@@ -4,25 +4,24 @@ using UnityEngine;
 
 public class RandomDiceCreate : MonoBehaviour {
 	private List<Point> _remainPoints;
-	private Point[] _points;
+	[SerializeField] private Point[] _points;
 	private int _pointNum;
 	
-	public GameObject[] seletDice;
+	public Tower[] seletDice;
 	private Point _point;
 	
-    void Awake() {
-		_points = GetComponentsInChildren<Point>();
-	}
-	public void CreateTower() {
+	public Tower CreateTower() {
 		_point = SelectPoint();
 		if (_point != null && !_point.isTower)
 		{
-			Instantiate(seletDice[Random.Range(0, seletDice.Length)], _point.transform.position, Quaternion.identity);
+			Tower tower = Instantiate(seletDice[Random.Range(0, seletDice.Length)], _point.transform.position, Quaternion.identity);
 			_point.isTower = true;
+			return tower;
 		}
+		return null;
 	}
 	
- 	public Point SelectPoint() {
+ 	private Point SelectPoint() {
 		_remainPoints = new List<Point>();
 		for (int i = 0; i < _points.Length; i++)
 		{

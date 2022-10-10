@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7344099052153927660}
   - component: {fileID: 4138223634660662793}
   - component: {fileID: 5737358419892103837}
-  - component: {fileID: 3294313083061182479}
+  - component: {fileID: 6856837228248213096}
   m_Layer: 0
   m_Name: FireOneGrade
   m_TagString: Untagged
@@ -98,7 +98,7 @@ SortingGroup:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
---- !u!114 &3294313083061182479
+--- !u!114 &6856837228248213096
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -107,14 +107,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5630969276751559583}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b5d08cfd4fe541b187251eea6528675, type: 3}
+  m_Script: {fileID: 11500000, guid: ecc474625827d45198f32c08c16a672e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
-  attackSpeed: 10
-  attackInterval: 1
-  ability: 0
-  targeting: 0
+  towerData: {fileID: 11400000, guid: 4273b197a9a9746f6b77b835e5b90e3e, type: 2}
 --- !u!1001 &8278306991999814622
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -172,25 +168,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d69f31d1e3d0d4446ba428a099d370d8, type: 3}
---- !u!1 &1196778899469596509 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7095883317955361923, guid: d69f31d1e3d0d4446ba428a099d370d8, type: 3}
-  m_PrefabInstance: {fileID: 8278306991999814622}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1592983237937281339
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1196778899469596509}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6d40eb277b504609b31be60493585e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentDice: {fileID: 3294313083061182479}
-  bullet: {fileID: 5237872507007048529, guid: 2b12b5409f1dc48c5a3a914541ffc07b, type: 3}
 --- !u!4 &5742360982248647306 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4418737923423625556, guid: d69f31d1e3d0d4446ba428a099d370d8, type: 3}

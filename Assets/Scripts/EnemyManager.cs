@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -48,6 +49,13 @@ public class EnemyManager : MonoBehaviour
 
 	private void SetGeneralTarget()
 	{
+		if (!_enemies.Any())
+		{
+			targetFirst = null;
+			targetRandom = null;
+			targetStrongest = null;
+			return;
+		}
 		int maxHealth = 0;
 		float minDist = float.MaxValue;
 		for (int i = 0; i < _enemies.Count; i++)
@@ -63,7 +71,7 @@ public class EnemyManager : MonoBehaviour
 				targetStrongest = _enemies[i];
 			}
 		}
-
+		
 		targetRandom = _enemies[Random.Range(0, _enemies.Count)];
 	}
 

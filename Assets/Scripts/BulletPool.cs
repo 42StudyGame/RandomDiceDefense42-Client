@@ -10,7 +10,6 @@ public class BulletPool : MonoBehaviour {
 	
 	private readonly Queue<Bullet> _poolingObjectQueue = new Queue<Bullet>();
 	
-	// 오브젝트풀에 초기불렛 생성 
 	private void Awake()
 	{
 		Initialize(startInitializeCount);

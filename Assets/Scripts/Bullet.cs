@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-	private GameObject _target;
+	private Enemy _target;
 	private float movementSpeed = 1;
 	private BulletPool _pool;
 	private Collider2D _targetCollider;
@@ -18,7 +18,7 @@ public class Bullet : MonoBehaviour
 	// 	_target = GameObject.FindWithTag("Enemy");
 	// }
 
-	public void SetTarget(GameObject target)
+	public void SetTarget(Enemy target)
 	{
 		_target = target;
 		_targetCollider = _target.GetComponent<Collider2D>();
@@ -39,7 +39,7 @@ public class Bullet : MonoBehaviour
 
 	private void MovePath() {
 		// if (!_target)
-		if (!_target || !_target.activeInHierarchy)
+		if (!_target || !_target.gameObject.activeInHierarchy)
 			_pool.ReturnObject(this);
 		transform.position = Vector3.MoveTowards
 		(transform.position, 
