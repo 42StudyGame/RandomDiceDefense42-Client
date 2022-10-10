@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class EnemyPool : MonoBehaviour
 {
-	public GameObject enemyPrefab;
-	public int startInitializeCount;
+	[SerializeField] private Enemy enemyPrefab;
+	[SerializeField] private int startInitializeCount;
 	
 	private Queue<Enemy> poolingObjectQueue = new Queue<Enemy>();
 	
@@ -14,7 +14,7 @@ public class EnemyPool : MonoBehaviour
 		Initialize(startInitializeCount);
 	}
 
-	private Enemy CreateNewBullet() {
+	private Enemy CreateNewEnemy() {
 		Enemy newObj = Instantiate(enemyPrefab, transform).GetComponent<Enemy>();
 		newObj.gameObject.SetActive(false);
 		return newObj;
@@ -22,7 +22,7 @@ public class EnemyPool : MonoBehaviour
 	
 	private void Initialize(int count) {
 		for (int i = 0; i < count; i++)
-			poolingObjectQueue.Enqueue(CreateNewBullet());
+			poolingObjectQueue.Enqueue(CreateNewEnemy());
 	}
 
 	public Enemy GetObject() {
@@ -35,14 +35,14 @@ public class EnemyPool : MonoBehaviour
 		}
 		else
 		{
-			Enemy newObj = CreateNewBullet();
+			Enemy newObj = CreateNewEnemy();
 			newObj.transform.SetParent(null);
 			newObj.gameObject.SetActive(true);
 			return newObj;
 		}
 	}
 
-	//가져다 쓴 불렛을 다시 오브젝트풀에 되돌려 놓는 메서드
+	//가져다 쓴 Enemy를 다시 오브젝트풀에 되돌려 놓는 메서드
 	public void ReturnObject(Enemy enemy) {
 		enemy.gameObject.SetActive(false);
 		enemy.transform.SetParent(transform);

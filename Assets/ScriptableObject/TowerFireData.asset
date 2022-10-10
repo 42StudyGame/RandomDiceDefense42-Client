@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 741ef0accb7704a06bc5fa56c2cc12f4, type: 3}
-  m_Name: FireTowerData
+  m_Name: TowerFireData
   m_EditorClassIdentifier: 
   damage: 10
   attackSpeed: 1

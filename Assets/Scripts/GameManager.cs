@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour {
 	private void Awake() {
 		towerManager = FindObjectOfType<TowerManager>();
 		enemyManager = FindObjectOfType<EnemyManager>();
-		towerManager.Init(this);
+		//towerManager.Init(this);
 		enemyManager.Init();
 	}
 
