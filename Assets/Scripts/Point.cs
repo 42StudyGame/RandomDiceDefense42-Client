@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class Point : MonoBehaviour
 {
-	public bool isDice { get; set; }
+	public bool isTower { get; set; }
 
 	private void Start() {
-		isDice = false;
+		isTower = false;
 	}
 }
