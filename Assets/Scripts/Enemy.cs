@@ -20,22 +20,24 @@ public class Enemy : MonoBehaviour {
 
 	// 적의 현재 체력 (해당 값 구하는 공식은 아직 못 알아냈습니다.)
 
-	private int _maxHealth = 100;
-	private int _currHealth = 100;
-	private float _speed = 5f;
-	private int _sp = 10;
+	public int maxHealth { get; private set; }
+	public int currHealth { get; private set; }
+	public float speed { get; private set; }
+	public int sp { get; private set; }
 	private Transform[] _wayPoints;
 	private int _currentLine = 0;
+	public float progressToGoal;
 	
 	public void Init(EnemyData enemyData, int wave, EnemyManager enemyManager)
 	{
 		_enemyManager = enemyManager;
 		_wayPoints = _enemyManager.wayPoints;
-		_speed = enemyData.speed;
-		_maxHealth = enemyData.health;
-		_currHealth = enemyData.health;
-		_sp = enemyData.sp;
+		speed = enemyData.speed;
+		maxHealth = enemyData.health;
+		currHealth = enemyData.health;
+		sp = enemyData.sp;
 		_enemySpriteRenderer.sprite = enemyData.sprite;
+		progressToGoal = GetProgressToGoal();
 	}
 
 	private void Awake()
@@ -50,7 +52,8 @@ public class Enemy : MonoBehaviour {
 		transform.position = Vector2.MoveTowards
 		(transform.position, 
 			_wayPoints[_currentLine].position, 
-			_speed * Time.deltaTime);
+			speed * Time.deltaTime);
+		progressToGoal -= speed * Time.deltaTime;
 
 		if (Vector2.SqrMagnitude(transform.position - _wayPoints[_currentLine].transform.position) <= 0.01f)
 			_currentLine++;
@@ -59,18 +62,21 @@ public class Enemy : MonoBehaviour {
 	}
 	private void Die() {
 		_enemyManager.EnemyGoal();
-		_enemyManager.KillEnemy(this);
+		_enemyManager.DestroyEnemy(this);;
 		/** private die()
 		* 몬스터가 체력이 다 닳거나 골라인에 도달하면 발생하는 함수
 		* 해당 오브젝트를 오브젝트풀에 다시 넣어달라고 EnemyMamager에 요청한다
 		*/
 	}
 
-	private void GetProgressToGoal()
+	private float GetProgressToGoal()
 	{
-		/** private getProgressToGoal()
-		* 골라인까지 남은 거리를 계산하는 함수 (update함수 내에서 실행)
-		* 현재 이동한 총 거리 / 골라인까지의 실제 거리
-		*/
+		float dist = Vector2.Distance(transform.position, _wayPoints[_currentLine].position);
+		for (int i = _currentLine; i < _wayPoints.Length - 1; i++)
+		{
+			dist += Vector2.Distance(_wayPoints[i].position, _wayPoints[i + 1].position);
+		}
+
+		return dist;
 	}
 }
