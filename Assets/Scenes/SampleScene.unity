@@ -649,6 +649,7 @@ GameObject:
   m_Component:
   - component: {fileID: 497353760}
   - component: {fileID: 497353759}
+  - component: {fileID: 497353761}
   m_Layer: 0
   m_Name: TowerManager
   m_TagString: Untagged
@@ -669,9 +670,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameManager: {fileID: 1689355136}
-  _bulletPool: {fileID: 0}
-  _towers: []
-  _randomDiceCreate: {fileID: 0}
+  _bulletPool: {fileID: 922189858}
+  _randomDiceCreate: {fileID: 497353761}
 --- !u!4 &497353760
 Transform:
   m_ObjectHideFlags: 0
@@ -687,6 +687,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &497353761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 497353758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a18eaddae85924ec195f44c875482dbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _points:
+  - {fileID: 2043322308}
+  - {fileID: 1811888842}
+  - {fileID: 306541330}
+  - {fileID: 868615443}
+  - {fileID: 1893486444}
+  - {fileID: 1191692442}
+  - {fileID: 1039374909}
+  - {fileID: 1886811647}
+  - {fileID: 682884067}
+  - {fileID: 1498704712}
+  - {fileID: 1959207395}
+  - {fileID: 925759006}
+  - {fileID: 570035586}
+  - {fileID: 1797837511}
+  - {fileID: 275413090}
+  seletDice:
+  - {fileID: 6856837228248213096, guid: 164e0819bb26347c19b9e08b76f58847, type: 3}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -825,7 +855,6 @@ GameObject:
   - component: {fileID: 559559779}
   - component: {fileID: 559559781}
   - component: {fileID: 559559780}
-  - component: {fileID: 559559782}
   m_Layer: 0
   m_Name: Board
   m_TagString: Untagged
@@ -862,7 +891,7 @@ Transform:
   - {fileID: 275413089}
   - {fileID: 968714437}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!210 &559559780
 SortingGroup:
@@ -927,19 +956,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &559559782
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 559559778}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a18eaddae85924ec195f44c875482dbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  seletDice: []
 --- !u!1 &570035584
 GameObject:
   m_ObjectHideFlags: 0
@@ -1021,7 +1037,7 @@ RectTransform:
   - {fileID: 1796271447}
   - {fileID: 729618701}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1358,6 +1374,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f30fc793b3ac64eb38206c6debb224c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &922189857
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 922189859}
+  - component: {fileID: 922189858}
+  m_Layer: 0
+  m_Name: BulletPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &922189858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 922189857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd6b97c6abb704eb1b86f6f2ef0a660a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 3012409440693919953, guid: 2b12b5409f1dc48c5a3a914541ffc07b, type: 3}
+  startInitializeCount: 1000
+--- !u!4 &922189859
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 922189857}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.2844806, y: -2.6667714, z: 0.09750395}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &925759004
 GameObject:
   m_ObjectHideFlags: 0
@@ -1973,9 +2035,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Random_Dice_Create, Assembly-CSharp
-        m_MethodName: CreateDice
+      - m_Target: {fileID: 1689355136}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: CreateTower
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2170,7 +2232,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1485285760
 GameObject:
@@ -2495,8 +2557,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 281453b741814461b9b14d5b94fbd932, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerManager: {fileID: 0}
-  enemyManager: {fileID: 0}
+  towerManager: {fileID: 497353759}
+  enemyManager: {fileID: 1417149470}
 --- !u!1 &1721327702
 GameObject:
   m_ObjectHideFlags: 0
@@ -3240,7 +3302,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: -2230017124263673465, guid: 894b49f6398ef4306ad0f7087dacc701, type: 3}
-  startInitializeCount: 500
+  startInitializeCount: 1000
 --- !u!4 &2030172446
 Transform:
   m_ObjectHideFlags: 0
@@ -3254,7 +3316,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2043322306
 GameObject:
