@@ -8,18 +8,13 @@ public delegate int TowerModify();
 public class TowerManager : MonoBehaviour {
 	[SerializeField] private GameManager _gameManager;
 	[SerializeField] private BulletPool _bulletPool;
-	[SerializeField] private Tower[] _towers;
 	[SerializeField] private RandomDiceCreate _randomDiceCreate;
-
-	// public void Init<T>(T reference) where T : GameManager
-	// {
-	// 	_gameManager = reference;
-	// }
+	private Tower[] _towers;
 
 	public void Launch(Tower obj) {
 		Bullet bullet = _bulletPool.GetObject();
 		bullet.transform.position = obj.transform.position;
-		bullet.SetTarget(null); // null -> enemey object
+		bullet.SetTarget(GetTarget()); // null -> enemey object
 	}
 
 	public Bullet GetBullet(Tower obj) {

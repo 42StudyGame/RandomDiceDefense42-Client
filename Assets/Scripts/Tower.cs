@@ -54,7 +54,10 @@ public class Tower : MonoBehaviour
 	// ReSharper disable Unity.PerformanceAnalysis
 	private void Launch() {
 		if (Time.time >= _lastAttackTime + towerData.attackSpeed)
+		{
+			_lastAttackTime = Time.time;
 			_towerManager.Launch(this);
+		}
 	}
 
 	private void Update() {

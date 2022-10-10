@@ -18,6 +18,7 @@ public class BulletPool : MonoBehaviour {
 	// ReSharper disable Unity.PerformanceAnalysis
 	private Bullet CreateNewBullet() {
 		Bullet newObj = Instantiate(bulletPrefab, transform);
+		newObj.Init(this);
 		newObj.gameObject.SetActive(false);
 		return newObj;
 	}

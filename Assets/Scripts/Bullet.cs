@@ -3,20 +3,9 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
 	private Enemy _target;
-	private float movementSpeed = 1;
+	private float movementSpeed = 10f;
 	private BulletPool _pool;
 	private Collider2D _targetCollider;
-
-	private void Awake() {
-		// _target = GameObject.FindWithTag("Enemy");
-		// _targetCollider = _target.GetComponent<Collider2D>();
-		_pool = FindObjectOfType<BulletPool>();
-	}
-
-	// private void OnEnable() 
-	// {
-	// 	_target = GameObject.FindWithTag("Enemy");
-	// }
 
 	public void SetTarget(Enemy target)
 	{
@@ -24,10 +13,12 @@ public class Bullet : MonoBehaviour
 		_targetCollider = _target.GetComponent<Collider2D>();
 		// getComponent 안쓸수 있으면 좋음. 비싸고, 빈도도 잦음
 	}
-
+	public void Init(BulletPool _bulletPool) {
+		_pool = _bulletPool;
+	}
 	private void Update() {
 		if (_target)
-			MovePath();
+			Move();
 		else
 			_pool.ReturnObject(this);
 	}
@@ -37,8 +28,7 @@ public class Bullet : MonoBehaviour
 			_pool.ReturnObject(this);
 	}
 
-	private void MovePath() {
-		// if (!_target)
+	private void Move() {
 		if (!_target || !_target.gameObject.activeInHierarchy)
 			_pool.ReturnObject(this);
 		transform.position = Vector3.MoveTowards
