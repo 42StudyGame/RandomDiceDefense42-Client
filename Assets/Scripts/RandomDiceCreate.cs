@@ -14,7 +14,7 @@ public partial class RandomDiceCreate // SerializeField
 
 public partial class RandomDiceCreate : MonoBehaviour
 {
-	
+	ra
 }
 
 public partial class RandomDiceCreate // body
