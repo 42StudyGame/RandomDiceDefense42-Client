@@ -7,17 +7,16 @@ public partial class GameManager : MonoBehaviour {
 	public int playerHealth { get; private set; } = 3;
 	public int sp = 500;
 	public int towerCost { get; private set; } = 10;
-    
-    
+
+
 	private void Awake() {
 		//towerManager.Init(this);
 		enemyManager.Init();
 	}
 
 	public void CreateTower() {
-		if (sp >= towerCost)
+		if (sp >= towerCost && towerManager.AddTower())
 		{
-			towerManager.AddTower();
 			sp -= towerCost;
 			uiManager.SetSpText(sp.ToString());
 			towerCost += 10;
@@ -35,6 +34,6 @@ public partial class GameManager : MonoBehaviour {
 	}
     // private void Update()
     // {
-    //     
+    //
     // }
 }

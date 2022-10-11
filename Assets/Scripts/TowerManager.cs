@@ -8,7 +8,7 @@ public partial class TowerManager // IO
 	public void Launch(Tower obj) => _Launch(obj);
 	public Bullet GetBullet(Tower tower) => _GetBullet(tower);
 	public void SetBullet(Bullet bullet) => _SetBullet(bullet);
-	public void AddTower() => _AddTower();
+	public bool AddTower() => _AddTower();
 	public Enemy GetTarget() => _GetTarget();
 }
 
@@ -52,11 +52,16 @@ public partial class TowerManager // body
 		bulletPool.ReturnObject(bullet);
 	}
 
-	private void _AddTower(/*int _class, int level, int star*/)
+	private bool _AddTower(/*int _class, int level, int star*/)
 	{
 		Tower tower = randomDiceCreate.CreateTower();
+		if (!tower)
+		{
+			return false;
+		}
 		_towers.Add(tower);
-		tower?.Init(this);
+		tower.Init(this);
+		return (true);
 	}
 
 	private Enemy _GetTarget()
