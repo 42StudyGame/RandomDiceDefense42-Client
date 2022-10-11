@@ -12,7 +12,7 @@ public partial class TowerManager // IO
 	public Enemy GetTarget() => _GetTarget();
 }
 
-public partial class TowerManager // SerializeField 
+public partial class TowerManager // SerializeField
 {
 	[SerializeField] private GameManager gameManager;
 	[SerializeField] private BulletPool bulletPool;
@@ -22,14 +22,14 @@ public partial class TowerManager : MonoBehaviour
 {
 	private void _DeleteTower(Tower tower) {
 		_towers.Remove(tower);
-		Destroy(tower);	
+		Destroy(tower);
 	}
 }
 
 public partial class TowerManager // body
 {
-	private List<Tower> _towers;
-	
+	private List<Tower> _towers = new List<Tower>();
+
 	// ReSharper disable Unity.PerformanceAnalysis
 	private void _Launch(Tower tower)
 	{
@@ -38,15 +38,15 @@ public partial class TowerManager // body
 		bullet.SetTarget(GetTarget());
 		bullet.SetDamage(tower.towerData.damage);
 	}
-	
-	private Bullet _GetBullet(Tower tower) 
+
+	private Bullet _GetBullet(Tower tower)
 	{
 		Bullet bullet = bulletPool.GetObject();
 		bullet.transform.position = tower.transform.position;
 		bullet.SetTarget(GetTarget());
 		return (bullet);
 	}
-	
+
 	private void _SetBullet(Bullet bullet)
 	{
 		bulletPool.ReturnObject(bullet);
@@ -58,9 +58,9 @@ public partial class TowerManager // body
 		_towers.Add(tower);
 		tower?.Init(this);
 	}
-	
-	private Enemy _GetTarget() 
-	{ 
+
+	private Enemy _GetTarget()
+	{
 		return gameManager.enemyManager.targetFirst;
 	}
 }
