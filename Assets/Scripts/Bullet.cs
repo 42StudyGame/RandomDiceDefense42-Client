@@ -1,6 +1,22 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public partial class Bullet // IO
+{
+	
+}
+
+public partial class Bullet // SerializeField
+{
+	
+}
+
+public partial class Bullet //IO
+{
+	
+}
+
+public partial class Bullet : MonoBehaviour
 {
 	private Enemy _target;
 	private const float MovementSpeed = 10f;
