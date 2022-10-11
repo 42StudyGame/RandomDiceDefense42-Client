@@ -3,15 +3,8 @@ using UnityEngine;
 
 public partial class BulletPool // IO
 {
-	public Bullet GetObject()
-	{
-		return _GetObject();
-	}
-
-	public void ReturnObject(Bullet bullet)
-	{
-		_ReturnObject(bullet);
-	}
+	public Bullet GetObject() => _GetObject();
+	public void ReturnObject(Bullet bullet) => _ReturnObject(bullet);
 }
 
 public partial class BulletPool // SerializeField
