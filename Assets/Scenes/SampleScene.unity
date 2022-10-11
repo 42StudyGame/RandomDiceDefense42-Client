@@ -617,7 +617,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a18eaddae85924ec195f44c875482dbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  diceDeck: []
+  diceDeck:
+  - {fileID: 6856837228248213096, guid: 164e0819bb26347c19b9e08b76f58847, type: 3}
   points:
   - {fileID: 2043322308}
   - {fileID: 1811888842}
