@@ -1,20 +1,27 @@
 using UnityEngine;
 
-public partial class GameManager : MonoBehaviour {
-	public TowerManager towerManager;
-	public EnemyManager enemyManager;
-	public UIManager uiManager;
+public partial class GameManager
+{
 	public int playerHealth { get; private set; } = 3;
 	public int sp = 500;
 	public int towerCost { get; private set; } = 10;
-    
-    
+	public TowerManager towerManager;
+	public EnemyManager enemyManager;
+	public UIManager uiManager;
+	public void CreateTower() => _CreateTower();
+	public void OnDamage(int damage) => _OnDamage(damage);
+}
+public partial class GameManager : MonoBehaviour 
+{
 	private void Awake() {
 		//towerManager.Init(this);
 		enemyManager.Init();
 	}
+}
 
-	public void CreateTower() {
+public partial class GameManager
+{
+	public void _CreateTower() {
 		if (sp >= towerCost)
 		{
 			towerManager.AddTower();
@@ -25,7 +32,7 @@ public partial class GameManager : MonoBehaviour {
 		}
 	}
 
-	public void OnDamage(int damage)
+	public void _OnDamage(int damage)
 	{
 		if (playerHealth > 0)
 		{
@@ -33,8 +40,4 @@ public partial class GameManager : MonoBehaviour {
 			uiManager.PlayerOnDamage(damage);
 		}
 	}
-    // private void Update()
-    // {
-    //     
-    // }
 }
