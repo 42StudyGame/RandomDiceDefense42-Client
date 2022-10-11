@@ -14,7 +14,9 @@ public class EnemyManager : MonoBehaviour
 	public Enemy targetStrongest { get; private set; }
 	public Transform[] wayPoints;
 
-	
+	public float maxDistToGoal { get; private set; }
+
+
 	private void Start()
 	{
 		CreateEnemy();
@@ -26,7 +28,7 @@ public class EnemyManager : MonoBehaviour
 	}
 
 	public void Init() {
-		
+		maxDistToGoal = GetMaxDistToGoal();
 	}
 
 	public void CreateEnemy()
@@ -68,11 +70,22 @@ public class EnemyManager : MonoBehaviour
 				targetStrongest = _enemies[i];
 			}
 		}
-		
+
 		targetRandom = _enemies[Random.Range(0, _enemies.Count)];
 	}
 
 	public void EnemyGoal() {
-		
+
+	}
+
+	private float GetMaxDistToGoal()
+	{
+		float dist = 0f;
+		for (int i = 0; i < wayPoints.Length - 1; i++)
+		{
+			dist += Vector2.Distance(wayPoints[i].position, wayPoints[i + 1].position);
+		}
+
+		return dist;
 	}
 }

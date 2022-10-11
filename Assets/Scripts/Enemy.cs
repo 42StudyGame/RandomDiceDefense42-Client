@@ -21,8 +21,9 @@ public class Enemy : MonoBehaviour {
 	public int sp { get; private set; }
 	private Transform[] _wayPoints;
 	private int _currentLine = 0;
-	public float progressToGoal;
-	
+	public float progressToGoal { get; private set; }
+	private float _runDistance;
+
 	public void Init(EnemyData enemyData, int wave, EnemyManager enemyManager)
 	{
 		_enemyManager = enemyManager;
@@ -32,7 +33,9 @@ public class Enemy : MonoBehaviour {
 		currHealth = enemyData.health;
 		sp = enemyData.sp;
 		_enemySpriteRenderer.sprite = enemyData.sprite;
-		progressToGoal = GetProgressToGoal();
+
+		progressToGoal = 0f;
+		_runDistance = 0f;
 	}
 
 	private void Awake()
@@ -41,14 +44,14 @@ public class Enemy : MonoBehaviour {
 
 	void Update() {
 		Move();
+		GetProgressToGoal();
 	}
 
 	private void Move() {
 		transform.position = Vector2.MoveTowards
-		(transform.position, 
-			_wayPoints[_currentLine].position, 
+		(transform.position,
+			_wayPoints[_currentLine].position,
 			speed * Time.deltaTime);
-		progressToGoal -= speed * Time.deltaTime;
 
 		if (Vector2.SqrMagnitude(transform.position - _wayPoints[_currentLine].transform.position) <= 0.01f)
 			_currentLine++;
@@ -70,15 +73,10 @@ public class Enemy : MonoBehaviour {
 		if (currHealth <= 0)
 			Die();
 	}
-	
-	private float GetProgressToGoal()
-	{
-		float dist = Vector2.Distance(transform.position, _wayPoints[_currentLine].position);
-		for (int i = _currentLine; i < _wayPoints.Length - 1; i++)
-		{
-			dist += Vector2.Distance(_wayPoints[i].position, _wayPoints[i + 1].position);
-		}
 
-		return dist;
+	private void GetProgressToGoal()
+	{
+		_runDistance += speed * Time.deltaTime;
+		progressToGoal = _runDistance / _enemyManager.maxDistToGoal;
 	}
 }

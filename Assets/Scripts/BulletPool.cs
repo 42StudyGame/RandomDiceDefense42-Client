@@ -1,42 +1,84 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-	
-public class BulletPool : MonoBehaviour {
-	// public GameObject bulletPrefab;
-	public Bullet bulletPrefab;
-	public int startInitializeCount;
-	
-	private readonly Queue<Bullet> _poolingObjectQueue = new Queue<Bullet>();
-	
+
+public partial class BulletPool // IO
+{
+	public Bullet GetObject() => _GetObject();
+	public void ReturnObject(Bullet bullet) => _ReturnObject(bullet);
+}
+
+public partial class BulletPool // SerializeField
+{
+	[SerializeField] private Bullet bulletPrefab;
+	[SerializeField] private int startInitializeCount;
+}
+
+public partial class BulletPool : MonoBehaviour 
+{
 	private void Awake()
 	{
 		Initialize(startInitializeCount);
 	}
 
-	// ReSharper disable Unity.PerformanceAnalysis
-	private Bullet CreateNewBullet() {
+	private void OnDisable()
+	{
+		_ReturnAllObject();
+	}
+}
+
+public partial class BulletPool // body
+{
+	private readonly Queue<Bullet> _poolingObjectQueue = new();
+	private readonly Dictionary<int, Bullet> _rentalDictionary = new();
+
+	private void Initialize(int count)
+	{
+		while (count-- > 0)
+		{
+			_poolingObjectQueue.Enqueue(CreateNewBullet());
+		}
+	}
+
+	private Bullet CreateNewBullet() 
+	{
 		Bullet newObj = Instantiate(bulletPrefab, transform);
 		newObj.Init(this);
 		newObj.gameObject.SetActive(false);
 		return newObj;
 	}
 	
-	private void Initialize(int count) {
-		for (int i = 0; i < count; i++)
-			_poolingObjectQueue.Enqueue(CreateNewBullet());
-	}
-
-	public Bullet GetObject() {
+	private Bullet _GetObject()
+	{
 		Bullet bullet = _poolingObjectQueue.Count == 0 ?
-			CreateNewBullet() : _poolingObjectQueue.Dequeue();
-		bullet.transform.SetParent(null); // 부모 오브젝트에서 나온다.
+			CreateNewBullet() :
+			_poolingObjectQueue.Dequeue();
+		_rentalDictionary[bullet.GetInstanceID()] = bullet;
 		bullet.gameObject.SetActive(true);
 		return bullet;
 	}
+	
+	private void _ReturnObject(Bullet bullet)
+	{
+		int instanceId = bullet.GetInstanceID();
+		
+		if (!_rentalDictionary.ContainsKey(instanceId))
+		{
+			throw new Exception($"{instanceId} is not rental object");
+		}
 
-	public void ReturnObject(Bullet bullet) {
+		_rentalDictionary.Remove(instanceId);
 		_poolingObjectQueue.Enqueue(bullet);
-		bullet.transform.SetParent(transform);
 		bullet.gameObject.SetActive(false);
+	}
+
+	private void _ReturnAllObject()
+	{
+		KeyValuePair<int, Bullet>[] array = _rentalDictionary.ToArray();
+		foreach (KeyValuePair<int, Bullet> item in array)
+		{
+			_ReturnObject(item.Value);
+		}
 	}
 }
