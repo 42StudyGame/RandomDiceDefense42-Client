@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour {
+public partial class GameManager : MonoBehaviour {
 	public TowerManager towerManager;
 	public EnemyManager enemyManager;
     

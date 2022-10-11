@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public delegate int TowerModify(); 
-	
+
 public class TowerManager : MonoBehaviour {
 	[SerializeField] private GameManager _gameManager;
 	[SerializeField] private BulletPool _bulletPool;
@@ -29,7 +29,7 @@ public class TowerManager : MonoBehaviour {
 
 	public void AddTower(/*int _class, int level, int star*/) {
 		Tower tower = _randomDiceCreate.CreateTower();
-		tower.Init(this);
+		tower?.Init(this);
 	}
 	// /** int addTower(int class, int level, int star...)
 	// * 타워 생성 함수.
