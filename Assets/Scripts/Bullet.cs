@@ -3,7 +3,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
 	private Enemy _target;
-	private float movementSpeed = 10f;
+	private const float MovementSpeed = 10f;
 	private BulletPool _pool;
 	private Collider2D _targetCollider;
 
@@ -13,9 +13,11 @@ public class Bullet : MonoBehaviour
 		_targetCollider = _target.GetComponent<Collider2D>();
 		// getComponent 안쓸수 있으면 좋음. 비싸고, 빈도도 잦음
 	}
+	
 	public void Init(BulletPool _bulletPool) {
 		_pool = _bulletPool;
 	}
+	
 	private void Update() {
 		if (_target)
 			Move();
@@ -34,7 +36,7 @@ public class Bullet : MonoBehaviour
 		transform.position = Vector3.MoveTowards
 		(transform.position, 
 			_target.transform.position, 
-			movementSpeed * Time.deltaTime);
+			MovementSpeed * Time.deltaTime);
 	}
 	
 	// z fighting
