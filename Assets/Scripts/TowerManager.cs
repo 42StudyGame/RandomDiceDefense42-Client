@@ -10,6 +10,7 @@ public partial class TowerManager // IO
 	public void SetBullet(Bullet bullet) => _SetBullet(bullet);
 	public bool AddTower() => _AddTower();
 	public Enemy GetTarget() => _GetTarget();
+	public void DestroyTower(Tower tower) => _DstroyTower(tower);
 }
 
 public partial class TowerManager // SerializeField
@@ -20,7 +21,7 @@ public partial class TowerManager // SerializeField
 }
 public partial class TowerManager : MonoBehaviour
 {
-	private void _DeleteTower(Tower tower) {
+	private void _DstroyTower(Tower tower) {
 		_towers.Remove(tower);
 		Destroy(tower);
 	}
