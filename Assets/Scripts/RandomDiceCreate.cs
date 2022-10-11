@@ -1,56 +1,49 @@
-using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public partial class RandomDiceCreate // IO
 {
+	public void ReleaseTower(Tower tower) => _ReleaseTower(tower);
 	public Tower CreateTower() => _CreateTower();
-	public Tower[] seletDice;	// selectDice
+	public Tower[] diceDeck;	// selectDice
 }
 
 public partial class RandomDiceCreate // SerializeField
 {
 	[SerializeField] private Point[] points;
 }
+//
+// public partial class RandomDiceCreate : MonoBehaviour
+// {
+// }
 
-public partial class RandomDiceCreate : MonoBehaviour
+public partial class RandomDiceCreate : MonoBehaviour // body
 {
-	
-}
-
-public partial class RandomDiceCreate // body
-{
-	private readonly List<Point> _remainPoints = new();
-	private int _pointNum;
-	private Point _point;
-	
-	private Tower _CreateTower() 
+	private Tower NewTower(Point point)
 	{
-		_point = SelectPoint();
-		if (_point != null && !_point.isTower)
-		{
-			Tower tower = Instantiate(seletDice[Random.Range(0, seletDice.Length)], _point.transform.position, Quaternion.identity);
-			_point.isTower = true;
-			return tower;
-		}
-		return null;
+		return Instantiate(diceDeck[Random.Range(0, diceDeck.Length)], point.transform.position, Quaternion.identity);
 	}
-	
-	private Point SelectPoint() 
+
+	private Tower _CreateTower()
 	{
-		if (_remainPoints.Count == 0)
+		Point[] array = points
+			.Where((e, index) => !e.occupied)
+			.ToArray();
+
+		if (array.Length == 0)
 		{
 			return null;
 		}
 		
-		for (int i = 0; i < points.Length; i++)
-		{
-			if (points[i].isTower == false && points[i] != null)
-			{
-				_remainPoints.Add(points[i]);
-			}
-		}
+		int index = Random.Range(0, array.Length);
 		
-		_pointNum = Random.Range(0, _remainPoints.Count);
-		return _remainPoints[_pointNum];
+		Point selected = array[index];
+		selected.occupied = true;
+		return NewTower(selected);
+	}
+
+	private void _ReleaseTower(Tower tower)
+	{
+		points[tower.slotId].occupied = false;
 	}
 }

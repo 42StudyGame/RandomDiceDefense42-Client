@@ -4,6 +4,7 @@ public partial class Tower // IO
 {
 	public void Init(TowerManager towerManager) => _Init(towerManager);
 	public TowerData towerData;
+	public int slotId;
 }
 
 public partial class Tower : MonoBehaviour
