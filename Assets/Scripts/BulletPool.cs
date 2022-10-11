@@ -7,7 +7,6 @@ public partial class BulletPool // IO
 {
 	public Bullet GetObject() => _GetObject();
 	public void ReturnObject(Bullet bullet) => _ReturnObject(bullet);
-	public void ReturnAllObject() => _ReturnAllObject();
 }
 
 public partial class BulletPool // SerializeField
@@ -18,9 +17,6 @@ public partial class BulletPool // SerializeField
 
 public partial class BulletPool : MonoBehaviour 
 {
-	private readonly Queue<Bullet> _poolingObjectQueue = new();
-	private readonly Dictionary<int, Bullet> _rentalDictionary = new();
-
 	private void Awake()
 	{
 		Initialize(startInitializeCount);
@@ -34,6 +30,9 @@ public partial class BulletPool : MonoBehaviour
 
 public partial class BulletPool // body
 {
+	private readonly Queue<Bullet> _poolingObjectQueue = new();
+	private readonly Dictionary<int, Bullet> _rentalDictionary = new();
+
 	private void Initialize(int count)
 	{
 		while (count-- > 0)
