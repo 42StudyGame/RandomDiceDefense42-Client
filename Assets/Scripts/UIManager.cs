@@ -9,6 +9,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _spText;
     [SerializeField] private TextMeshProUGUI _costText;
     [SerializeField] private GameObject[] _playerHealths;
+
+    private int _healthIndex;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,6 +18,8 @@ public class UIManager : MonoBehaviour
         {
             _playerHealths[i].SetActive(true);
         }
+
+        _healthIndex = 2;
         _spText.text = _gameManager.sp.ToString();
         _costText.text = _gameManager.towerCost.ToString();
     }
@@ -32,5 +36,11 @@ public class UIManager : MonoBehaviour
 
     public void PlayerOnDamage(int damage)
     {
+        for (int i = 0; i < damage; i++)
+        {
+            if (_healthIndex < 0)
+                break;
+            _playerHealths[_healthIndex--].SetActive(false);
+        }
     }
 }

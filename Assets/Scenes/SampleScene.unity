@@ -1552,7 +1552,7 @@ GameObject:
   - component: {fileID: 1013384290}
   - component: {fileID: 1013384291}
   m_Layer: 0
-  m_Name: UI
+  m_Name: UIManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1590,7 +1590,10 @@ MonoBehaviour:
   _gameManager: {fileID: 1689355136}
   _spText: {fileID: 1131538122}
   _costText: {fileID: 236474875}
-  _playerHealths: []
+  _playerHealths:
+  - {fileID: 1176923946}
+  - {fileID: 1171023037}
+  - {fileID: 910201757}
 --- !u!1 &1039374907
 GameObject:
   m_ObjectHideFlags: 0
@@ -2723,6 +2726,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerManager: {fileID: 497353759}
   enemyManager: {fileID: 1417149470}
+  uiManager: {fileID: 1013384291}
   sp: 500
 --- !u!1 &1721327702
 GameObject:

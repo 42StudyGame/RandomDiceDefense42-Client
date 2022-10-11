@@ -3,6 +3,7 @@ using UnityEngine;
 public partial class GameManager : MonoBehaviour {
 	public TowerManager towerManager;
 	public EnemyManager enemyManager;
+	public UIManager uiManager;
 	public int playerHealth { get; private set; } = 3;
 	public int sp = 500;
 	public int towerCost { get; private set; } = 10;
@@ -18,7 +19,9 @@ public partial class GameManager : MonoBehaviour {
 		{
 			towerManager.AddTower();
 			sp -= towerCost;
+			uiManager.SetSpText(sp.ToString());
 			towerCost += 10;
+			uiManager.SetCostText(towerCost.ToString());
 		}
 	}
 
@@ -27,7 +30,7 @@ public partial class GameManager : MonoBehaviour {
 		if (playerHealth > 0)
 		{
 			playerHealth -= damage;
-			
+			uiManager.PlayerOnDamage(damage);
 		}
 	}
     // private void Update()
