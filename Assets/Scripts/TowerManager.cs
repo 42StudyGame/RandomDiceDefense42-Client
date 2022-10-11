@@ -12,6 +12,7 @@ public class TowerManager : MonoBehaviour {
 		Bullet bullet = _bulletPool.GetObject();
 		bullet.transform.position = obj.transform.position;
 		bullet.SetTarget(GetTarget()); // null -> enemey object
+		bullet.SetDamage(obj.towerData.damage);
 	}
 
 	public Bullet GetBullet(Tower obj) {

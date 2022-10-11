@@ -55,7 +55,7 @@ public class EnemyManager : MonoBehaviour
 			targetStrongest = null;
 			return;
 		}
-		int maxHealth = 0;
+		float maxHealth = 0;
 		float minDist = float.MaxValue;
 		for (int i = 0; i < _enemies.Count; i++)
 		{
