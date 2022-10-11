@@ -2,23 +2,35 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class EnemyManager : MonoBehaviour
+public partial class EnemyManager // IO
+{
+	[HideInInspector] public Transform[] wayPoints;
+
+	public Enemy targetFirst { get; private set; }
+	public Enemy targetRandom { get; private set; }
+	public Enemy targetStrongest { get; private set; }
+	public float maxDistToGoal { get; private set; }
+
+	public void Init() => _Init();
+	public void CreateEnemy() => _CreateEnemy();
+	public void DestroyEnemy(Enemy enemy) => _DestroyEnemy(enemy);
+	public void EnemyGoal() => _EnemyGoal();
+
+}
+
+public partial class EnemyManager // SerializeField
 {
 	[SerializeField] private GameManager _gameManager;
 	[SerializeField] private EnemyPool _enemyPool;
 	[SerializeField] private EnemyData[] _enemyDatas;
-	private List<Enemy> _enemies = new List<Enemy>();
 	[SerializeField] private Transform _spawnPoint;
-	public Enemy targetFirst { get; private set; }
-	public Enemy targetRandom { get; private set; }
-	public Enemy targetStrongest { get; private set; }
-	public Transform[] wayPoints;
+}
 
-	public float maxDistToGoal { get; private set; }
-
-
+public partial class EnemyManager : MonoBehaviour
+{
 	private void Start()
 	{
+		// TODO : remove
 		CreateEnemy();
 	}
 
@@ -26,12 +38,17 @@ public class EnemyManager : MonoBehaviour
 	{
 		SetGeneralTarget();
 	}
+}
 
-	public void Init() {
+public partial class EnemyManager
+{
+	private List<Enemy> _enemies = new List<Enemy>();
+
+	private void _Init() {
 		maxDistToGoal = GetMaxDistToGoal();
 	}
 
-	public void CreateEnemy()
+	private void _CreateEnemy()
 	{
 		Enemy enemy = _enemyPool.GetObject();
 		EnemyData enemyData = _enemyDatas[0];
@@ -40,7 +57,7 @@ public class EnemyManager : MonoBehaviour
 		_enemies.Add(enemy);
 	}
 
-	public void DestroyEnemy(Enemy enemy)
+	private void _DestroyEnemy(Enemy enemy)
 	{
 		_enemyPool.ReturnObject(enemy);
 		_enemies.Remove(enemy);
@@ -74,18 +91,19 @@ public class EnemyManager : MonoBehaviour
 		targetRandom = _enemies[Random.Range(0, _enemies.Count)];
 	}
 
-	public void EnemyGoal() {
-
-	}
-
 	private float GetMaxDistToGoal()
 	{
-		float dist = 0f;
+		float dist = Vector2.Distance(_spawnPoint.position, wayPoints[0].position);
 		for (int i = 0; i < wayPoints.Length - 1; i++)
 		{
 			dist += Vector2.Distance(wayPoints[i].position, wayPoints[i + 1].position);
 		}
 
 		return dist;
+	}
+
+	private void _EnemyGoal()
+	{
+
 	}
 }

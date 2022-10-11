@@ -1,44 +1,66 @@
+using System.Collections.Generic;
 using UnityEngine;
 
-public delegate int TowerModify(); 
+public delegate int TowerModify();
 
-public class TowerManager : MonoBehaviour {
-	[SerializeField] private GameManager _gameManager;
-	[SerializeField] private BulletPool _bulletPool;
-	[SerializeField] private RandomDiceCreate _randomDiceCreate;
-	private Tower[] _towers;
+public partial class TowerManager // IO
+{
+	public void Launch(Tower obj) => _Launch(obj);
+	public Bullet GetBullet(Tower tower) => _GetBullet(tower);
+	public void SetBullet(Bullet bullet) => _SetBullet(bullet);
+	public void AddTower() => _AddTower();
+	public Enemy GetTarget() => _GetTarget();
+}
 
-	public void Launch(Tower obj) {
-		Bullet bullet = _bulletPool.GetObject();
-		bullet.transform.position = obj.transform.position;
-		bullet.SetTarget(GetTarget()); // null -> enemey object
-		bullet.SetDamage(obj.towerData.damage);
+public partial class TowerManager // SerializeField 
+{
+	[SerializeField] private GameManager gameManager;
+	[SerializeField] private BulletPool bulletPool;
+	[SerializeField] private RandomDiceCreate randomDiceCreate;
+}
+public partial class TowerManager : MonoBehaviour
+{
+	private void _DeleteTower(Tower tower) {
+		_towers.Remove(tower);
+		Destroy(tower);	
 	}
+}
 
-	public Bullet GetBullet(Tower obj) {
-		Bullet bullet = _bulletPool.GetObject();
-		bullet.transform.position = obj.transform.position;
+public partial class TowerManager // body
+{
+	private List<Tower> _towers;
+	
+	// ReSharper disable Unity.PerformanceAnalysis
+	private void _Launch(Tower tower)
+	{
+		Bullet bullet = bulletPool.GetObject();
+		bullet.transform.position = tower.transform.position;
+		bullet.SetTarget(GetTarget());
+		bullet.SetDamage(tower.towerData.damage);
+	}
+	
+	private Bullet _GetBullet(Tower tower) 
+	{
+		Bullet bullet = bulletPool.GetObject();
+		bullet.transform.position = tower.transform.position;
 		bullet.SetTarget(GetTarget());
 		return (bullet);
 	}
-	public void SetBullet(Bullet bullet) {
-		_bulletPool.ReturnObject(bullet);
+	
+	private void _SetBullet(Bullet bullet)
+	{
+		bulletPool.ReturnObject(bullet);
 	}
 
-	public void AddTower(/*int _class, int level, int star*/) {
-		Tower tower = _randomDiceCreate.CreateTower();
+	private void _AddTower(/*int _class, int level, int star*/)
+	{
+		Tower tower = randomDiceCreate.CreateTower();
+		_towers.Add(tower);
 		tower?.Init(this);
 	}
-	// /** int addTower(int class, int level, int star...)
-	// * 타워 생성 함수.
-	// * 게임 매니저가 갖고 있는 타워 생성 버튼이 눌리면 해당 함수가 실행되면서 타워 배열의 랜덤 위치에 랜덤한 타워가 생성됨
-	// * 혹은 플레이어가 타워를 합칠 때도 사용(이는 추후 생각해보겠음)
-	// * 매개변수는 타워를 생성할 때 필요한 변수.
-	// * 이 함수에서 타워의 init함수를 호출해 변수값을 설정해줌
-	// * 어떠한 이유로든 타워가 생성되지 않으면 오류 코드 등을 반환
-	// */
-	public Enemy GetTarget() { 
-		return _gameManager.enemyManager.targetFirst;
+	
+	private Enemy _GetTarget() 
+	{ 
+		return gameManager.enemyManager.targetFirst;
 	}
-
 }
