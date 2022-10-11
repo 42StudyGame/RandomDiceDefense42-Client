@@ -2742,10 +2742,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 281453b741814461b9b14d5b94fbd932, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sp: 5000
   towerManager: {fileID: 497353759}
   enemyManager: {fileID: 1417149470}
   uiManager: {fileID: 1013384291}
-  sp: 500
 --- !u!1 &1721327702
 GameObject:
   m_ObjectHideFlags: 0
