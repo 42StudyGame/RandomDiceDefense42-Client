@@ -1,15 +1,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RandomDiceCreate : MonoBehaviour {
-	private List<Point> _remainPoints;
-	[SerializeField] private Point[] _points;
-	private int _pointNum;
+public partial class RandomDiceCreate // IO
+{
+	public Tower CreateTower() => _CreateTower();
+	public Tower[] seletDice;	// selectDice
+}
+
+public partial class RandomDiceCreate // SerializeField
+{
+	[SerializeField] private Point[] points;
+}
+
+public partial class RandomDiceCreate : MonoBehaviour
+{
 	
-	public Tower[] seletDice;
+}
+
+public partial class RandomDiceCreate // body
+{
+	private readonly List<Point> _remainPoints = new();
+	private int _pointNum;
 	private Point _point;
 	
-	public Tower CreateTower() {
+	private Tower _CreateTower() 
+	{
 		_point = SelectPoint();
 		if (_point != null && !_point.isTower)
 		{
@@ -20,16 +35,22 @@ public class RandomDiceCreate : MonoBehaviour {
 		return null;
 	}
 	
- 	private Point SelectPoint() {
-		_remainPoints = new List<Point>();
-		for (int i = 0; i < _points.Length; i++)
-		{
-			if (_points[i].isTower == false && _points[i] != null)
-				_remainPoints.Add(_points[i]);
-		}
+	private Point SelectPoint() 
+	{
 		if (_remainPoints.Count == 0)
-			return (null);
+		{
+			return null;
+		}
+		
+		for (int i = 0; i < points.Length; i++)
+		{
+			if (points[i].isTower == false && points[i] != null)
+			{
+				_remainPoints.Add(points[i]);
+			}
+		}
+		
 		_pointNum = Random.Range(0, _remainPoints.Count);
-		return (_remainPoints[_pointNum]);
+		return _remainPoints[_pointNum];
 	}
 }
