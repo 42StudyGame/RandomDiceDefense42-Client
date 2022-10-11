@@ -7,6 +7,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour {
 	private EnemyManager _enemyManager;
 	[SerializeField] private SpriteRenderer _enemySpriteRenderer;
+	[SerializeField] private TextMesh textMesh;
 	// private EnemyData _enemyData; //ScriptableObject
 
 	// 골라인까지의 실제 거리, 현재 이동한 거리
@@ -14,8 +15,8 @@ public class Enemy : MonoBehaviour {
 
 	// 적의 현재 체력 (해당 값 구하는 공식은 아직 못 알아냈습니다.)
 
-	public int maxHealth { get; private set; }
-	public int currHealth { get; private set; }
+	public float maxHealth { get; private set; }
+	public float currHealth { get; private set; }
 	public float speed { get; private set; }
 	public int sp { get; private set; }
 	private Transform[] _wayPoints;
@@ -63,6 +64,13 @@ public class Enemy : MonoBehaviour {
 		*/
 	}
 
+	public void OnDamage(float damage) {
+		currHealth -= damage;
+		textMesh.text = currHealth.ToString();
+		if (currHealth <= 0)
+			Die();
+	}
+	
 	private float GetProgressToGoal()
 	{
 		float dist = Vector2.Distance(transform.position, _wayPoints[_currentLine].position);

@@ -6,6 +6,7 @@ public class Bullet : MonoBehaviour
 	private const float MovementSpeed = 10f;
 	private BulletPool _pool;
 	private Collider2D _targetCollider;
+	private float _damage;
 
 	public void SetTarget(Enemy target)
 	{
@@ -13,9 +14,12 @@ public class Bullet : MonoBehaviour
 		_targetCollider = _target.GetComponent<Collider2D>();
 		// getComponent 안쓸수 있으면 좋음. 비싸고, 빈도도 잦음
 	}
-	
-	public void Init(BulletPool _bulletPool) {
-		_pool = _bulletPool;
+
+	public void SetDamage(float damage) {
+		_damage = damage;
+	}
+	public void Init(BulletPool bulletPool) {
+		_pool = bulletPool;
 	}
 	
 	private void Update() {
@@ -27,7 +31,10 @@ public class Bullet : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D col) {
 		if (col == _targetCollider)
+		{
 			_pool.ReturnObject(this);
+			_target.OnDamage(_damage);
+		}
 	}
 
 	private void Move() {
