@@ -231,7 +231,7 @@ GameObject:
   - component: {fileID: 236474876}
   - component: {fileID: 236474875}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: SpCostText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -277,7 +277,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 100
+  m_text: cost
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1550,6 +1550,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1013384290}
+  - component: {fileID: 1013384291}
   m_Layer: 0
   m_Name: UI
   m_TagString: Untagged
@@ -1574,6 +1575,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1013384291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1013384289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d3080e1ffc3448e2a0077e076910912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameManager: {fileID: 1689355136}
+  _spText: {fileID: 1131538122}
+  _costText: {fileID: 236474875}
+  _playerHealths: []
 --- !u!1 &1039374907
 GameObject:
   m_ObjectHideFlags: 0
@@ -1731,7 +1748,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 100
+  m_text: sp
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1825,7 +1842,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1171023038
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1901,7 +1918,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1176923947
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2500,7 +2517,7 @@ GameObject:
   - component: {fileID: 1551213704}
   - component: {fileID: 1551213703}
   m_Layer: 0
-  m_Name: sp
+  m_Name: SpImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2706,6 +2723,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerManager: {fileID: 497353759}
   enemyManager: {fileID: 1417149470}
+  sp: 500
 --- !u!1 &1721327702
 GameObject:
   m_ObjectHideFlags: 0
