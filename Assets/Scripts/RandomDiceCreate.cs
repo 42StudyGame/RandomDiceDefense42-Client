@@ -21,13 +21,15 @@ public partial class RandomDiceCreate : MonoBehaviour // body
 {
 	private Tower NewTower(Point point)
 	{
-		return Instantiate(diceDeck[Random.Range(0, diceDeck.Length)], point.transform.position, Quaternion.identity);
+		Tower newTower = Instantiate(diceDeck[Random.Range(0, diceDeck.Length)], point.transform.position, Quaternion.identity);
+		newTower.slotId = point.slotId;
+		return newTower;
 	}
 
 	private Tower _CreateTower()
 	{
 		Point[] array = points
-			.Where((e, index) => !e.occupied)
+			.Where(e => !e.occupied)
 			.ToArray();
 
 		if (array.Length == 0)
