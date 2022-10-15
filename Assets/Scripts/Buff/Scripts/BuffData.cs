@@ -1,13 +1,6 @@
 using System;
 using UnityEngine;
 
-public enum BuffType
-{
-    Dot,
-    Slow,
-    Etc,
-}
-
 [CreateAssetMenu(menuName = "Scriptable/BuffData", fileName = "Buff Data")]
 public class BuffData : ScriptableObject
 {

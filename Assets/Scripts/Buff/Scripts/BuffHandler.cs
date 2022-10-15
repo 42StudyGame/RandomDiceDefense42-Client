@@ -14,11 +14,7 @@ public partial class BuffHandler // SerializeField
     [SerializeField] private BuffPool buffPool;
 }
 
-public partial class BuffHandler : MonoBehaviour
-{
-}
-
-public partial class BuffHandler // body
+public partial class BuffHandler : MonoBehaviour // body
 {
     private readonly Dictionary<int, BuffData> _buffDictionary = new();
     
