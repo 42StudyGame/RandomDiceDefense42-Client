@@ -45,3 +45,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buffPool: {fileID: 7376763127369674151, guid: 29f43b08edf134b44b641ca52adcd1c9, type: 3}
+  prefab: {fileID: 7630029789584630955, guid: b92cf352dcf798b488ee4d085daaf703, type: 3}
+  currentTransform: {fileID: 754710933441332675}

@@ -5,46 +5,61 @@ using UnityEngine;
 
 public partial class BuffHandler // IO
 {
-    public void Append(int buffId) => _append(buffId);
-    public (BuffType, float)[] EffectiveValue() => _effectiveValue();
+    public void Append(int buffId, Vector3 position = default) => _append(buffId, position);
+    public (BuffType, float)[] GetEffectiveValueArray() => _getEffectiveValueArray();
 }
 
 public partial class BuffHandler // SerializeField
 {
     [SerializeField] private BuffPool buffPool;
+    [SerializeField] private Buff prefab;
 }
 
 public partial class BuffHandler : MonoBehaviour // body
 {
-    private readonly Dictionary<int, BuffData> _buffDictionary = new();
+    private readonly Dictionary<int, Buff> _buffDictionary = new();
     
-    private void _append(int buffId)
+    private void _append(int buffId, Vector3 position)
     {
         if (!RequestBuff(buffId, out BuffData buff))
         {
             return;
         }
 
-        int stackCount = _buffDictionary.ContainsKey(buff.id) ? _buffDictionary[buff.id].stackCount : 0;  
-        buff.stackCount = stackCount;
-        buff.BeginTime = DateTime.Now;
-        _buffDictionary[buff.id] = buff;
+        SetupBuff(buff, position);
     }
 
-    private (BuffType, float)[] _effectiveValue()
+    private (BuffType, float)[] _getEffectiveValueArray()
     {
         RemoveExpired();
         DateTime now = DateTime.Now;
-        
         (BuffType, float)[] tupleArray = _buffDictionary
-            .GroupBy(g => g.Value.buffType)
+            .GroupBy(g => g.Value.GetData().buffType)
             .Select(g => 
-                (g.Key, g.Sum(e => UpdateLastEffectiveTime(now, e.Value))))
+                (g.Key, g.Sum(e => UpdateLastEffectiveTime(now, e.Value.GetData()))))
             .ToArray();
         
         return tupleArray;
     }
 
+    private void SetupBuff(BuffData buff, Vector3 position)
+    {
+        Buff buffObject;
+        if (_buffDictionary.ContainsKey(buff.id))
+        {
+            buffObject = _buffDictionary[buff.id];
+            buff.stackCount = buffObject.GetData().stackCount + 1;
+        }
+        else
+        {
+            buffObject = Instantiate(prefab, transform);
+        }
+        
+        buff.BeginTime = DateTime.Now;
+        buffObject.InjectData(buff, position);
+        _buffDictionary[buff.id] = buffObject;
+    }
+    
     private float UpdateLastEffectiveTime(DateTime now, BuffData data)
     {
         TimeSpan timeSpan = now - data.LastEffectiveTime;
@@ -69,13 +84,12 @@ public partial class BuffHandler : MonoBehaviour // body
     {
         DateTime now = DateTime.Now;
         
-        foreach (KeyValuePair<int, BuffData> pair in _buffDictionary.ToArray())
+        foreach (KeyValuePair<int, Buff> pair in _buffDictionary.ToArray())
         {
-            TimeSpan timeSpan = now - pair.Value.BeginTime;
-            if (pair.Value.duration < timeSpan.Seconds)
+            TimeSpan timeSpan = now - pair.Value.GetData().BeginTime;
+            if (pair.Value.GetData().duration < timeSpan.Seconds)
             {
-                // Debug.Log($"key = {pair.Key}, Begin - now = {(now - pair.Value.BeginTime).Seconds}");
-                //
+                Destroy(_buffDictionary[pair.Key].gameObject);
                 _buffDictionary.Remove(pair.Key);
             }
         }

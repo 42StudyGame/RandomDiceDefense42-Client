@@ -17,5 +17,6 @@ MonoBehaviour:
   duration: 10
   interval: 3
   effectiveValue: 3
-  decorateSprite: []
+  decorateSprite:
+  - {fileID: 21300000, guid: eb31f7519d3a1468d9e1f9fc653a6409, type: 3}
   buffType: 0
