@@ -5,6 +5,7 @@ public enum BuffType
 {
     Dot,
     Slow,
+    Ground,
     Etc,
 }
 

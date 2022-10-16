@@ -17,7 +17,7 @@ public class TestObject : MonoBehaviour
 
     private void Update()
     {
-        (BuffType BuffType, float effectValue)[] array = buffHandler.EffectiveValue();
+        (BuffType BuffType, float effectValue)[] array = buffHandler.GetEffectiveValueArray();
 
         if (array.Length <= 0 || !(array[0].effectValue > 0))
         {
