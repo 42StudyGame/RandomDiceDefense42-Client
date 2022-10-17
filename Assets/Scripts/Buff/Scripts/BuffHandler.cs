@@ -5,7 +5,7 @@ using UnityEngine;
 
 public partial class BuffHandler // IO
 {
-    public void Append(int buffId, Vector3 position = default) => _append(buffId, position);
+    public void Append(int buffId) => _append(buffId);
     public (BuffType, float)[] GetEffectiveValueArray() => _getEffectiveValueArray();
 }
 
@@ -19,14 +19,14 @@ public partial class BuffHandler : MonoBehaviour // body
 {
     private readonly Dictionary<int, Buff> _buffDictionary = new();
     
-    private void _append(int buffId, Vector3 position)
+    private void _append(int buffId)
     {
         if (!RequestBuff(buffId, out BuffData buff))
         {
             return;
         }
 
-        SetupBuff(buff, position);
+        SetupBuff(buff);
     }
 
     private (BuffType, float)[] _getEffectiveValueArray()
@@ -42,7 +42,7 @@ public partial class BuffHandler : MonoBehaviour // body
         return tupleArray;
     }
 
-    private void SetupBuff(BuffData buff, Vector3 position)
+    private void SetupBuff(BuffData buff)
     {
         Buff buffObject;
         if (_buffDictionary.ContainsKey(buff.id))
@@ -56,7 +56,7 @@ public partial class BuffHandler : MonoBehaviour // body
         }
         
         buff.BeginTime = DateTime.Now;
-        buffObject.InjectData(buff, position);
+        buffObject.InjectData(buff);
         _buffDictionary[buff.id] = buffObject;
     }
     
