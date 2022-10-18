@@ -24,13 +24,9 @@ public partial class Enemy // SerializeField
 
 public partial class Enemy : MonoBehaviour
 {
-	private void Awake()
-	{
-	}
-
 	void Update() {
-		Move();
-		GetProgressToGoal();
+		_Move();
+		_GetProgressToGoal();
 	}
 }
 
@@ -41,45 +37,48 @@ public partial class Enemy // body
 	private int _currentLine = 0;
 	private float _runDistance;
 
-	private void _Init(EnemyData enemyData, int wave, EnemyManager enemyManager)
+	private void _Init(EnemyData enemyData, int hpOffset, EnemyManager enemyManager)
 	{
 		_enemyManager = enemyManager;
 		_wayPoints = _enemyManager.wayPoints;
 		speed = enemyData.speed;
-		maxHealth = enemyData.health;
-		currHealth = enemyData.health;
+		maxHealth = enemyData.health * hpOffset;
+		currHealth = maxHealth;
 		sp = enemyData.sp;
 		_enemySpriteRenderer.sprite = enemyData.sprite;
 
 		progressToGoal = 0f;
 		_runDistance = 0f;
+
+		textMesh.text = currHealth.ToString();
 	}
 
-	private void Move() {
+	private void _Move() {
 		transform.position = Vector2.MoveTowards
 		(transform.position,
 			_wayPoints[_currentLine].position,
 			speed * Time.deltaTime);
 
-		if (Vector2.SqrMagnitude(transform.position - _wayPoints[_currentLine].transform.position) <= 0.01f)
+		if (Vector2.SqrMagnitude(transform.position - _wayPoints[_currentLine].transform.position) <= 0.000001f)
 			_currentLine++;
 		if (_currentLine == _wayPoints.Length)
-			Die();
+			_Die();
 	}
 
-	private void Die() {
+	private void _Die() {
 		_enemyManager.EnemyGoal();
 		_enemyManager.DestroyEnemy(this);
+		_enemyManager.SetGeneralTarget();
 	}
 
 	private void _OnDamage(float damage) {
 		currHealth -= damage;
 		textMesh.text = currHealth.ToString();
 		if (currHealth <= 0)
-			Die();
+			_Die();
 	}
 
-	private void GetProgressToGoal()
+	private void _GetProgressToGoal()
 	{
 		_runDistance += speed * Time.deltaTime;
 		progressToGoal = _runDistance / _enemyManager.maxDistToGoal;
