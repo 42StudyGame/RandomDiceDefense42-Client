@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,10 +32,18 @@ public class ScenarioList
         for (int i = 0; i < enemyList.Count; i++)
         {
             if (enemyList[i] < 0)
+            {
+                Debug.LogError(String.Format("no enemy on wave {0}", wave));
                 return false;
+            }
+
         }
         if (wave < 0 || enemyHPOffset < 1 || spawnDelay < 0)
+        {
+            Debug.LogError(String.Format("value error on wave {0}", wave));
             return false;
+        }
+
         return true;
     }
 }
@@ -60,13 +69,11 @@ public class ScenarioLists
             {
                 return false;
             }
-                
-            if (i != waveList.Count - 1)
+
+            if (waveList[i].wave != i + 1)
             {
-                if (waveList[i].wave >= waveList[i + 1].wave)
-                {
-                    return false;
-                }
+                Debug.LogError(String.Format("wave numbering error on {0}", i + 1));
+                return false;
             }
         }
         return true;
