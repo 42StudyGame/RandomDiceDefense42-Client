@@ -8,9 +8,11 @@ public partial class TowerManager // IO
 	public void Launch(Tower obj) => _Launch(obj);
 	public Bullet GetBullet(Tower tower) => _GetBullet(tower);
 	public void SetBullet(Bullet bullet) => _SetBullet(bullet);
-	public bool AddTower() => _AddTower();
 	public Enemy GetTarget() => _GetTarget();
-	public void DestroyTower(Tower tower) => _DstroyTower(tower);
+	public bool AddTower() => _AddTower();
+	public void DestroyTower(Tower tower) => _DestroyTower(tower);
+
+	public void Merge(Tower baseTower, Tower otherTower) => _Merge(baseTower, otherTower);
 }
 
 public partial class TowerManager // SerializeField
@@ -21,15 +23,17 @@ public partial class TowerManager // SerializeField
 }
 public partial class TowerManager : MonoBehaviour
 {
-	private void _DstroyTower(Tower tower) {
+	private void _DestroyTower(Tower tower)
+	{
 		_towers.Remove(tower);
-		Destroy(tower);
+		randomDiceCreate.ReleaseTower(tower);
+		Destroy(tower.gameObject);
 	}
 }
 
 public partial class TowerManager // body
 {
-	private List<Tower> _towers = new List<Tower>();
+	private readonly List<Tower> _towers = new List<Tower>();
 
 	// ReSharper disable Unity.PerformanceAnalysis
 	private void _Launch(Tower tower)
@@ -68,5 +72,12 @@ public partial class TowerManager // body
 	private Enemy _GetTarget()
 	{
 		return gameManager.enemyManager.targetFirst;
+	}
+
+	private void _Merge(Tower baseTower, Tower otherTower) 
+	{
+		baseTower.UpGrade();
+		baseTower.ResetEyesPosition();
+		DestroyTower(otherTower);
 	}
 }

@@ -618,14 +618,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   diceDeck:
-  - {fileID: 6856837228248213096, guid: 164e0819bb26347c19b9e08b76f58847, type: 3}
+  - {fileID: 6856837228248213096, guid: dc8d21e7f1ca34318b0e27373014f68f, type: 3}
   points:
   - {fileID: 2043322308}
   - {fileID: 1811888842}
-  - {fileID: 306541330}
   - {fileID: 868615443}
   - {fileID: 1893486444}
   - {fileID: 1191692442}
+  - {fileID: 306541330}
   - {fileID: 1039374909}
   - {fileID: 1886811647}
   - {fileID: 682884067}
@@ -1901,7 +1901,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1171023037
 GameObject:
@@ -2245,6 +2245,10 @@ PrefabInstance:
     - target: {fileID: 369761965684606544, guid: c9e928c866c18f945a65938235a256a2, type: 3}
       propertyPath: m_Name
       value: TestObject
+      objectReference: {fileID: 0}
+    - target: {fileID: 369761965684606544, guid: c9e928c866c18f945a65938235a256a2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5101096785910123041, guid: c9e928c866c18f945a65938235a256a2, type: 3}
       propertyPath: m_RootOrder
