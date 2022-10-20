@@ -86,6 +86,8 @@ public partial class EnemyManager
 	{
 		_enemyPool.ReturnObject(enemy);
 		_enemies.Remove(enemy);
+		_gameManager.sp += enemy.sp;
+		_gameManager.uiManager.SetSpText(_gameManager.sp.ToString());
 	}
 
 	private void _SetGeneralTarget()

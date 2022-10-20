@@ -71,7 +71,7 @@ public partial class Enemy // body
 		_enemyManager.SetGeneralTarget();
 	}
 
-	private void _OnDamage(float damage) {
+	protected virtual void _OnDamage(float damage) {
 		currHealth -= damage;
 		textMesh.text = currHealth.ToString();
 		if (currHealth <= 0)
