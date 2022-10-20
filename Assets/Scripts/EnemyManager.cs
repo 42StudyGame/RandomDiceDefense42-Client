@@ -39,10 +39,15 @@ public partial class EnemyManager // SerializeField
 	[SerializeField] private EnemyPool _enemyPool;
 	[SerializeField] private EnemyData[] _enemyDatas;
 	[SerializeField] private Transform _spawnPoint;
+	[SerializeField] private Boss _bossPrefab;
 }
 
 public partial class EnemyManager : MonoBehaviour
 {
+	private void Start()
+	{
+		_CreateBoss();
+	}
 	private void Update()
 	{
 		_UpdateState();
@@ -65,6 +70,15 @@ public partial class EnemyManager
 		enemy.transform.position = _spawnPoint.position;
 		enemy.Init(enemyData, hpOffset, this);
 		_enemies.Add(enemy);
+		SetGeneralTarget();
+	}
+
+	private void _CreateBoss()
+	{
+		Boss boss = Instantiate(_bossPrefab, _spawnPoint.position, _spawnPoint.rotation);
+		BossData bossData = (BossData)_enemyDatas[1];
+		boss.Init(bossData,1, _gameManager);
+		_enemies.Add(boss);
 		SetGeneralTarget();
 	}
 

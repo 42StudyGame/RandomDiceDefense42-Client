@@ -12,7 +12,7 @@ public partial class Enemy // IO
 	public int sp { get; private set; }
 	public float progressToGoal { get; private set; }
 
-	public void Init(EnemyData enemyData, int wave, EnemyManager enemyManager) => _Init(enemyData, wave, enemyManager);
+	public void Init(EnemyData enemyData, int hpOffset, EnemyManager enemyManager) => _Init(enemyData, hpOffset, enemyManager);
 	public void OnDamage(float damage) => _OnDamage(damage);
 }
 
@@ -24,7 +24,7 @@ public partial class Enemy // SerializeField
 
 public partial class Enemy : MonoBehaviour
 {
-	void Update() {
+	protected virtual void Update() {
 		_Move();
 		_GetProgressToGoal();
 	}
