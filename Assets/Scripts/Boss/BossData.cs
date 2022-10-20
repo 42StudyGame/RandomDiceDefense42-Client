@@ -7,6 +7,7 @@ public class BossData : EnemyData
 {
 	[SerializeField] private TowerManager towerManager;
 	public int skillIndex;
+	public float skillCoolTime;
 	public delegate void SkillPointer();
 	public SkillPointer[] skills = new SkillPointer[]{new SkillPointer(skill1), new SkillPointer(skill2)};
 

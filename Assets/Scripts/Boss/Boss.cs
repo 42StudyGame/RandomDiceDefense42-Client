@@ -46,5 +46,6 @@ public partial class Boss // body
         base.Init(bossData, hpOffset, gameManager.enemyManager);
         _skills = bossData.skills[bossData.skillIndex];
         _towerManager = gameManager.towerManager;
+        _skillCoolTime = bossData.skillCoolTime;
     }
 }
