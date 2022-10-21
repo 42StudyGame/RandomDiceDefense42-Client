@@ -407,6 +407,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemySpriteRenderer: {fileID: 6847922770527907922}
   textMesh: {fileID: 6847922770558250735}
+  _skills: {fileID: 1026394601946049739, guid: 922ec33e52d3b4857ba29570c27d433f, type: 3}
   _healthSlider: {fileID: 4441892691085311835}
 --- !u!1 &6847922770558250734
 GameObject:

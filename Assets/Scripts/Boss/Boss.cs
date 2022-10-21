@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public partial class Boss : Enemy // IO
 {
-    public void Init(BossData bossData, int hpOffset, GameManager gameManager) => _Init(bossData, hpOffset, gameManager);
+    public void Init(BossData bossData, int hpOffset, GameManager gameManager, ISkills skills) => _Init(bossData, hpOffset, gameManager, skills);
 }
 
 
@@ -17,14 +17,21 @@ public partial class Boss// SerializeField
 
 public partial class Boss// Monobehaviour
 {
+    private Coroutine _coroutine;
+
+    private void OnDisable()
+    {
+        if (_coroutine != null)
+        {
+            StopCoroutine(_coroutine);
+            _coroutine = null;
+        }
+    }
+
     protected override void Update()
     {
         base.Update();
         _healthSlider.transform.position = (Vector2)Camera.main.WorldToScreenPoint(transform.position) + (Vector2.down * 70);
-        if (!_isCoolTime)
-        {
-            StartCoroutine(UseSkill());
-        }
     }
 }
 
@@ -33,26 +40,30 @@ public partial class Boss // body
     private TowerManager _towerManager;
     private float _skillCoolTime = 2.0f;
     private bool _isCoolTime = false;
-    private BossData.SkillPointer _skills;
+    private delegate void SkillPointer();
+    private SkillPointer _skillPointer;
     
     IEnumerator UseSkill()
     {
-        _isCoolTime = true;
-        yield return new WaitForSeconds(_skillCoolTime);
-        _skills();
-        _isCoolTime = false;
+        if (_skillPointer != null)
+        {
+            yield return new WaitForSeconds(_skillCoolTime);
+            _skillPointer();
+            _coroutine = StartCoroutine(UseSkill());
+        }
     }
     protected override void _OnDamage(float damage) {
         base._OnDamage(damage);
         _healthSlider.value = currHealth;
     }
-    public void _Init(BossData bossData, int hpOffset, GameManager gameManager)
+    public void _Init(BossData bossData, int hpOffset, GameManager gameManager, ISkills skills)
     {
         base.Init(bossData, hpOffset, gameManager.enemyManager);
-        _skills = bossData.skills[bossData.skillIndex];
+        _skillPointer = new SkillPointer(skills.Skill);
         _towerManager = gameManager.towerManager;
         _skillCoolTime = bossData.skillCoolTime;
         _healthSlider.maxValue = maxHealth;
         _healthSlider.value = currHealth;
+        _coroutine = StartCoroutine(UseSkill());
     }
 }
