@@ -40,7 +40,7 @@ public partial class EnemyManager // SerializeField
 	[SerializeField] private EnemyData[] _enemyDatas;
 	[SerializeField] private Transform _spawnPoint;
 	[SerializeField] private Boss _bossPrefab;
-	[SerializeField] private ISkills[] _skills;
+	[SerializeField] private ASkills[] _skills;
 }
 
 public partial class EnemyManager : MonoBehaviour

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public partial class Boss : Enemy // IO
 {
-    public void Init(BossData bossData, int hpOffset, GameManager gameManager, ISkills skills) => _Init(bossData, hpOffset, gameManager, skills);
+    public void Init(BossData bossData, int hpOffset, GameManager gameManager, ASkills skills) => _Init(bossData, hpOffset, gameManager, skills);
 }
 
 
@@ -37,9 +37,7 @@ public partial class Boss// Monobehaviour
 
 public partial class Boss // body
 {
-    private TowerManager _towerManager;
     private float _skillCoolTime = 2.0f;
-    private bool _isCoolTime = false;
     private delegate void SkillPointer();
     private SkillPointer _skillPointer;
     
@@ -56,11 +54,10 @@ public partial class Boss // body
         base._OnDamage(damage);
         _healthSlider.value = currHealth;
     }
-    public void _Init(BossData bossData, int hpOffset, GameManager gameManager, ISkills skills)
+    public void _Init(BossData bossData, int hpOffset, GameManager gameManager, ASkills skills)
     {
         base.Init(bossData, hpOffset, gameManager.enemyManager);
         _skillPointer = new SkillPointer(skills.Skill);
-        _towerManager = gameManager.towerManager;
         _skillCoolTime = bossData.skillCoolTime;
         _healthSlider.maxValue = maxHealth;
         _healthSlider.value = currHealth;
