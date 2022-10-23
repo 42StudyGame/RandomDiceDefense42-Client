@@ -40,7 +40,7 @@ public partial class Enemy // body
 	private void _Init(EnemyData enemyData, int hpOffset, EnemyManager enemyManager)
 	{
 		_enemyManager = enemyManager;
-		_wayPoints = _enemyManager.wayPoints;
+		_wayPoints = _enemyManager.enemyLine.wayPoints;
 		speed = enemyData.speed;
 		maxHealth = enemyData.health * hpOffset;
 		currHealth = maxHealth;
@@ -81,6 +81,6 @@ public partial class Enemy // body
 	private void _GetProgressToGoal()
 	{
 		_runDistance += speed * Time.deltaTime;
-		progressToGoal = _runDistance / _enemyManager.maxDistToGoal;
+		progressToGoal = _runDistance / _enemyManager.enemyLine.maxDistToGoal;
 	}
 }

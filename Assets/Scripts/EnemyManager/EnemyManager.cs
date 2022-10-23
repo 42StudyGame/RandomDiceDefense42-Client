@@ -12,15 +12,13 @@ public enum EMState
 
 public partial class EnemyManager // IO
 {
-	[HideInInspector] public Transform[] wayPoints;
-
+	public EnemyLineManager enemyLine;
 	public EMState State { get; private set; }
-
+	
 	public Enemy targetFirst { get; private set; }
 	public Enemy targetLast { get; private set; }
 	public Enemy targetRandom { get; private set; }
 	public Enemy targetStrongest { get; private set; }
-	public float maxDistToGoal { get; private set; }
 
 	public void Init() => _Init();
 
@@ -55,7 +53,7 @@ public partial class EnemyManager
 	private List<Enemy> _enemies = new List<Enemy>();
 
 	private void _Init() {
-		maxDistToGoal = _GetMaxDistToGoal();
+		enemyLine.Init();
 	}
 
 	private void _CreateEnemy(int type, int hpOffset)
@@ -84,6 +82,7 @@ public partial class EnemyManager
 			targetStrongest = null;
 			return;
 		}
+
 		float maxHealth = 0;
 		float minDist = float.MaxValue;
 		float maxDist = 0f;
@@ -94,29 +93,21 @@ public partial class EnemyManager
 				minDist = _enemies[i].progressToGoal;
 				targetLast = _enemies[i];
 			}
+
 			if (_enemies[i].progressToGoal > maxDist)
-            {
+			{
 				maxDist = _enemies[i].progressToGoal;
 				targetFirst = _enemies[i];
 			}
+
 			if (_enemies[i].currHealth > maxHealth)
 			{
 				maxHealth = _enemies[i].currHealth;
 				targetStrongest = _enemies[i];
 			}
 		}
+
 		targetRandom = _enemies[Random.Range(0, _enemies.Count)];
-	}
-
-	private float _GetMaxDistToGoal()
-	{
-		float dist = Vector2.Distance(_spawnPoint.position, wayPoints[0].position);
-		for (int i = 0; i < wayPoints.Length - 1; i++)
-		{
-			dist += Vector2.Distance(wayPoints[i].position, wayPoints[i + 1].position);
-		}
-
-		return dist;
 	}
 
 	private void _InjectScenario(ScenarioList wave, float delay)

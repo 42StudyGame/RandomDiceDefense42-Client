@@ -52,7 +52,7 @@ public partial class ScenarioManager // body
 
         wave = 0;
         maxWave = _scenarioLists.waveList.Count;
-        waveStartDelay = 3f;
+        waveStartDelay = 0f;
     }
 
     private void _StartNewWave()
