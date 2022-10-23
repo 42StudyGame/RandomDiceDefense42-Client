@@ -618,15 +618,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   diceDeck:
-  - {fileID: 6856837228248213096, guid: dc8d21e7f1ca34318b0e27373014f68f, type: 3}
-  - {fileID: 6856837228248213096, guid: 37a2470835a304b86a0f53a69ef6b297, type: 3}
+  - {fileID: 6856837228248213096, guid: 164e0819bb26347c19b9e08b76f58847, type: 3}
   points:
   - {fileID: 2043322308}
   - {fileID: 1811888842}
+  - {fileID: 306541330}
   - {fileID: 868615443}
   - {fileID: 1893486444}
   - {fileID: 1191692442}
-  - {fileID: 306541330}
   - {fileID: 1039374909}
   - {fileID: 1886811647}
   - {fileID: 682884067}
