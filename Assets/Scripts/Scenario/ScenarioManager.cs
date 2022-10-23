@@ -6,7 +6,7 @@ public partial class ScenarioManager // IO
     public bool isWaveOver { get; private set; }
     public int wave { get; private set; }
     public int maxWave { get; private set; }
-    public float waveStartDelay { get; private set; }
+
 
 
     public void Init() => _Init();
@@ -52,7 +52,6 @@ public partial class ScenarioManager // body
 
         wave = 0;
         maxWave = _scenarioLists.waveList.Count;
-        waveStartDelay = 0f;
     }
 
     private void _StartNewWave()
@@ -64,6 +63,7 @@ public partial class ScenarioManager // body
         else if (_gameManager.enemyManager.State == EMState.waiting)
         {
             _currentList = new ScenarioList(_scenarioLists.waveList[wave]);
+            float waveStartDelay = _scenarioLists.waveList[wave].waveStartDelay;
             _gameManager.enemyManager.InjectScenario(_currentList, waveStartDelay);
             wave = wave + 1;
         }

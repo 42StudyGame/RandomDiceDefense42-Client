@@ -8,6 +8,7 @@ public class ScenarioList
 {
     public int wave;
     public int enemyHPOffset;
+    public float waveStartDelay;
     public float spawnDelay;
     public List<int> enemyList = new List<int>();
 
@@ -16,6 +17,7 @@ public class ScenarioList
     {
         wave = 0;
         enemyHPOffset = 0;
+        waveStartDelay = 0;
         spawnDelay = 0;
     }
 
@@ -23,6 +25,7 @@ public class ScenarioList
     {
         wave = other.wave;
         enemyHPOffset = other.enemyHPOffset;
+        waveStartDelay = other.waveStartDelay;
         spawnDelay = other.spawnDelay;
         enemyList.AddRange(other.enemyList);
     }
