@@ -40,7 +40,7 @@ public partial class Boss // body
     private float _skillCoolTime = 2.0f;
     private delegate void SkillPointer();
     private SkillPointer _skillPointer;
-    
+
     IEnumerator UseSkill()
     {
         if (_skillPointer != null)
@@ -62,5 +62,7 @@ public partial class Boss // body
         _healthSlider.maxValue = maxHealth;
         _healthSlider.value = currHealth;
         _coroutine = StartCoroutine(UseSkill());
+
+        _damage = 2;
     }
 }

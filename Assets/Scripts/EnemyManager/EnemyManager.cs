@@ -26,7 +26,7 @@ public partial class EnemyManager // IO
 
 	public void DestroyEnemy(Enemy enemy) => _DestroyEnemy(enemy);
 
-	public void EnemyGoal() => _EnemyGoal();
+	public void EnemyGoal(int damage) => _EnemyGoal(damage);
 
 	public void SetGeneralTarget() => _SetGeneralTarget();
 
@@ -170,8 +170,8 @@ public partial class EnemyManager
         }
     }
 
-	private void _EnemyGoal()
+	private void _EnemyGoal(int damage)
 	{
-
+		_gameManager.OnDamage(damage);
 	}
 }
