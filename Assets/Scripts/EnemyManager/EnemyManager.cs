@@ -26,7 +26,7 @@ public partial class EnemyManager // IO
 
 	public void DestroyEnemy(Enemy enemy) => _DestroyEnemy(enemy);
 
-	public void EnemyGoal() => _EnemyGoal();
+	public void EnemyGoal(int damage) => _EnemyGoal(damage);
 
 	public void SetGeneralTarget() => _SetGeneralTarget();
 
@@ -39,10 +39,16 @@ public partial class EnemyManager // SerializeField
 	[SerializeField] private EnemyPool _enemyPool;
 	[SerializeField] private EnemyData[] _enemyDatas;
 	[SerializeField] private Transform _spawnPoint;
+	[SerializeField] private Boss _bossPrefab;
+	[SerializeField] private ASkills[] _skills;
 }
 
 public partial class EnemyManager : MonoBehaviour
 {
+	private void Start()
+	{
+		_CreateBoss();
+	}
 	private void Update()
 	{
 		_UpdateState();
@@ -68,10 +74,21 @@ public partial class EnemyManager
 		SetGeneralTarget();
 	}
 
+	private void _CreateBoss()
+	{
+		Boss boss = Instantiate(_bossPrefab, _spawnPoint.position, _spawnPoint.rotation);
+		BossData bossData = (BossData)_enemyDatas[1];
+		boss.Init(bossData,1, _gameManager, _skills[0]);
+		_enemies.Add(boss);
+		SetGeneralTarget();
+	}
+
 	private void _DestroyEnemy(Enemy enemy)
 	{
 		_enemyPool.ReturnObject(enemy);
 		_enemies.Remove(enemy);
+		_gameManager.sp += enemy.sp;
+		_gameManager.uiManager.SetSpText(_gameManager.sp.ToString());
 	}
 
 	private void _SetGeneralTarget()
@@ -153,8 +170,8 @@ public partial class EnemyManager
         }
     }
 
-	private void _EnemyGoal()
+	private void _EnemyGoal(int damage)
 	{
-
+		_gameManager.OnDamage(damage);
 	}
 }

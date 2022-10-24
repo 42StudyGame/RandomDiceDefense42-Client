@@ -12,7 +12,7 @@ public partial class Enemy // IO
 	public int sp { get; private set; }
 	public float progressToGoal { get; private set; }
 
-	public void Init(EnemyData enemyData, int wave, EnemyManager enemyManager) => _Init(enemyData, wave, enemyManager);
+	public void Init(EnemyData enemyData, int hpOffset, EnemyManager enemyManager) => _Init(enemyData, hpOffset, enemyManager);
 	public void OnDamage(float damage) => _OnDamage(damage);
 }
 
@@ -24,7 +24,7 @@ public partial class Enemy // SerializeField
 
 public partial class Enemy : MonoBehaviour
 {
-	void Update() {
+	protected virtual void Update() {
 		_Move();
 		_GetProgressToGoal();
 	}
@@ -36,6 +36,7 @@ public partial class Enemy // body
 	private Transform[] _wayPoints;
 	private int _currentLine = 0;
 	private float _runDistance;
+	protected int _damage = 1;
 
 	private void _Init(EnemyData enemyData, int hpOffset, EnemyManager enemyManager)
 	{
@@ -62,16 +63,18 @@ public partial class Enemy // body
 		if (Vector2.SqrMagnitude(transform.position - _wayPoints[_currentLine].transform.position) <= 0.000001f)
 			_currentLine++;
 		if (_currentLine == _wayPoints.Length)
+		{
+			_enemyManager.EnemyGoal(_damage);
 			_Die();
+		}
 	}
 
 	private void _Die() {
-		_enemyManager.EnemyGoal();
 		_enemyManager.DestroyEnemy(this);
 		_enemyManager.SetGeneralTarget();
 	}
 
-	private void _OnDamage(float damage) {
+	protected virtual void _OnDamage(float damage) {
 		currHealth -= damage;
 		textMesh.text = currHealth.ToString();
 		if (currHealth <= 0)

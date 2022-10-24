@@ -112,8 +112,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecc474625827d45198f32c08c16a672e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerData: {fileID: 11400000, guid: 4273b197a9a9746f6b77b835e5b90e3e, type: 2}
+  towerData: {fileID: 11400000, guid: 00dd802d14f0d444ab5b25046297069c, type: 2}
   slotId: 0
+  draggable: {fileID: -495085180044389356}
 --- !u!114 &-495085180044389356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,7 +127,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e43b2d6cb93db4c628b7e3268b28d678, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 0}
 --- !u!61 &397475938
 BoxCollider2D:
   m_ObjectHideFlags: 0

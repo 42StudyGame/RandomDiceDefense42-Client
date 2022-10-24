@@ -38,12 +38,11 @@ public partial class RandomDiceCreate : MonoBehaviour // body
 		}
 		
 		int index = Random.Range(0, array.Length);
-		
 		Point selected = array[index];
 		selected.occupied = true;
 		return NewTower(selected);
 	}
-
+	
 	private void _ReleaseTower(Tower tower)
 	{
 		points[tower.slotId].occupied = false;
