@@ -619,6 +619,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   diceDeck:
   - {fileID: 6856837228248213096, guid: dc8d21e7f1ca34318b0e27373014f68f, type: 3}
+  - {fileID: 6856837228248213096, guid: 19bdbf09435504487943eb3b59d5232a, type: 3}
   points:
   - {fileID: 2043322308}
   - {fileID: 1811888842}
@@ -2429,7 +2430,10 @@ MonoBehaviour:
   _enemyPool: {fileID: 2030172445}
   _enemyDatas:
   - {fileID: 11400000, guid: 8408232562fb646178355d085609c7fc, type: 2}
+  - {fileID: 11400000, guid: 8408232562fb646178355d085609c7fc, type: 2}
   _spawnPoint: {fileID: 1051109104}
+  _bossPrefab: {fileID: 6847922770527907927, guid: 203399ee70b764ebdaeaa6ee56cf74e3, type: 3}
+  _skills: []
 --- !u!4 &1417149471
 Transform:
   m_ObjectHideFlags: 0
