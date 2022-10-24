@@ -21,7 +21,7 @@ public partial class BuffHandler : MonoBehaviour
 public partial class BuffHandler // body
 {
     private readonly Dictionary<int, Buff> _buffDictionary = new();
-    
+
     private void _attach(int buffId, UnityAction<BuffData> beginAction, UnityAction<BuffData> endAction)
     {
         if (RequestBuff(buffId, out BuffData buffData))

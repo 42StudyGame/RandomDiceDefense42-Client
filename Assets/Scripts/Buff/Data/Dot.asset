@@ -14,9 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   stackCount: 0
-  duration: 10
   interval: 3
+  repeatTimes: 4
   effectiveValue: 3
   decorateSprite:
   - {fileID: 21300000, guid: eb31f7519d3a1468d9e1f9fc653a6409, type: 3}
+  - {fileID: 21300000, guid: a1a4dd1387c3c4332bb8d630015a9c1f, type: 3}
+  - {fileID: 21300000, guid: 3f24cd89501d6449cb3883b735efcc28, type: 3}
   buffType: 0
