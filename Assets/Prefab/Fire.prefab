@@ -347,10 +347,10 @@ GameObject:
   - component: {fileID: 7344099052153927660}
   - component: {fileID: 4138223634660662793}
   - component: {fileID: 5737358419892103837}
-  - component: {fileID: 397475938}
   - component: {fileID: 6856837228248213096}
   - component: {fileID: -495085180044389356}
-  - component: {fileID: -1042505958853169835}
+  - component: {fileID: 397475938}
+  - component: {fileID: 805890658}
   m_Layer: 0
   m_Name: Fire
   m_TagString: Untagged
@@ -443,6 +443,34 @@ SortingGroup:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
+--- !u!114 &6856837228248213096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5630969276751559583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecc474625827d45198f32c08c16a672e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerData: {fileID: 11400000, guid: 00dd802d14f0d444ab5b25046297069c, type: 2}
+  slotId: 0
+  draggable: {fileID: -495085180044389356}
+  towerEyesPosition: {fileID: 805890658}
+--- !u!114 &-495085180044389356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5630969276751559583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e43b2d6cb93db4c628b7e3268b28d678, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!61 &397475938
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -467,38 +495,9 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.5, y: 1.5}
+  m_Size: {x: 2.36, y: 2.36}
   m_EdgeRadius: 0
---- !u!114 &6856837228248213096
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5630969276751559583}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecc474625827d45198f32c08c16a672e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  towerData: {fileID: 11400000, guid: 00dd802d14f0d444ab5b25046297069c, type: 2}
-  slotId: 0
-  spriteRenderer: {fileID: 4138223634660662793}
-  draggable: {fileID: -495085180044389356}
-  towerEyesPositionning: {fileID: -1042505958853169835}
---- !u!114 &-495085180044389356
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5630969276751559583}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e43b2d6cb93db4c628b7e3268b28d678, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &-1042505958853169835
+--- !u!114 &805890658
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

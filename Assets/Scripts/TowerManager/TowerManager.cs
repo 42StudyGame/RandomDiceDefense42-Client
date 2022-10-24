@@ -39,7 +39,7 @@ public partial class TowerManager // body
 	private void _Launch(Tower tower)
 	{
 		Bullet bullet = bulletPool.GetObject();
-		bullet.transform.position = tower.GetStartPosition();
+		bullet.transform.position = tower.transform.position;
 		bullet.SetTarget(GetTarget());
 		bullet.SetDamage(tower.towerData.damage);
 	}
@@ -74,11 +74,8 @@ public partial class TowerManager // body
 		return gameManager.enemyManager.targetFirst;
 	}
 
-	private void _Merge(Tower baseTower, Tower otherTower)
+	private void _Merge(Tower baseTower, Tower otherTower) 
 	{
-		baseTower.towerData = 
-			randomDiceCreate.diceDeck[Random.Range(0, randomDiceCreate.diceDeck.Length)].towerData;
-		baseTower.Init(this);
 		baseTower.UpGrade();
 		baseTower.ResetEyesPosition();
 		DestroyTower(otherTower);
