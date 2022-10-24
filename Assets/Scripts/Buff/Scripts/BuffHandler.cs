@@ -1,12 +1,11 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
 public partial class BuffHandler // IO
 {
-    public void Append(int buffId) => _append(buffId);
-    public (BuffType, float)[] GetEffectiveValueArray() => _getEffectiveValueArray();
+    public void Attach(int buffId, UnityAction<BuffData> beginAction = null, UnityAction<BuffData> endAction = null) => _attach(buffId, beginAction, endAction);
 }
 
 public partial class BuffHandler // SerializeField
@@ -15,83 +14,63 @@ public partial class BuffHandler // SerializeField
     [SerializeField] private Buff prefab;
 }
 
-public partial class BuffHandler : MonoBehaviour // body
+public partial class BuffHandler : MonoBehaviour
+{
+}
+
+public partial class BuffHandler // body
 {
     private readonly Dictionary<int, Buff> _buffDictionary = new();
     
-    private void _append(int buffId)
+    private void _attach(int buffId, UnityAction<BuffData> beginAction, UnityAction<BuffData> endAction)
     {
-        if (!RequestBuff(buffId, out BuffData buff))
+        if (RequestBuff(buffId, out BuffData buffData))
+        {
+            SetupBuff(buffData, beginAction, endAction, RemoveBuff);
+        }
+    }
+
+    private void RemoveBuff(int objectId)
+    {
+        if (!_buffDictionary.ContainsKey(objectId))
         {
             return;
         }
 
-        SetupBuff(buff);
-    }
-
-    private (BuffType, float)[] _getEffectiveValueArray()
-    {
-        RemoveExpired();
-        DateTime now = DateTime.Now;
-        (BuffType, float)[] tupleArray = _buffDictionary
-            .GroupBy(g => g.Value.GetData().buffType)
-            .Select(g => 
-                (g.Key, g.Sum(e => UpdateLastEffectiveTime(now, e.Value.GetData()))))
-            .ToArray();
-        
-        return tupleArray;
-    }
-
-    private void SetupBuff(BuffData buff)
-    {
-        Buff buffObject;
-        if (_buffDictionary.ContainsKey(buff.id))
+        if (_buffDictionary[objectId] != null)
         {
-            buffObject = _buffDictionary[buff.id];
-            buff.stackCount = buffObject.GetData().stackCount + 1;
-        }
-        else
-        {
-            buffObject = Instantiate(prefab, transform);
+            Destroy(_buffDictionary[objectId]);
         }
         
-        buff.BeginTime = DateTime.Now;
-        buffObject.InjectData(buff);
-        _buffDictionary[buff.id] = buffObject;
+        _buffDictionary.Remove(objectId);
     }
-    
-    private float UpdateLastEffectiveTime(DateTime now, BuffData data)
+
+    private void SetupBuff(BuffData buffData, UnityAction<BuffData> beginAction, UnityAction<BuffData> endAction, UnityAction<int> finallyAction)
     {
-        TimeSpan timeSpan = now - data.LastEffectiveTime;
-
-        if (!(data.interval <= timeSpan.Seconds))
-        {
-            return 0;
-        }
+        Buff buffObject = Instantiate(prefab, transform);
+        int buffObjectId = buffObject.GetInstanceID();
         
-        data.LastEffectiveTime = now;
-        return data.effectiveValue;
+        buffObject.InjectData(buffData, beginAction, endAction, finallyAction);
+        _buffDictionary.Add(buffObjectId, buffObject);
+    }
 
+    private Buff Current(int buffId)
+    {
+        return _buffDictionary.FirstOrDefault(e => e.Value.BuffData().id == buffId).Value;
     }
     
     private bool RequestBuff(int buffId, out BuffData buffData)
     {
         buffData = buffPool.RequestBuff(buffId);
-        return buffData != null;
-    }
-    
-    private void RemoveExpired()
-    {
-        DateTime now = DateTime.Now;
-        
-        foreach (KeyValuePair<int, Buff> pair in _buffDictionary.ToArray())
+        Buff current = Current(buffId);
+
+        if (current == null)
         {
-            TimeSpan timeSpan = now - pair.Value.GetData().BeginTime;
-            if (pair.Value.GetData().duration < timeSpan.Seconds)
-            {
-                Destroy(_buffDictionary[pair.Key].gameObject);
-                _buffDictionary.Remove(pair.Key);
-            }
+            return buffData != null;
         }
+        
+        buffData.stackCount = current.BuffData().stackCount + 1;
+        current.RemoveForce();
+        return buffData != null;
     }
 }
