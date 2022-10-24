@@ -16,9 +16,9 @@ public partial class Tower // IO
 
 public partial class Tower // SerializeField
 {
-	[SerializeField] private SpriteRenderer SpriteRenderer;
+	[SerializeField] private SpriteRenderer spriteRenderer;
 	[SerializeField] private Draggable draggable;
-	[SerializeField] private TowerEyesPosition towerEyesPosition;
+	[SerializeField] private TowerEyesPositionning towerEyesPositionning;
 }
 
 public partial class Tower : MonoBehaviour
@@ -44,11 +44,12 @@ public partial class Tower // body
 	protected int TowerLevel = 1;
 	protected int TowerStar = 1;
 
-	private void _Init(TowerManager towerManager) {
-		SpriteRenderer.sprite = towerData.Sprite;
+	private void _Init(TowerManager towerManager)
+	{
+		spriteRenderer.sprite = towerData.Sprite;
 		_towerManager = towerManager;
 		draggable.Init(this, towerManager);
-		towerEyesPosition.Init();
+		towerEyesPositionning.Init();
 		_isEnable = false;
 		_startPosition = transform.position;
 		_lastAttackTime = Time.time;
@@ -90,7 +91,7 @@ public partial class Tower // body
 
 	private void _ResetEyesPosition() 
 	{
-		towerEyesPosition.FindEyesPosition(TowerGrade);	
+		towerEyesPositionning.FindEyesPosition(TowerGrade);	
 	}
 
 	private Vector2 _GetSartPosition() 

@@ -618,8 +618,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   diceDeck:
-  - {fileID: 6856837228248213096, guid: dc8d21e7f1ca34318b0e27373014f68f, type: 3}
-  - {fileID: 6856837228248213096, guid: 37a2470835a304b86a0f53a69ef6b297, type: 3}
+  - {fileID: 6856837228248213096, guid: 953f4578cee574a8ea51ced8f95d91b0, type: 3}
+  - {fileID: 6856837228248213096, guid: 19bdbf09435504487943eb3b59d5232a, type: 3}
   points:
   - {fileID: 2043322308}
   - {fileID: 1811888842}
