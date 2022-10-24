@@ -1,17 +1,17 @@
 using UnityEngine;
 
-public partial class TowerEyesPositionning // IO 
+public partial class TowerEyesPosition // IO 
 {
 	public void FindEyesPosition(int grade) => _FindEyesPosition(grade);
 	public void Init() => _Init();
 }
 
-public partial class TowerEyesPositionning // SerializeField
+public partial class TowerEyesPosition // SerializeField
 {
 	[SerializeField] private GameObject[] eyesPoint;
 }
 
-public partial class TowerEyesPositionning : MonoBehaviour// body
+public partial class TowerEyesPosition : MonoBehaviour// body
 {
 	private void _Init() 
 	{
