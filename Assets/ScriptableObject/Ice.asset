@@ -15,4 +15,6 @@ MonoBehaviour:
   type: Ice
   damage: 10
   attackSpeed: 1
-  Sprite: {fileID: 21300000, guid: 0747ede9cfcc6402faa1aecda28a19fe, type: 3}
+  gradeDamageIncrease: 1
+  gradeAttackSpeedIncrease: 1
+  sprite: {fileID: 21300000, guid: 0747ede9cfcc6402faa1aecda28a19fe, type: 3}

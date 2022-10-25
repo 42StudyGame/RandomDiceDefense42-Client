@@ -15,4 +15,6 @@ MonoBehaviour:
   type: Fire
   damage: 10
   attackSpeed: 1
-  Sprite: {fileID: 21300000, guid: c5e7a64b6f8f1475683296844cb1ee32, type: 3}
+  gradeDamageIncrease: 1
+  gradeAttackSpeedIncrease: 1
+  sprite: {fileID: 21300000, guid: c5e7a64b6f8f1475683296844cb1ee32, type: 3}

@@ -483,7 +483,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerData: {fileID: 11400000, guid: bd3e8280d338843b59d4505b6bfe6995, type: 2}
   slotId: 0
-  SpriteRenderer: {fileID: 4138223634660662793}
+  spriteRenderer: {fileID: 4138223634660662793}
   draggable: {fileID: -495085180044389356}
   towerEyesPosition: {fileID: -1042505958853169835}
 --- !u!114 &-495085180044389356

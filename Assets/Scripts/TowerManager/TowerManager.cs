@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public delegate int TowerModify();
+// public delegate int TowerModify();
 
 public partial class TowerManager // IO
 {
@@ -20,6 +20,7 @@ public partial class TowerManager // SerializeField
 	[SerializeField] private GameManager gameManager;
 	[SerializeField] private BulletPool bulletPool;
 	[SerializeField] private RandomDiceCreate randomDiceCreate;
+	[SerializeField] private int maxGrade = 6;
 }
 public partial class TowerManager : MonoBehaviour
 {
@@ -41,7 +42,7 @@ public partial class TowerManager // body
 		Bullet bullet = bulletPool.GetObject();
 		bullet.transform.position = tower.GetStartPosition();
 		bullet.SetTarget(GetTarget());
-		bullet.SetDamage(tower.towerData.damage);
+		bullet.SetDamage(tower.towerData.damage * tower.GetGrade());
 	}
 
 	private Bullet _GetBullet(Tower tower)
@@ -74,8 +75,9 @@ public partial class TowerManager // body
 		return gameManager.enemyManager.targetFirst;
 	}
 
-	private void _Merge(Tower baseTower, Tower otherTower)
-	{
+	private void _Merge(Tower baseTower, Tower otherTower) {
+		if (baseTower.GetGrade() >= maxGrade)
+			return;
 		baseTower.towerData = 
 			randomDiceCreate.diceDeck[Random.Range(0, randomDiceCreate.diceDeck.Length)].towerData;
 		baseTower.Init(this);

@@ -5,10 +5,8 @@ public partial class Tower // IO
 	public void Init(TowerManager towerManager) => _Init(towerManager);
 	public TowerData towerData;
 	public int slotId;
-	public void UpGrade() => _UpGrade();
-	public void UpGrade(int num) => _UpGrade(num);
-	public void DownGrade() => _DownGrade();
-	public void DownGrade(int num) => _DownGrade(num);
+	public void UpGrade(int num = 1) => _UpGrade(num);
+	public void DownGrade(int num = 1) => _DownGrade(num);
 	public int GetGrade() => _GetGrade();
 	public void ResetEyesPosition() => _ResetEyesPosition();
 	public Vector2 GetStartPosition() => _GetSartPosition();
@@ -16,7 +14,7 @@ public partial class Tower // IO
 
 public partial class Tower // SerializeField
 {
-	[SerializeField] private SpriteRenderer SpriteRenderer;
+	[SerializeField] private SpriteRenderer spriteRenderer;
 	[SerializeField] private Draggable draggable;
 	[SerializeField] private TowerEyesPosition towerEyesPosition;
 }
@@ -39,24 +37,24 @@ public partial class Tower // body
 {
 	private float _lastAttackTime;
 	private Vector2 _startPosition;
-	private	bool _isEnable;
+	private	bool _isEnable = false;
 	protected int TowerGrade = 1;
 	protected int TowerLevel = 1;
 	protected int TowerStar = 1;
 
-	private void _Init(TowerManager towerManager) {
-		SpriteRenderer.sprite = towerData.Sprite;
+	private void _Init(TowerManager towerManager)
+	{
+		spriteRenderer.sprite = towerData.sprite;
 		_towerManager = towerManager;
 		draggable.Init(this, towerManager);
 		towerEyesPosition.Init();
-		_isEnable = false;
 		_startPosition = transform.position;
 		_lastAttackTime = Time.time;
 	}
 
 	private void Launch() 
 	{
-		if (Time.time >= _lastAttackTime + towerData.attackSpeed)
+		if (Time.time >= _lastAttackTime + towerData.attackSpeed / (TowerGrade * towerData.gradeAttackSpeedIncrease))
 		{
 			_lastAttackTime = Time.time;
 			_towerManager.Launch(this);
@@ -68,22 +66,12 @@ public partial class Tower // body
 		return TowerGrade;
 	}
 
-	private void _UpGrade() 
-	{
-		TowerGrade += 1;
-	}
-	
-	private void _UpGrade(int num)
+	private void _UpGrade(int num = 1)
 	{
 		TowerGrade += num;
 	}
 	
-	private void _DownGrade() 
-	{
-		TowerGrade -= 1;
-	}
-	
-	private void _DownGrade(int num)
+	private void _DownGrade(int num = 1)
 	{
 		TowerGrade -= num;
 	}
