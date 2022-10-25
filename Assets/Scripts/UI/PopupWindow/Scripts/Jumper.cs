@@ -5,6 +5,8 @@ using UnityEngine.Events;
 public partial class Jumper // IO
 {
     public void Jump(Vector2 offset, float duration) => _jump(offset, duration);
+    public void AddOnComplete(UnityAction onComplete) => _addOnComplete(onComplete);
+    public void SetOnComplete(UnityAction onComplete) => _setOnComplete(onComplete);
 }
 
 public partial class Jumper : MonoBehaviour
@@ -22,6 +24,7 @@ public partial class Jumper // body
     private Coroutine _coroutine;
     private Ease _ease;
     private bool _done;
+    private UnityAction _onComplete;
 
     private void _jump(Vector2 offset, float duration, EaseType easeType = EaseType.Linear, UnityAction onComplete = null)
     {
@@ -29,6 +32,16 @@ public partial class Jumper // body
         SetEase(_beginPosition, _beginPosition + offset, duration * .5f, easeType, onComplete);
         
         _coroutine = StartCoroutine(Jumping());
+    }
+
+    private void _addOnComplete(UnityAction onComplete)
+    {
+        _onComplete += onComplete;
+    }
+
+    private void _setOnComplete(UnityAction onComplete)
+    {
+        _onComplete = onComplete;
     }
 
     private void SetEase(Vector2 begin, Vector2 end, float duration, EaseType easeType, UnityAction onComplete)
@@ -77,5 +90,6 @@ public partial class Jumper // body
 
         SetLocalPosition(_beginPosition);
         _coroutine = null;
+        _onComplete?.Invoke();
     }
 }
