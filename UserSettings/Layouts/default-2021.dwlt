@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1728
     height: 969
   m_ShowMode: 4
-  m_Title: Game
+  m_Title: Project
   m_RootView: {fileID: 10}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 94
+  controlID: 162
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -125,7 +125,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 15
+  controlID: 113
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -176,7 +176,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 16
+  controlID: 114
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -196,8 +196,8 @@ MonoBehaviour:
     y: 0
     width: 279.5
     height: 635
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 201, y: 221}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 18}
   m_Panes:
   - {fileID: 18}
@@ -327,7 +327,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 17
+  controlID: 44
 --- !u!114 &14
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -818,8 +818,8 @@ MonoBehaviour:
     m_VAllowExceedBaseRangeMin: 1
     m_VAllowExceedBaseRangeMax: 1
     m_ScaleWithWindow: 0
-    m_HSlider: 1
-    m_VSlider: 1
+    m_HSlider: 0
+    m_VSlider: 0
     m_IgnoreScrollWheelUntilClicked: 0
     m_EnableMouseInput: 1
     m_EnableSliderZoomHorizontal: 0
@@ -832,7 +832,7 @@ MonoBehaviour:
       y: 21
       width: 788.5
       height: 593
-    m_Scale: {x: 3.2257857, y: 3.2257857}
+    m_Scale: {x: 0.92656255, y: 0.9265625}
     m_Translation: {x: 394.25, y: 296.5}
     m_MarginLeft: 0
     m_MarginRight: 0
@@ -840,10 +840,10 @@ MonoBehaviour:
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-      x: -122.218285
-      y: -91.91559
-      width: 244.43657
-      height: 183.83118
+      x: -425.49744
+      y: -320
+      width: 850.9949
+      height: 640
     m_MinimalGUI: 1
   m_defaultScale: 0.9265625
   m_LastWindowPixelSize: {x: 1577, y: 1228}
@@ -883,9 +883,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
+      m_SelectedIDs: 18130000
       m_LastClickedID: 0
-      m_ExpandedIDs: 24fbffff92600000e0600000
+      m_ExpandedIDs: e091fcff5692fcff24fbffff94600000e2600000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -901,7 +901,7 @@ MonoBehaviour:
         m_IsRenaming: 0
         m_OriginalEventType: 11
         m_IsRenamingFilename: 0
-        m_ClientGUIView: {fileID: 8}
+        m_ClientGUIView: {fileID: 0}
       m_SearchString: 
     m_ExpandedScenes: []
     m_CurrenRootInstanceID: 0
@@ -950,36 +950,36 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts/UI/PopupWindow
+    - Assets/Scripts/UI/PopupWindow/Scripts
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Scripts/UI/PopupWindow
+  - Assets/Scripts/UI/PopupWindow/Scripts
   m_LastFoldersGridSize: 16
   m_LastProjectPath: /Users/noname/unity project/RandomDiceDefense42-Client
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 273}
-    m_SelectedIDs: 52630000
-    m_LastClickedID: 25426
-    m_ExpandedIDs: 00000000186300001a6300001c6300004c63000000ca9a3b
+    scrollPos: {x: 0, y: 337}
+    m_SelectedIDs: d0800000
+    m_LastClickedID: 32976
+    m_ExpandedIDs: 000000001c6300001e6300002063000040630000506300005663000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: 
-      m_OriginalName: 
+      m_Name: PopupWindow
+      m_OriginalName: PopupWindow
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 0
+      m_UserData: 25430
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 11
+      m_OriginalEventType: 0
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 6}
     m_SearchString: 
@@ -993,7 +993,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000186300001a6300001c630000
+    m_ExpandedIDs: 000000001c6300001e63000020630000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1024,15 +1024,15 @@ MonoBehaviour:
     m_ExpandedInstanceIDs: 44620000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: EmojiSelectWindow
-      m_OriginalName: EmojiSelectWindow
+      m_Name: EmojiWindowTest
+      m_OriginalName: EmojiWindowTest
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 25016
+      m_UserData: 33002
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
       m_OriginalEventType: 0
