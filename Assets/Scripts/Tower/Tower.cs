@@ -4,7 +4,7 @@ public partial class Tower // IO
 {
 	public void Init(TowerManager towerManager) => _Init(towerManager);
 	public TowerData towerData;
-	public int slotId;
+	[HideInInspector] public int slotId;
 	public void UpGrade(int num = 1) => _UpGrade(num);
 	public void DownGrade(int num = 1) => _DownGrade(num);
 	public int GetGrade() => _GetGrade();
