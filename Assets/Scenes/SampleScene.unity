@@ -1538,6 +1538,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 968714437}
+  - component: {fileID: 968714438}
   m_Layer: 0
   m_Name: EnemyLine
   m_TagString: Line
@@ -1570,6 +1571,23 @@ Transform:
   m_Father: {fileID: 1417149471}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &968714438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 968714436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 885853562ca9d4176aa23c9ca2ab7615, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wayPoints:
+  - {fileID: 1051109104}
+  - {fileID: 521247572}
+  - {fileID: 272876358}
+  - {fileID: 1485285761}
 --- !u!1 &982747614
 GameObject:
   m_ObjectHideFlags: 0
@@ -1978,7 +1996,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1171023037
 GameObject:
@@ -2437,10 +2455,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20f86a6df28234a33a1e3733981c3e61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wayPoints:
-  - {fileID: 521247572}
-  - {fileID: 272876358}
-  - {fileID: 1485285761}
+  enemyLine: {fileID: 968714438}
   _gameManager: {fileID: 1689355136}
   _enemyPool: {fileID: 2030172445}
   _enemyDatas:
