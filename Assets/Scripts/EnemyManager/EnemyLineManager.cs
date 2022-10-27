@@ -64,11 +64,10 @@ public partial class EnemyLineManager // Body
             sum += _normPathLen[i];
             i++;
         }
-        sum -= _normPathLen[i - 1];
+        sum -= _normPathLen[--i];
         
-        float offset = (pin - sum) / _normPathLen[i - 1];
-        res = Vector2.Lerp(wayPoints[i - 1].position, wayPoints[i].position, offset);
-        Debug.Log(res);
+        float offset = (pin - sum) / _normPathLen[i];
+        res = Vector2.Lerp(wayPoints[i].position, wayPoints[i + 1].position, offset);
         return res;
     }
 
@@ -90,15 +89,14 @@ public partial class EnemyLineManager // Body
             return (-1f);
         }
 
+        valid -= 1;
         float res = 0f;
-
-        for (int j = 0; j < valid - 1; j++)
+        for (int j = 0; j < valid; j++)
         {
             res += _normPathLen[j];
         }
-
-        res += _InverseLerp(wayPoints[valid - 1].position, wayPoints[valid].position, vec)
-               * _normPathLen[valid - 1];
+        res += _InverseLerp(wayPoints[valid].position, wayPoints[valid + 1].position, vec)
+               * _normPathLen[valid];
         return (res);
     }
 
