@@ -1,33 +1,29 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TestObject : MonoBehaviour
 {
     [SerializeField] private BuffHandler buffHandler;
     
-    private void Start()
+    private IEnumerator Start()
     {
-        buffHandler.Append(0);
-        // buffHandler.Append(1);
-        // buffHandler.Append(2);
-        buffHandler.Append(3);
-        buffHandler.Append(4);
+        yield return new WaitForSecondsRealtime(2);
+        buffHandler.Attach(0, BeginAction, EndAction);
+
+        yield return new WaitForSecondsRealtime(2);
+        buffHandler.Attach(0, BeginAction, EndAction);
+        
+        yield return new WaitForSecondsRealtime(2);
+        buffHandler.Attach(0, BeginAction, EndAction);
     }
 
-    private void Update()
+    private void BeginAction(BuffData data)
     {
-        (BuffType BuffType, float effectValue)[] array = buffHandler.GetEffectiveValueArray();
-
-        if (array.Length <= 0 || !(array[0].effectValue > 0))
-        {
-            return;
-        }
-        
-        foreach (var item in array)
-        {
-            Debug.Log($"BuffType = {item.BuffType}, EffectValue = {item.effectValue}");
-        }
-        Debug.Log("-----------------------------------------");
+        Debug.LogWarning($"{data.id} effected, current stack = {data.stackCount}, repeatable count = {data.repeatTimes}");
+    }
+    
+    private void EndAction(BuffData data)
+    {
+        Debug.LogWarning($"{data.id} removed");
     }
 }
