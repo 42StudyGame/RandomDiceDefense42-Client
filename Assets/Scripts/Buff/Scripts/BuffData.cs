@@ -6,10 +6,8 @@ public class BuffData : ScriptableObject
 {
     public int id;
     public int stackCount;
-    public float duration;
-    public DateTime BeginTime;
-    public DateTime LastEffectiveTime;
     public float interval;
+    public int repeatTimes;
     public float effectiveValue;
     public Sprite[] decorateSprite;
     public BuffType buffType;
