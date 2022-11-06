@@ -45,7 +45,7 @@ public partial class EnemyManager : MonoBehaviour
 {
 	private void Start()
 	{
-		_CreateBoss();
+		//_CreateBoss();
 	}
 	private void Update()
 	{

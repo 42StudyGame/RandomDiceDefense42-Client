@@ -57,7 +57,8 @@ public partial class Tower // body
 		if (Time.time >= _lastAttackTime + towerData.attackSpeed / (TowerGrade * towerData.gradeAttackSpeedIncrease))
 		{
 			_lastAttackTime = Time.time;
-			_towerManager.Launch(this);
+			//_towerManager.Launch(this);
+			Bullet bullet = _towerManager.GetBullet(this);
 		}
 	}
 
