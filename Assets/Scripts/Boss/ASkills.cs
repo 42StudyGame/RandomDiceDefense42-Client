@@ -4,5 +4,5 @@ using UnityEngine;
 
 public abstract class ASkills : MonoBehaviour
 {
-    public abstract void Skill();
+    public abstract void Skill(Boss boss);
 }

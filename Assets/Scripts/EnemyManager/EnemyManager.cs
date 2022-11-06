@@ -23,6 +23,7 @@ public partial class EnemyManager // IO
 	public void Init() => _Init();
 
 	public void DestroyEnemy(Enemy enemy) => _DestroyEnemy(enemy);
+	public void DestroyBoss(Boss boss) => _DestroyBoss(boss);
 
 	public void EnemyGoal(int damage) => _EnemyGoal(damage);
 
@@ -45,7 +46,7 @@ public partial class EnemyManager : MonoBehaviour
 {
 	private void Start()
 	{
-		//_CreateBoss();
+		_CreateBoss(1, 1, 0);
 	}
 	private void Update()
 	{
@@ -72,11 +73,11 @@ public partial class EnemyManager
 		SetGeneralTarget();
 	}
 
-	private void _CreateBoss()
+	private void _CreateBoss(int type, int hpOffset, int skillIndex)
 	{
 		Boss boss = Instantiate(_bossPrefab, _spawnPoint.position, _spawnPoint.rotation);
-		BossData bossData = (BossData)_enemyDatas[1];
-		boss.Init(bossData,1, _gameManager, _skills[0]);
+		EnemyData enemyData = _enemyDatas[type];
+		boss.Init(enemyData,hpOffset, _gameManager, _skills[skillIndex].Skill);
 		_enemies.Add(boss);
 		SetGeneralTarget();
 	}
@@ -87,6 +88,14 @@ public partial class EnemyManager
 		_enemies.Remove(enemy);
 		_gameManager.sp += enemy.sp;
 		_gameManager.uiManager.SetSpText(_gameManager.sp.ToString());
+	}
+
+	private void _DestroyBoss(Boss boss)
+	{
+		_enemies.Remove(boss);
+		_gameManager.sp += boss.sp;
+		_gameManager.uiManager.SetSpText(_gameManager.sp.ToString());
+		Destroy(boss.gameObject);
 	}
 
 	private void _SetGeneralTarget()
