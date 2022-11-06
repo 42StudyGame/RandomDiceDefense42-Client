@@ -635,6 +635,7 @@ MonoBehaviour:
   gameManager: {fileID: 1689355136}
   bulletPool: {fileID: 922189858}
   randomDiceCreate: {fileID: 497353761}
+  maxGrade: 6
 --- !u!4 &497353760
 Transform:
   m_ObjectHideFlags: 0
@@ -2620,7 +2621,7 @@ MonoBehaviour:
   _enemyPool: {fileID: 2030172445}
   _enemyDatas:
   - {fileID: 11400000, guid: 8408232562fb646178355d085609c7fc, type: 2}
-  - {fileID: 11400000, guid: b6bf78d3f59d04343a7f34a543acff10, type: 2}
+  - {fileID: 11400000, guid: 8e1dad506a4664dcf99763ffd32321b1, type: 2}
   _spawnPoint: {fileID: 1051109104}
   _bossPrefab: {fileID: 6847922770527907927, guid: 203399ee70b764ebdaeaa6ee56cf74e3, type: 3}
   _skills:

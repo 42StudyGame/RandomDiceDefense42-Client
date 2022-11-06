@@ -32,7 +32,7 @@ public partial class Enemy : MonoBehaviour
 
 public partial class Enemy // body
 {
-	private EnemyManager _enemyManager;
+	protected EnemyManager _enemyManager;
 	private Transform[] _wayPoints;
 	private int _currentLine = 0;
 	private float _runDistance;
@@ -54,7 +54,7 @@ public partial class Enemy // body
 		textMesh.text = currHealth.ToString();
 	}
 
-	private void _Move() {
+	protected void _Move() {
 		transform.position = Vector2.MoveTowards
 		(transform.position,
 			_wayPoints[_currentLine].position,
@@ -69,7 +69,7 @@ public partial class Enemy // body
 		}
 	}
 
-	private void _Die() {
+	protected virtual void _Die() {
 		_enemyManager.DestroyEnemy(this);
 		_enemyManager.SetGeneralTarget();
 	}
