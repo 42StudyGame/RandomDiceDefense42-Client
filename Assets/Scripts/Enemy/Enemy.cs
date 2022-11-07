@@ -11,6 +11,7 @@ public partial class Enemy // IO
 	public float speed { get; private set; }
 	public int sp { get; private set; }
 	public float progressToGoal { get; private set; }
+	public int hpOffset { get; private set; }
 
 	public void Init(EnemyData enemyData, int hpOffset, EnemyManager enemyManager) => _Init(enemyData, hpOffset, enemyManager);
 	public void OnDamage(float damage) => _OnDamage(damage);
@@ -43,6 +44,7 @@ public partial class Enemy // body
 		_enemyManager = enemyManager;
 		_wayPoints = _enemyManager.enemyLine.wayPoints;
 		speed = enemyData.speed;
+		this.hpOffset = hpOffset;
 		maxHealth = enemyData.health * hpOffset;
 		currHealth = maxHealth;
 		sp = enemyData.sp;

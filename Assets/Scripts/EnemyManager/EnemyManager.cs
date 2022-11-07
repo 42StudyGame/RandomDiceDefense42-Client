@@ -21,7 +21,7 @@ public partial class EnemyManager // IO
 	public Enemy targetStrongest { get; private set; }
 
 	public void Init() => _Init();
-
+	public void CreateEnemy(int type, int hpOffset) => _CreateEnemy(type, hpOffset);
 	public void DestroyEnemy(Enemy enemy) => _DestroyEnemy(enemy);
 	public void DestroyBoss(Boss boss) => _DestroyBoss(boss);
 
@@ -46,7 +46,7 @@ public partial class EnemyManager : MonoBehaviour
 {
 	private void Start()
 	{
-		_CreateBoss(1, 1, 0);
+		// _CreateBoss(3, 1);
 	}
 	private void Update()
 	{
@@ -73,11 +73,11 @@ public partial class EnemyManager
 		SetGeneralTarget();
 	}
 
-	private void _CreateBoss(int type, int hpOffset, int skillIndex)
+	private void _CreateBoss(int type, int hpOffset)
 	{
 		Boss boss = Instantiate(_bossPrefab, _spawnPoint.position, _spawnPoint.rotation);
-		EnemyData enemyData = _enemyDatas[type];
-		boss.Init(enemyData,hpOffset, _gameManager, _skills[skillIndex].Skill);
+		BossData bossData = (BossData)_enemyDatas[type];
+		boss.Init(bossData, hpOffset, _gameManager, _skills[bossData.skillIndex].Skill);
 		_enemies.Add(boss);
 		SetGeneralTarget();
 	}
@@ -150,6 +150,11 @@ public partial class EnemyManager
 			yield return new WaitForSeconds(_currentWave.spawnDelay);
 			_CreateEnemy(_currentWave.enemyList[0], _currentWave.enemyHPOffset);
 			_currentWave.enemyList.RemoveAt(0);
+		}
+		if (_currentWave.boss != 0)
+		{
+			yield return new WaitForSeconds(_currentWave.spawnDelay);
+			_CreateBoss(_currentWave.boss, _currentWave.enemyHPOffset);
 		}
 		yield return null;
     }
