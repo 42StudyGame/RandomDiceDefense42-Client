@@ -3,7 +3,7 @@ using UnityEngine;
 public partial class TowerEyesPosition // IO 
 {
 	public void FindEyesPosition(int grade) => _FindEyesPosition(grade);
-	public void Init() => _Init();
+	public void Init() => _FindEyesPosition(1);
 }
 
 public partial class TowerEyesPosition // SerializeField
@@ -13,58 +13,27 @@ public partial class TowerEyesPosition // SerializeField
 
 public partial class TowerEyesPosition : MonoBehaviour// body
 {
-	private GameObject[,] _eyes = new GameObject[6, 6];
-	private void _Init()
+	private readonly bool[][] _dots = new bool[][]
 	{
-		_eyes[0, 0] = eyesPoint[3];
+		// 0 left top, 1 right top, 2 left mid, 3 center, 4 right mid, 5 left bot, 6 right bot
+		new bool[] { false, false, false, true, false, false, false }, 
+		new bool[] { false, true, false, false, false, true, false }, 
+		new bool[] { false, true, false, true, false, true, false },
+		new bool[] { true, true, false, false, false, true, true }, 
+		new bool[] { true, true, false, true, false, true, true }, 
+		new bool[] { true, true, true, false, true, true, true }
+	};
 
-		_eyes[1, 0] = eyesPoint[1];
-		_eyes[1, 1] = eyesPoint[5];
-		
-		_eyes[2, 0] = eyesPoint[1];
-		_eyes[2, 1] = eyesPoint[3];
-		_eyes[2, 2] = eyesPoint[5];
-		
-		_eyes[3, 0] = eyesPoint[0];
-		_eyes[3, 1] = eyesPoint[1];
-		_eyes[3, 2] = eyesPoint[5];
-		_eyes[3, 3] = eyesPoint[6];
-		
-		_eyes[4, 0] = eyesPoint[0];
-		_eyes[4, 1] = eyesPoint[1];
-		_eyes[4, 2] = eyesPoint[3];
-		_eyes[4, 3] = eyesPoint[5];
-		_eyes[4, 4] = eyesPoint[6];
-		
-		_eyes[5, 0] = eyesPoint[0];
-		_eyes[5, 1] = eyesPoint[1];
-		_eyes[5, 2] = eyesPoint[2];
-		_eyes[5, 3] = eyesPoint[4];
-		_eyes[5, 4] = eyesPoint[5];
-		_eyes[5, 5] = eyesPoint[6];
-		FalseEyes();
-		ActiveEyes(1);
-	}
-	private void FalseEyes() 
+	private void Activate(int grade) 
 	{
-		for (int i = 0; i < eyesPoint.Length; i++)
+		for (int i = 0; i < eyesPoint.Length; ++i)
 		{
-			eyesPoint[i].SetActive(false);
-		}
-	}
-
-	private void ActiveEyes(int grade) 
-	{
-		grade--;
-		for (int i = 0; _eyes[grade, i]; i++)
-		{
-			_eyes[grade, i].SetActive(true);			
+			eyesPoint[i].SetActive(_dots[grade - 1][i]);
 		}
 	}
 
 	private void _FindEyesPosition(int grade)
 	{
-		FalseEyes();
-		ActiveEyes(grade);
+		Activate(grade);
 	}
 }
