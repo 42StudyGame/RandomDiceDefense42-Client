@@ -10,6 +10,7 @@ public class ScenarioList
     public int enemyHPOffset;
     public float waveStartDelay;
     public float spawnDelay;
+    public int boss;
     public List<int> enemyList = new List<int>();
 
 
@@ -19,6 +20,7 @@ public class ScenarioList
         enemyHPOffset = 0;
         waveStartDelay = 0;
         spawnDelay = 0;
+        boss = 0;
     }
 
     public ScenarioList(ScenarioList other)
@@ -28,6 +30,7 @@ public class ScenarioList
         waveStartDelay = other.waveStartDelay;
         spawnDelay = other.spawnDelay;
         enemyList.AddRange(other.enemyList);
+        boss = other.boss;
     }
 
     public bool ValidateList()
