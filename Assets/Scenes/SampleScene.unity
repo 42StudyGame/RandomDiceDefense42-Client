@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 204800508}
   - component: {fileID: 204800509}
   m_Layer: 0
-  m_Name: SkillPrint
+  m_Name: SkillSummonEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -164,10 +164,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 204800507}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97aea3663987a424185d9c4a341549ba, type: 3}
+  m_Script: {fileID: 11500000, guid: a3900844dcaa84d7491707f3c28df2f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerManager: {fileID: 497353759}
+  _enemyManager: {fileID: 1417149470}
 --- !u!1 &230066662
 GameObject:
   m_ObjectHideFlags: 0
@@ -1904,7 +1904,7 @@ Transform:
   m_Children:
   - {fileID: 204800508}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1131538119
 GameObject:
@@ -2621,7 +2621,9 @@ MonoBehaviour:
   _enemyPool: {fileID: 2030172445}
   _enemyDatas:
   - {fileID: 11400000, guid: 8408232562fb646178355d085609c7fc, type: 2}
-  - {fileID: 11400000, guid: 8e1dad506a4664dcf99763ffd32321b1, type: 2}
+  - {fileID: 11400000, guid: f2542d9d79c1f43e8bc9795f945a6f39, type: 2}
+  - {fileID: 11400000, guid: 4d903d1d5052842f7aaf4271a75917c7, type: 2}
+  - {fileID: 11400000, guid: 69f649c4b872f4b92834bb0e0c9dc679, type: 2}
   _spawnPoint: {fileID: 1051109104}
   _bossPrefab: {fileID: 6847922770527907927, guid: 203399ee70b764ebdaeaa6ee56cf74e3, type: 3}
   _skills:
