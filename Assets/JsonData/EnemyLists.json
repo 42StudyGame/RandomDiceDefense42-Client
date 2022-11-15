@@ -6,11 +6,9 @@
             "waveStartDelay": 3,
             "spawnDelay": 1.0,
             "enemyList": [
-                0,
-                0,
-                0
-            ],
-            "boss": 3
+                3,
+                4
+            ]
         },
         {
             "wave": 2,

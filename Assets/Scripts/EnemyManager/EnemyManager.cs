@@ -70,7 +70,7 @@ public partial class EnemyManager
 		enemy.transform.position = _spawnPoint.position;
 		enemy.Init(enemyData, hpOffset, this);
 		_enemies.Add(enemy);
-		SetGeneralTarget();
+		_SetGeneralTarget();
 	}
 
 	private void _CreateBoss(int type, int hpOffset)
@@ -79,7 +79,7 @@ public partial class EnemyManager
 		BossData bossData = (BossData)_enemyDatas[type];
 		boss.Init(bossData, hpOffset, _gameManager, _skills[bossData.skillIndex].Skill);
 		_enemies.Add(boss);
-		SetGeneralTarget();
+		_SetGeneralTarget();
 	}
 
 	private void _DestroyEnemy(Enemy enemy)
@@ -111,7 +111,7 @@ public partial class EnemyManager
 
 		float maxHealth = 0;
 		float minDist = float.MaxValue;
-		float maxDist = 0f;
+		float maxDist = -0.1f;
 		for (int i = 0; i < _enemies.Count; i++)
 		{
 			if (_enemies[i].progressToGoal < minDist)
@@ -132,7 +132,6 @@ public partial class EnemyManager
 				targetStrongest = _enemies[i];
 			}
 		}
-
 		targetRandom = _enemies[Random.Range(0, _enemies.Count)];
 	}
 
@@ -147,14 +146,18 @@ public partial class EnemyManager
 		yield return new WaitForSeconds(startDelay);
 		while(_currentWave.enemyList.Count > 0)
         {
-			yield return new WaitForSeconds(_currentWave.spawnDelay);
-			_CreateEnemy(_currentWave.enemyList[0], _currentWave.enemyHPOffset);
-			_currentWave.enemyList.RemoveAt(0);
-		}
-		if (_currentWave.boss != 0)
-		{
-			yield return new WaitForSeconds(_currentWave.spawnDelay);
-			_CreateBoss(_currentWave.boss, _currentWave.enemyHPOffset);
+	        if (_currentWave.enemyList[0] >= 0 && _currentWave.enemyList[0] < 3)
+	        {
+				yield return new WaitForSeconds(_currentWave.spawnDelay);
+				_CreateEnemy(_currentWave.enemyList[0], _currentWave.enemyHPOffset);
+				_currentWave.enemyList.RemoveAt(0);
+	        }
+	        else if (_currentWave.enemyList[0] >= 3)
+	        {
+				yield return new WaitForSeconds(_currentWave.spawnDelay);
+		        _CreateBoss(_currentWave.enemyList[0], _currentWave.enemyHPOffset);
+		        _currentWave.enemyList.RemoveAt(0);
+	        }
 		}
 		yield return null;
     }

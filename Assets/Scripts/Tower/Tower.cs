@@ -10,6 +10,8 @@ public partial class Tower // IO
 	public int GetGrade() => _GetGrade();
 	public void ResetEyesPosition() => _ResetEyesPosition();
 	public Vector2 GetStartPosition() => _GetSartPosition();
+	public void DisableTower() => _DisableTower();
+	public void EnableTower() => _EnableTower();
 }
 
 public partial class Tower // SerializeField
@@ -37,7 +39,7 @@ public partial class Tower // body
 {
 	private float _lastAttackTime;
 	private Vector2 _startPosition;
-	private	bool _isEnable = false;
+	private	bool _isEnable = true;
 	protected int TowerGrade = 1;
 	protected int TowerLevel = 1;
 	protected int TowerStar = 1;
@@ -54,7 +56,7 @@ public partial class Tower // body
 
 	private void Launch() 
 	{
-		if (Time.time >= _lastAttackTime + towerData.attackSpeed / (TowerGrade * towerData.gradeAttackSpeedIncrease))
+		if (_isEnable && Time.time >= _lastAttackTime + towerData.attackSpeed / (TowerGrade * towerData.gradeAttackSpeedIncrease))
 		{
 			_lastAttackTime = Time.time;
 			_towerManager.Launch(this);
@@ -84,5 +86,15 @@ public partial class Tower // body
 	private Vector2 _GetSartPosition() 
 	{
 		return _startPosition;
+	}
+
+	private void _DisableTower()
+	{
+		_isEnable = false;
+	}
+
+	private void _EnableTower()
+	{
+		_isEnable = true;
 	}
 }

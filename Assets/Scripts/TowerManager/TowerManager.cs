@@ -12,6 +12,8 @@ public partial class TowerManager // IO
 	public bool AddTower() => _AddTower();
 	public void DestroyTower(Tower tower) => _DestroyTower(tower);
 
+	public List<Tower> GetTowerList() => _GetTowerList();
+
 	public void Merge(Tower baseTower, Tower otherTower) => _Merge(baseTower, otherTower);
 }
 
@@ -73,6 +75,11 @@ public partial class TowerManager // body
 	private Enemy _GetTarget()
 	{
 		return gameManager.enemyManager.targetFirst;
+	}
+
+	private List<Tower> _GetTowerList()
+	{
+		return _towers;
 	}
 
 	private void _Merge(Tower baseTower, Tower otherTower) {
