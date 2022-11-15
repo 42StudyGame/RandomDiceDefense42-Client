@@ -1903,6 +1903,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 204800508}
+  - {fileID: 1231490161}
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2296,6 +2297,51 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slotId: 4
   occupied: 0
+--- !u!1 &1231490160
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1231490161}
+  - component: {fileID: 1231490162}
+  m_Layer: 0
+  m_Name: SkillSilence
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1231490161
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1231490160}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1073420001}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1231490162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1231490160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87feefd473e334203b241e3460c5b9f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _towerManager: {fileID: 497353759}
 --- !u!1 &1237742221
 GameObject:
   m_ObjectHideFlags: 0
@@ -2624,10 +2670,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f2542d9d79c1f43e8bc9795f945a6f39, type: 2}
   - {fileID: 11400000, guid: 4d903d1d5052842f7aaf4271a75917c7, type: 2}
   - {fileID: 11400000, guid: 69f649c4b872f4b92834bb0e0c9dc679, type: 2}
+  - {fileID: 11400000, guid: 41c0e65b6767b47828cb3c3142bf1b33, type: 2}
   _spawnPoint: {fileID: 1051109104}
   _bossPrefab: {fileID: 6847922770527907927, guid: 203399ee70b764ebdaeaa6ee56cf74e3, type: 3}
   _skills:
   - {fileID: 204800509}
+  - {fileID: 1231490162}
 --- !u!4 &1417149471
 Transform:
   m_ObjectHideFlags: 0
