@@ -21,14 +21,14 @@ public partial class Tower // SerializeField
 
 public partial class Tower : MonoBehaviour
 {
-	private TowerManager _towerManager;
+	protected TowerManager _towerManager;
 
 	private void Update() 
 	{
 		Enemy target = _towerManager.GetTarget();
 		if (target && (Time.time >= _lastAttackTime + towerData.attackSpeed / (TowerGrade * towerData.gradeAttackSpeedIncrease)))
 		{
-			Launch();
+			_Launch();
 		}
 	}
 }
@@ -37,8 +37,11 @@ public partial class Tower // body
 {
 	private float _lastAttackTime;
 	private Vector2 _startPosition;
-	private	bool _isEnable = false;
-	protected Bullet bullet = null;
+	private bool _isEnable = false;
+
+	protected Bullet _bullet = null;
+	protected Enemy _currentTarget = null;
+
 	protected int TowerGrade = 1;
 	protected int TowerLevel = 1;
 	protected int TowerStar = 1;
@@ -53,17 +56,18 @@ public partial class Tower // body
 		_lastAttackTime = Time.time;
 	}
 
-	protected virtual void Launch() 
+	protected virtual void _Launch() 
 	{
 		_lastAttackTime = Time.time;
 		//_towerManager.Launch(this);
-		bullet = _towerManager.GetBullet(this);
-		bullet.transform.position = transform.position;
-		bullet.SetTarget(_towerManager.GetTarget());
-		bullet.SetDamage(towerData.damage * TowerGrade);
+		_bullet = _towerManager.GetBullet(this);
+		_bullet.transform.position = transform.position;
+		_currentTarget = _towerManager.GetTarget();
+		_bullet.SetTarget(_currentTarget);
+		_bullet.SetDamage(towerData.damage * TowerGrade);
 	}
 
-	protected virtual void Skill()
+	protected virtual void _Skill()
 	{
 		
 	}

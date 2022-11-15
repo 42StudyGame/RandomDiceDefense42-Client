@@ -1,18 +1,28 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class FireTower : Tower
 {
-    protected override void Launch()
+    public FireTowerSkillData skillData;
+
+
+    protected override void _Launch()
     {
-        base.Launch();
+        base._Launch();
+        _bullet.events.AddListener(_Skill);
     }
 
-    protected override void Skill()
+    protected override void _Skill()
     {
-        base.Skill();
+        base._Skill();
+        if (skillData != null)
+        {
+            List<Enemy> enemyList = _towerManager.GetNearTarget(_currentTarget.progressToGoal, skillData.offset);
+            foreach (Enemy enemy in enemyList)
+            {
+                // TODO: Effect
+                enemy.OnDamage(skillData.basicSkillDamage);
+            }
+        }
         
     }
 }

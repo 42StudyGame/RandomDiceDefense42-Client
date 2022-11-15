@@ -29,6 +29,10 @@ public partial class EnemyManager // IO
 
 	public void SetGeneralTarget() => _SetGeneralTarget();
 
+	public List<Enemy> GetNearEnemy(float pin, float offset) => _GetNearEnemy(pin, offset);
+	public Enemy GetPrevTarget(float pin) => _getPrevTarget(pin);
+	public Enemy GetNexttarget(float pin) => _getNexttarget(pin);
+
 	public void InjectScenario(ScenarioList wave, float startDelay) => _InjectScenario(wave, startDelay);
 }
 
@@ -134,6 +138,68 @@ public partial class EnemyManager
 		}
 
 		targetRandom = _enemies[Random.Range(0, _enemies.Count)];
+	}
+
+
+	private List<Enemy> _GetNearEnemy(float pin, float offset)
+	{
+		if (offset > 1 || offset < 0 || pin > 1 || pin < 0)
+        {
+			Debug.LogError("input value error");
+			return null;
+        }
+
+		List<Enemy> result = new List<Enemy>();
+		float min = pin - offset;
+		float max = pin + offset;
+
+		foreach(Enemy enemy in _enemies)
+        {
+			if (enemy.progressToGoal > min && enemy.progressToGoal < max)
+            {
+				result.Add(enemy);
+            }
+        }
+		return result;
+	}
+
+	private Enemy _GetPrevTarget(float pin)
+    {
+		if (pin > 1 || pin < 0)
+        {
+			Debug.LogError("input value error");
+			return null;
+		}
+
+		Enemy result = _enemies.FirstOrDefault();
+
+		foreach (Enemy enemy in _enemies)
+        {
+			if (enemy.progressToGoal < pin && enemy.progressToGoal > result.progressToGoal)
+            {
+				result = enemy;
+            }
+        }
+		return (result);
+    }
+	private Enemy _GetNexttarget(float pin)
+    {
+		if (pin > 1 || pin < 0)
+		{
+			Debug.LogError("input value error");
+			return null;
+		}
+
+		Enemy result = _enemies.LastOrDefault();
+
+		foreach (Enemy enemy in _enemies)
+		{
+			if (enemy.progressToGoal > pin && enemy.progressToGoal < result.progressToGoal)
+			{
+				result = enemy;
+			}
+		}
+		return (result);
 	}
 
 	private void _InjectScenario(ScenarioList wave, float delay)
