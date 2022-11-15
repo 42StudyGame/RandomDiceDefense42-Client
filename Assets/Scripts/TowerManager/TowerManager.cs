@@ -48,8 +48,6 @@ public partial class TowerManager // body
 	private Bullet _GetBullet(Tower tower)
 	{
 		Bullet bullet = bulletPool.GetObject();
-		bullet.transform.position = tower.transform.position;
-		bullet.SetTarget(GetTarget());
 		return (bullet);
 	}
 
