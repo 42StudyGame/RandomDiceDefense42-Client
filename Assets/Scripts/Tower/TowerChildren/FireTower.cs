@@ -14,15 +14,14 @@ public class FireTower : Tower
     protected override void _Skill()
     {
         base._Skill();
-        if (skillData != null)
+        if (skillData)
         {
             List<Enemy> enemyList = _towerManager.GetNearTarget(_currentTarget.progressToGoal, skillData.offset);
             foreach (Enemy enemy in enemyList)
             {
                 // TODO: Effect
-                enemy.OnDamage(skillData.basicSkillDamage);
+                enemy.OnDamage(skillData.bSkillDmg);
             }
         }
-        
     }
 }

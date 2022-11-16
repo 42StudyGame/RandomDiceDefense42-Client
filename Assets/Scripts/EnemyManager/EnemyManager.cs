@@ -30,8 +30,8 @@ public partial class EnemyManager // IO
 	public void SetGeneralTarget() => _SetGeneralTarget();
 
 	public List<Enemy> GetNearEnemy(float pin, float offset) => _GetNearEnemy(pin, offset);
-	public Enemy GetPrevTarget(float pin) => _getPrevTarget(pin);
-	public Enemy GetNexttarget(float pin) => _getNexttarget(pin);
+	public Enemy GetPrevTarget(float pin) => _GetPrevTarget(pin);
+	public Enemy GetNexttarget(float pin) => _GetNexttarget(pin);
 
 	public void InjectScenario(ScenarioList wave, float startDelay) => _InjectScenario(wave, startDelay);
 }
@@ -171,7 +171,7 @@ public partial class EnemyManager
 			return null;
 		}
 
-		Enemy result = _enemies.FirstOrDefault();
+		Enemy result = _enemies.LastOrDefault();
 
 		foreach (Enemy enemy in _enemies)
         {
@@ -190,7 +190,7 @@ public partial class EnemyManager
 			return null;
 		}
 
-		Enemy result = _enemies.LastOrDefault();
+		Enemy result = _enemies.FirstOrDefault();
 
 		foreach (Enemy enemy in _enemies)
 		{

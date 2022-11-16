@@ -4,7 +4,7 @@
             "wave": 1,
             "enemyHPOffset": 1,
             "waveStartDelay": 3,
-            "spawnDelay": 0.15,
+            "spawnDelay": 1.0,
             "enemyList": [
                 0,
                 0,
