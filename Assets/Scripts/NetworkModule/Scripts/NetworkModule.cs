@@ -7,20 +7,29 @@ using UnityEngine.Networking;
 
 public partial class NetworkModule // IO
 {
-    public void Request(string uri, UnityAction<(bool, string)> callback = null) => _Request(uri, callback);
+    public void RequestGet(string uri, UnityAction<(bool, string)> callback = null) => _RequestGet(uri, callback);
+    public void RequestPost(string uri, UnityAction<(bool, string)> callback = null, params KeyValuePair<string, string>[] data) => _RequestPost(uri, data, callback);
+    public void RequestPost(string uri, UnityAction<(bool, string)> callback = null, Dictionary<string, string> data = null) => _RequestPost(uri, data, callback);
 }
 
 public partial class NetworkModule : MonoBehaviour
 {
     private readonly Dictionary<int, (bool, string)> _requestResult = new();
-    private int _requestId = 0;
+    private int _requestId;
     private const int Tic = 40; // almost 24 fps (little over)
     private const int TimeOut = 3000;
 
-    private void _Request(string uri, UnityAction<(bool, string)> callback)
+    private void _RequestGet(string uri, UnityAction<(bool, string)> callback)
     {
         int requestId = _requestId++;
         StartCoroutine(GetRequest(uri, requestId));
+        WaitTaskAndRunCallback(requestId, callback);
+    }
+    
+    private void _RequestPost(string uri, IEnumerable<KeyValuePair<string, string>> data, UnityAction<(bool, string)> callback)
+    {
+        int requestId = _requestId++;
+        StartCoroutine(PostRequest(uri, data, requestId));
         WaitTaskAndRunCallback(requestId, callback);
     }
 
@@ -43,6 +52,14 @@ public partial class NetworkModule : MonoBehaviour
         DisposeWebRequestResult(webRequest, requestId);
     }
 
+    private IEnumerator PostRequest(string uri, IEnumerable<KeyValuePair<string, string>> data, int requestId)
+    {
+        WWWForm form = ConvertToWWWForm(data);
+        using UnityWebRequest webRequest = UnityWebRequest.Post(uri, form);
+        yield return webRequest.SendWebRequest();
+        DisposeWebRequestResult(webRequest, requestId);
+    }
+
     private void DisposeWebRequestResult(UnityWebRequest webRequest, int requestId)
     {
         (bool success, string payload) item = new ()
@@ -52,6 +69,20 @@ public partial class NetworkModule : MonoBehaviour
 
         item.payload = item.success ? webRequest.downloadHandler.text : webRequest.error;
         _requestResult.Add(requestId, item);
+    }
+
+    private static WWWForm ConvertToWWWForm(IEnumerable<KeyValuePair<string, string>> source)
+    {
+        WWWForm form = new WWWForm();
+
+        if (source == null) return null;
+        
+        foreach (KeyValuePair<string, string> element in source)
+        {
+            form.AddField(element.Key, element.Value);
+        }
+        
+        return form;
     }
 }
 
