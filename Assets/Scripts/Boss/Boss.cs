@@ -8,6 +8,8 @@ using UnityEngine.UI;
 public partial class Boss : Enemy // IO
 {
     public void Init(EnemyData enemyData, int hpOffset, GameManager gameManager, UnityAction<Boss> skills) => _Init(enemyData, hpOffset, gameManager, skills);
+    public void StopMove() => _StopMove();
+    public void StartMove() => _StartMove();
 }
 
 
@@ -22,7 +24,10 @@ public partial class Boss// Monobehaviour
 
     protected override void Update()
     {
-        base.Update();
+        if (!_stop)
+        {
+            base.Update();
+        }
         _healthSlider.transform.position = (Vector2)Camera.main.WorldToScreenPoint(transform.position) + (Vector2.down * 70);
     }
 }
@@ -30,6 +35,7 @@ public partial class Boss// Monobehaviour
 public partial class Boss // body
 {
     private UnityAction<Boss> _skill;
+    private bool _stop = false;
 
     private void UseSkill()
     {
@@ -54,5 +60,15 @@ public partial class Boss // body
         UseSkill();
 
         _damage = 2;
+    }
+
+    private void _StopMove()
+    {
+        _stop = true;
+    }
+
+    private void _StartMove()
+    {
+        _stop = false;
     }
 }

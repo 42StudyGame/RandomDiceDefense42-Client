@@ -2342,6 +2342,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _towerManager: {fileID: 497353759}
+  _effectPrefab: {fileID: 3088813161724301973, guid: 5a0ed38b36d2e47a8896d30875d6dfe1, type: 3}
 --- !u!1 &1237742221
 GameObject:
   m_ObjectHideFlags: 0

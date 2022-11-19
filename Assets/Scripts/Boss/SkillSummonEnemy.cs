@@ -29,6 +29,9 @@ public partial class SkillSummonEnemy
 {
     private Boss _boss;
     private Coroutine _coroutine;
+    private float _skillCooltime = 5f;
+    private float _spawnDelay = 0.5f;
+    private float _moveStopTime = 0.5f;
     
     private void _Skill(Boss boss)
     {
@@ -38,13 +41,15 @@ public partial class SkillSummonEnemy
     
     IEnumerator SummonEnemy()
     {
-        yield return new WaitForSeconds(4f);
-        Debug.Log("Enemy 소환");
+        yield return new WaitForSeconds(_skillCooltime);
+        _boss.StopMove();
         _enemyManager.CreateEnemy(0, _boss.hpOffset);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(_spawnDelay);
         _enemyManager.CreateEnemy(0, _boss.hpOffset);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(_spawnDelay);
         _enemyManager.CreateEnemy(1, _boss.hpOffset);
+        yield return new WaitForSeconds(_moveStopTime);
+        _boss.StartMove();
         _coroutine = StartCoroutine(SummonEnemy());
     }
 }
