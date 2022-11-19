@@ -1,7 +1,10 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public partial class Bullet // IO
 {
+	public UnityEvent events;
+
 	public void SetTarget(Enemy target) => _SetTarget(target);
 	public void SetDamage(float damage) => _SetDamage(damage);
 	public void Init(BulletPool bulletPool) => _Init(bulletPool);
@@ -35,6 +38,8 @@ public partial class Bullet : MonoBehaviour
 		{
 			_pool.ReturnObject(this);
 			_target.OnDamage(_damage);
+			events.Invoke();
+			events.RemoveAllListeners();
 		}
 	}
 }
