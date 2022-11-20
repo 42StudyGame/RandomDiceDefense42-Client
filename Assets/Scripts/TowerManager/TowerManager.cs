@@ -9,6 +9,11 @@ public partial class TowerManager // IO
 	public Bullet GetBullet(Tower tower) => _GetBullet(tower);
 	public void SetBullet(Bullet bullet) => _SetBullet(bullet);
 	public Enemy GetTarget() => _GetTarget();
+	public List<Enemy> GetNearTarget(float pin, float offset) => _GetNearTarget(pin, offset);
+
+	public Enemy GetNextTarget(float pin) => _GetNextTarget(pin);
+	public Enemy GetPrevTarget(float pin) => _GetPrevTarget(pin);
+
 	public bool AddTower() => _AddTower();
 	public void DestroyTower(Tower tower) => _DestroyTower(tower);
 
@@ -48,8 +53,6 @@ public partial class TowerManager // body
 	private Bullet _GetBullet(Tower tower)
 	{
 		Bullet bullet = bulletPool.GetObject();
-		bullet.transform.position = tower.transform.position;
-		bullet.SetTarget(GetTarget());
 		return (bullet);
 	}
 
@@ -74,6 +77,21 @@ public partial class TowerManager // body
 	{
 		return gameManager.enemyManager.targetFirst;
 	}
+
+	private List<Enemy> _GetNearTarget(float pin, float offset)
+    {
+		return gameManager.enemyManager.GetNearEnemy(pin, offset);
+    }
+
+	private Enemy _GetNextTarget(float pin)
+    {
+		return gameManager.enemyManager.GetNexttarget(pin);
+
+	}
+	private Enemy _GetPrevTarget(float pin)
+    {
+		return gameManager.enemyManager.GetPrevTarget(pin);
+    }
 
 	private void _Merge(Tower baseTower, Tower otherTower) {
 		if (baseTower.GetGrade() >= maxGrade)
