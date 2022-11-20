@@ -10,6 +10,8 @@ public class ElectricTower : Tower
     {
         base._Launch();
         _bullet.events.AddListener(_Skill);
+        _currentTarget = _towerManager.GetTarget().targetFirst;
+        _bullet.SetTarget(_currentTarget);
     }
 
     protected override void _Skill()
@@ -17,6 +19,7 @@ public class ElectricTower : Tower
         base._Skill();
 
         Enemy temp = _currentTarget;
+        Enemy temp2;
         
         if (skillData)
         {
@@ -25,7 +28,10 @@ public class ElectricTower : Tower
                 if (temp)
                 {
                     temp.OnDamage(skillData.bSkillDmg);
-                    temp = _towerManager.GetPrevTarget(temp.progressToGoal);
+                    temp2 = _towerManager.GetTarget().GetPrevTarget(temp.progressToGoal);
+                    if (temp2 == temp)
+                        break;
+                    temp = temp2;
                 }
             }
         }

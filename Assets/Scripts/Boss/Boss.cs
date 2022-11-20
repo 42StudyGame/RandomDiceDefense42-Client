@@ -39,7 +39,7 @@ public partial class Boss // body
     protected override void _Die()
     {
         _enemyManager.DestroyBoss(this);
-        _enemyManager.SetGeneralTarget();
+        _enemyManager.enemyTarget.SetGeneralTarget();
     }
     protected override void _OnDamage(float damage) {
         base._OnDamage(damage);

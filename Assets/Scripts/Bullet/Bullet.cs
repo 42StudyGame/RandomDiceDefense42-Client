@@ -52,7 +52,10 @@ public partial class Bullet // body
 	private void _SetTarget(Enemy target)
 	{
 		_target = target;
-		_targetCollider = _target.GetComponent<Collider2D>();
+		if (_target)
+		{
+			_targetCollider = _target.GetComponent<Collider2D>();
+		}
 	}
 
 	private void _SetDamage(float damage) 

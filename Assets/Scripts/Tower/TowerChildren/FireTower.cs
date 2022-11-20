@@ -9,6 +9,8 @@ public class FireTower : Tower
     {
         base._Launch();
         _bullet.events.AddListener(_Skill);
+        _currentTarget = _towerManager.GetTarget().targetFirst;
+        _bullet.SetTarget(_currentTarget);
     }
 
     protected override void _Skill()
@@ -16,7 +18,7 @@ public class FireTower : Tower
         base._Skill();
         if (skillData)
         {
-            List<Enemy> enemyList = _towerManager.GetNearTarget(_currentTarget.progressToGoal, skillData.offset);
+            List<Enemy> enemyList = _towerManager.GetTarget().GetNearTargets(_currentTarget.progressToGoal, skillData.offset);
             foreach (Enemy enemy in enemyList)
             {
                 // TODO: Effect
