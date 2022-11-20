@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class NetworkModuleTest : MonoBehaviour
 {
-    [SerializeField] private NetworkModule networkModule;
+    [SerializeField] private NetworkModule _networkModule;
     private const string Uri0 = "naver0.com"; // wrong
     private const string Uri1 = "google.com"; // correct
     private const string Post0 = "https://jsonplaceholder.typicode.com/posts";
@@ -23,17 +23,12 @@ public class NetworkModuleTest : MonoBehaviour
 
     private void NetReqGetTest(string uri)
     {
-        if (!networkModule)
-        {
-            return;
-        }
-        
-        networkModule.RequestGet(uri, PrintResult);
+        _networkModule?.RequestGet(uri, PrintResult);
     }
 
     private void NetReqPostTest(string uri)
     {
-        if (!networkModule)
+        if (_networkModule == null)
         {
             return;
         }
@@ -42,9 +37,9 @@ public class NetworkModuleTest : MonoBehaviour
         
         Dictionary<string, string> data = new() { { "dic test key 0", "dic test value 0" } };
 
-        networkModule.RequestPost(uri, PrintResult, pair);
-        networkModule.RequestPost(uri, PrintResult, data);
-        networkModule.RequestPost(uri, PrintResult);
+        _networkModule.RequestPost(uri, PrintResult, pair);
+        _networkModule.RequestPost(uri, PrintResult, data);
+        _networkModule.RequestPost(uri, PrintResult);
     }
 
     private static void PrintResult((bool result, string payload) request)
