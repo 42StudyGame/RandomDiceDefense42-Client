@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public partial class SkillSilence: ASkills // IO
@@ -13,7 +14,8 @@ public partial class SkillSilence: ASkills // IO
 public partial class SkillSilence // SerializeField
 {
     [SerializeField] private TowerManager _towerManager;
-    [SerializeField] private GameObject _effectPrefab;
+    [SerializeField] private GameObject _effectToDicePrefab;
+    [SerializeField] private GameObject _effectToBossPrefab;
 }
 
 public partial class SkillSilence // MonoBehaviour
@@ -69,12 +71,14 @@ public partial class SkillSilence
                 _towers.Remove(_disabledTowers[i]);
             }
             Tower target = _towers[Random.Range(0, _towers.Count)];
-            _effectObjects.Add(Instantiate(_effectPrefab, target.transform.position, target.transform.rotation));
+            _effectObjects.Add(Instantiate(_effectToDicePrefab, target.transform.position, target.transform.rotation));
             target.DisableTower();
             _disabledTowers.Add(target);
             _boss.StopMove();
+            GameObject bossEffect = Instantiate(_effectToBossPrefab, _boss.transform.position, _boss.transform.rotation);
             yield return new WaitForSeconds(_moveStopTime);
             _boss.StartMove();
+            Destroy(bossEffect);
         }
         _coroutine = StartCoroutine(Silence());
     }

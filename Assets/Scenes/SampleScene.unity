@@ -168,6 +168,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyManager: {fileID: 1417149470}
+  _effectToBossPrefab: {fileID: 8483434230586460716, guid: a289bc7cfceb64a458e49228a725a858, type: 3}
+  _effectToStartPointPrefab: {fileID: 5683785839794909112, guid: 2c890b010dd12d94db099e24d10c8a1b, type: 3}
 --- !u!1 &230066662
 GameObject:
   m_ObjectHideFlags: 0
@@ -2342,7 +2344,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _towerManager: {fileID: 497353759}
-  _effectPrefab: {fileID: 3088813161724301973, guid: 5a0ed38b36d2e47a8896d30875d6dfe1, type: 3}
+  _effectToDicePrefab: {fileID: 3088813161724301973, guid: 5a0ed38b36d2e47a8896d30875d6dfe1, type: 3}
+  _effectToBossPrefab: {fileID: 1970522907599590335, guid: a82133e59f981a0488cf3fbece92daf7, type: 3}
 --- !u!1 &1237742221
 GameObject:
   m_ObjectHideFlags: 0

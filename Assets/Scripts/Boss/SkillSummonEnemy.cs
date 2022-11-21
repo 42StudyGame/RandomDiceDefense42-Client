@@ -12,6 +12,8 @@ public partial class SkillSummonEnemy : ASkills // IO
 public partial class SkillSummonEnemy // SerializeField
 {
     [SerializeField] private EnemyManager _enemyManager;
+    [SerializeField] private GameObject _effectToBossPrefab;
+    [SerializeField] private GameObject _effectToStartPointPrefab;
 }
 
 public partial class SkillSummonEnemy // MonoBehaviour
@@ -36,13 +38,17 @@ public partial class SkillSummonEnemy
     private void _Skill(Boss boss)
     {
         _boss = boss;
-        _coroutine = StartCoroutine(SummonEnemy());
+        _coroutine = StartCoroutine(_SummonEnemy());
     }
     
-    IEnumerator SummonEnemy()
+    IEnumerator _SummonEnemy()
     {
         yield return new WaitForSeconds(_skillCooltime);
         _boss.StopMove();
+        GameObject effectToBoss = Instantiate(_effectToBossPrefab, _boss.transform.position, _boss.transform.rotation);
+        GameObject effectToStartPoint = Instantiate(_effectToStartPointPrefab, _enemyManager.enemyLine.wayPoints[0].transform.position,
+            _enemyManager.enemyLine.wayPoints[0].transform.rotation);
+        
         _enemyManager.CreateEnemy(0, _boss.hpOffset);
         yield return new WaitForSeconds(_spawnDelay);
         _enemyManager.CreateEnemy(0, _boss.hpOffset);
@@ -50,6 +56,8 @@ public partial class SkillSummonEnemy
         _enemyManager.CreateEnemy(1, _boss.hpOffset);
         yield return new WaitForSeconds(_moveStopTime);
         _boss.StartMove();
-        _coroutine = StartCoroutine(SummonEnemy());
+        Destroy(effectToBoss);
+        Destroy(effectToStartPoint);
+        _coroutine = StartCoroutine(_SummonEnemy());
     }
 }
