@@ -93,7 +93,8 @@ public partial class TowerManager // body
 		return gameManager.enemyManager.GetPrevTarget(pin);
     }
 
-	private void _Merge(Tower baseTower, Tower otherTower) {
+	private void _Merge(Tower baseTower, Tower otherTower)
+	{
 		if (baseTower.GetGrade() >= maxGrade)
 			return;
 		baseTower.towerData = 

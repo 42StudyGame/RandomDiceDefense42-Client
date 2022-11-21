@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.Rendering;
 
 public partial class Tower // IO
 {
@@ -16,7 +18,10 @@ public partial class Tower // SerializeField
 {
 	[SerializeField] private SpriteRenderer spriteRenderer;
 	[SerializeField] private Draggable draggable;
-	[SerializeField] private TowerEyesPosition towerEyesPosition;
+	[SerializeField] private Droppable droppable;
+	[SerializeField] private TowerEyesPosition towerEyesPosition;	
+	[SerializeField] private SortingGroup sortingGroup;
+	[SerializeField] private Collider2D collider2D;
 }
 
 public partial class Tower : MonoBehaviour
@@ -51,6 +56,23 @@ public partial class Tower // body
 		spriteRenderer.sprite = towerData.sprite;
 		_towerManager = towerManager;
 		draggable.Init(this, towerManager);
+		draggable._onBeginDrag = ColliderOff;
+		draggable._onDrag = MoveDragObject;
+		draggable._onEndDrag = () =>
+		{
+			ColliderOn();
+			BackToPosition();
+		};
+		droppable._onDrop = (PointerEventData eventData) =>
+		{
+			Tower otherTower = eventData.pointerDrag.GetComponent<Tower>();
+
+			if (towerData.type == otherTower.towerData.type
+				&& GetGrade() == otherTower.GetGrade())
+			{
+				_towerManager.Merge(this, otherTower);
+			}
+		};
 		towerEyesPosition.Init();
 		_startPosition = transform.position;
 		_lastAttackTime = Time.time;
@@ -95,5 +117,26 @@ public partial class Tower // body
 	private Vector2 _GetSartPosition() 
 	{
 		return _startPosition;
+	}
+	private void ColliderOff() 
+	{
+		sortingGroup.sortingOrder += 1;
+		collider2D.enabled = false;
+	}
+	
+	private void ColliderOn() 
+	{
+		sortingGroup.sortingOrder -= 1;
+		collider2D.enabled = true;
+	}
+
+	private void BackToPosition() 
+	{
+		transform.position = _startPosition;
+	}
+
+	private void MoveDragObject(PointerEventData eventData) 
+	{ 
+		transform.position = (Vector2)Camera.main.ScreenToWorldPoint(eventData.position);
 	}
 }
