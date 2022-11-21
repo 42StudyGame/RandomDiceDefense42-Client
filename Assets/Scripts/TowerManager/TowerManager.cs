@@ -1,5 +1,8 @@
+using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 // public delegate int TowerModify();
 
@@ -9,12 +12,7 @@ public partial class TowerManager // IO
 	public Bullet GetBullet(Tower tower) => _GetBullet(tower);
 	public void SetBullet(Bullet bullet) => _SetBullet(bullet);
 	public EnemyTargetManager GetTarget() => _GetTarget();
-	/*
-	public List<Enemy> GetNearTarget(float pin, float offset) => _GetNearTarget(pin, offset);
 
-	public Enemy GetNextTarget(float pin) => _GetNextTarget(pin);
-	public Enemy GetPrevTarget(float pin) => _GetPrevTarget(pin);
-*/
 	public bool AddTower() => _AddTower();
 	public void DestroyTower(Tower tower) => _DestroyTower(tower);
 
@@ -30,6 +28,11 @@ public partial class TowerManager // SerializeField
 }
 public partial class TowerManager : MonoBehaviour
 {
+	private void Awake()
+	{
+		TowerBoard.Init(_towers);
+	}
+
 	private void _DestroyTower(Tower tower)
 	{
 		_towers.Remove(tower);
@@ -41,6 +44,8 @@ public partial class TowerManager : MonoBehaviour
 public partial class TowerManager // body
 {
 	private readonly List<Tower> _towers = new List<Tower>();
+
+	public TowerBoardManager TowerBoard { get; private set; } = new TowerBoardManager();
 
 	// ReSharper disable Unity.PerformanceAnalysis
 	/*private void _Launch(Tower tower)
@@ -77,22 +82,7 @@ public partial class TowerManager // body
 	{
 		return gameManager.enemyManager.enemyTarget;
 	}
-/*
-	private List<Enemy> _GetNearTarget(float pin, float offset)
-    {
-		return gameManager.enemyManager.GetNearEnemy(pin, offset);
-    }
 
-	private Enemy _GetNextTarget(float pin)
-    {
-		return gameManager.enemyManager.GetNexttarget(pin);
-
-	}
-	private Enemy _GetPrevTarget(float pin)
-    {
-		return gameManager.enemyManager.GetPrevTarget(pin);
-    }
-*/
 	private void _Merge(Tower baseTower, Tower otherTower) {
 		if (baseTower.GetGrade() >= maxGrade)
 			return;
