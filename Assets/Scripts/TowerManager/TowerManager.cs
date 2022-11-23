@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 // public delegate int TowerModify();
 
@@ -26,6 +28,8 @@ public partial class TowerManager // SerializeField
 	[SerializeField] private BulletPool bulletPool;
 	[SerializeField] private RandomDiceCreate randomDiceCreate;
 	[SerializeField] private int maxGrade = 6;
+	[SerializeField] private TowerData[] towerDataList;
+
 }
 public partial class TowerManager : MonoBehaviour
 {
@@ -35,6 +39,7 @@ public partial class TowerManager : MonoBehaviour
 		randomDiceCreate.ReleaseTower(tower);
 		Destroy(tower.gameObject);
 	}
+
 }
 
 public partial class TowerManager // body
@@ -42,62 +47,56 @@ public partial class TowerManager // body
 	private readonly List<Tower> _towers = new List<Tower>();
 
 	// ReSharper disable Unity.PerformanceAnalysis
-	private void _Launch(Tower tower)
-	{
+	private void _Launch(Tower tower) {
 		Bullet bullet = bulletPool.GetObject();
 		bullet.transform.position = tower.GetStartPosition();
 		bullet.SetTarget(GetTarget());
 		bullet.SetDamage(tower.towerData.damage * tower.GetGrade());
 	}
 
-	private Bullet _GetBullet(Tower tower)
-	{
+	private Bullet _GetBullet(Tower tower) {
 		Bullet bullet = bulletPool.GetObject();
 		return (bullet);
 	}
 
-	private void _SetBullet(Bullet bullet)
-	{
+	private void _SetBullet(Bullet bullet) {
 		bulletPool.ReturnObject(bullet);
 	}
 
-	private bool _AddTower(/*int _class, int level, int star*/)
-	{
+	private bool _AddTower( /*int _class, int level, int star*/) {
 		Tower tower = randomDiceCreate.CreateTower();
 		if (!tower)
 		{
 			return false;
 		}
+
 		_towers.Add(tower);
 		tower.Init(this);
 		return (true);
 	}
 
-	private Enemy _GetTarget()
-	{
+	private Enemy _GetTarget() {
 		return gameManager.enemyManager.targetFirst;
 	}
 
-	private List<Enemy> _GetNearTarget(float pin, float offset)
-    {
+	private List<Enemy> _GetNearTarget(float pin, float offset) {
 		return gameManager.enemyManager.GetNearEnemy(pin, offset);
-    }
+	}
 
-	private Enemy _GetNextTarget(float pin)
-    {
+	private Enemy _GetNextTarget(float pin) {
 		return gameManager.enemyManager.GetNexttarget(pin);
 
 	}
-	private Enemy _GetPrevTarget(float pin)
-    {
-		return gameManager.enemyManager.GetPrevTarget(pin);
-    }
 
-	private void _Merge(Tower baseTower, Tower otherTower)
+	private Enemy _GetPrevTarget(float pin) {
+		return gameManager.enemyManager.GetPrevTarget(pin);
+	}
+
+	private void _Merge(Tower baseTower, Tower otherTower) 
 	{
 		if (baseTower.GetGrade() >= maxGrade)
 			return;
-		baseTower.towerData = 
+		baseTower.towerData =
 			randomDiceCreate.diceDeck[Random.Range(0, randomDiceCreate.diceDeck.Length)].towerData;
 		baseTower.Init(this);
 		baseTower.UpGrade();

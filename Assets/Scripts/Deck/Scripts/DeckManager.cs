@@ -14,7 +14,6 @@ public partial class DeckManager // SerializeField
 {
 	[SerializeField] private DeckSlot[] slot;
 	[SerializeField] private DeckTower[] towerList;
-	[SerializeField] private GameManager gameManager;
 }
 
 public partial class DeckManager : MonoBehaviour 
