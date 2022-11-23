@@ -53,7 +53,7 @@ public partial class RandomDiceCreate : MonoBehaviour // body
 		points[tower.slotId].occupied = false;
 	}
 
-	private void TowerSettingToDeck() 
+	public void TowerSettingToDeck() 
 	{
 		DeckDataConverter deckDataConverter = new DeckDataConverter();
 		DeckTowerList deckTowerList = deckDataConverter.LoadData();

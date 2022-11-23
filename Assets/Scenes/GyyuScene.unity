@@ -1624,8 +1624,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 497353759}
-        m_TargetAssemblyTypeName: TowerManager, Assembly-CSharp
+      - m_Target: {fileID: 497353761}
+        m_TargetAssemblyTypeName: RandomDiceCreate, Assembly-CSharp
         m_MethodName: TowerSettingToDeck
         m_Mode: 1
         m_Arguments:
@@ -2295,15 +2295,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   diceDeck:
+  - {fileID: 6856837228248213096, guid: 165f977f8dd084d9d84b09551e69a8d6, type: 3}
+  - {fileID: 6856837228248213096, guid: 214b27ed9f1094d1d92f40c8fb0bbf10, type: 3}
+  - {fileID: 6856837228248213096, guid: b9f0595d7224a40938f6cb3444938aa1, type: 3}
+  - {fileID: 6856837228248213096, guid: 47c1d707e4fa5446593714db3380b920, type: 3}
+  - {fileID: 6856837228248213096, guid: 8b84d143250df403c9d91b7da5fc48db, type: 3}
   - {fileID: 6856837228248213096, guid: de44e32d4b274437dabae56441d88d1b, type: 3}
-  - {fileID: 6856837228248213096, guid: 8f085aa017c934d3bba305136cda245a, type: 3}
-  - {fileID: 6856837228248213096, guid: 8f085aa017c934d3bba305136cda245a, type: 3}
-  - {fileID: 6856837228248213096, guid: 8f085aa017c934d3bba305136cda245a, type: 3}
-  - {fileID: 6856837228248213096, guid: 8f085aa017c934d3bba305136cda245a, type: 3}
   towerList:
   - {fileID: 6856837228248213096, guid: 47c1d707e4fa5446593714db3380b920, type: 3}
   - {fileID: 6856837228248213096, guid: de44e32d4b274437dabae56441d88d1b, type: 3}
-  - {fileID: 6856837228248213096, guid: 8f085aa017c934d3bba305136cda245a, type: 3}
+  - {fileID: 6856837228248213096, guid: 165f977f8dd084d9d84b09551e69a8d6, type: 3}
   - {fileID: 6856837228248213096, guid: 214b27ed9f1094d1d92f40c8fb0bbf10, type: 3}
   - {fileID: 6856837228248213096, guid: b9f0595d7224a40938f6cb3444938aa1, type: 3}
   - {fileID: 6856837228248213096, guid: 8b84d143250df403c9d91b7da5fc48db, type: 3}
@@ -2323,7 +2324,13 @@ MonoBehaviour:
   - {fileID: 570035586}
   - {fileID: 1797837511}
   - {fileID: 275413090}
-  towerDataList: []
+  towerDataList:
+  - {fileID: 11400000, guid: 01858cb2d5e644aaf96e8e2acd0f9157, type: 2}
+  - {fileID: 11400000, guid: 00dd802d14f0d444ab5b25046297069c, type: 2}
+  - {fileID: 11400000, guid: bd3e8280d338843b59d4505b6bfe6995, type: 2}
+  - {fileID: 11400000, guid: 5fc1cb67969214bed82c212b2027c9bd, type: 2}
+  - {fileID: 11400000, guid: 0f7600bcc5e6e4400bd5bd26cd469431, type: 2}
+  - {fileID: 11400000, guid: 87aaeea59201b4c198e8a6e2655f8900, type: 2}
 --- !u!1 &499844102
 GameObject:
   m_ObjectHideFlags: 0
@@ -3565,7 +3572,12 @@ MonoBehaviour:
   - {fileID: 2015237402}
   - {fileID: 470787320}
   - {fileID: 289662406}
-  towerList: []
+  towerList:
+  - {fileID: 7344099050733700618}
+  - {fileID: 7344099050621852531}
+  - {fileID: 7344099052074167112}
+  - {fileID: 7344099051633087017}
+  - {fileID: 7344099051675602236}
 --- !u!4 &833202955
 Transform:
   m_ObjectHideFlags: 0
@@ -8025,7 +8037,6 @@ MonoBehaviour:
   enemyManager: {fileID: 1417149470}
   scenarioManager: {fileID: 1166434725}
   uiManager: {fileID: 1013384291}
-  deckManager: {fileID: 0}
 --- !u!1 &1697944264
 GameObject:
   m_ObjectHideFlags: 0

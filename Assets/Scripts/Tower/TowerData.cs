@@ -1,7 +1,8 @@
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Scriptable/TowerData", fileName = "Tower Data")]
-public class TowerData : ScriptableObject {
+public class TowerData : ScriptableObject 
+{
 	public string type = "Tower";
 	public float damage = 10f;
 	public float attackSpeed = 1f;
