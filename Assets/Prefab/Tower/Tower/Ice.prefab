@@ -1,4 +1,4 @@
-g%YAML 1.1
+%YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
 --- !u!1 &52294139186208660
 GameObject:
@@ -351,7 +351,7 @@ GameObject:
   - component: {fileID: 6856837228248213096}
   - component: {fileID: -495085180044389356}
   - component: {fileID: 805890658}
-  - component: {fileID: 5658144049550700797}
+  - component: {fileID: 3075887098828514280}
   m_Layer: 0
   m_Name: Ice
   m_TagString: Untagged
@@ -422,7 +422,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 1741c26b278aa4e728dc795cbfe44432, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0747ede9cfcc6402faa1aecda28a19fe, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -486,7 +486,7 @@ MonoBehaviour:
   slotId: 0
   spriteRenderer: {fileID: 4138223634660662793}
   draggable: {fileID: -495085180044389356}
-  droppable: {fileID: 5658144049550700797}
+  droppable: {fileID: 3075887098828514280}
   towerEyesPosition: {fileID: 805890658}
   sortingGroup: {fileID: 5737358419892103837}
   collider2D: {fileID: 397475938}
@@ -522,7 +522,7 @@ MonoBehaviour:
   - {fileID: 52294139186208660}
   - {fileID: 833634972931210852}
   - {fileID: 3818347411874975627}
---- !u!114 &5658144049550700797
+--- !u!114 &3075887098828514280
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
