@@ -31,7 +31,6 @@ public enum FileSection
 {
     None = 0,
     Texture,
-    Sprite,
 }
 
 public partial class NetworkModule // IO

@@ -28,8 +28,6 @@ public partial class RequestBuilder // IO
         {
             case FileSection.Texture:
                 return UnityWebRequestTexture.GetTexture(uri);
-            case FileSection.Sprite:
-                return UnityWebRequestTexture.GetTexture(uri);
             default:
                 return UnityWebRequest.Get(uri);
         }

@@ -82,7 +82,7 @@ public class NetworkModuleTest : MonoBehaviour
         var reqUrl = req.requestUrl;
 
         // networkModule.RequestGet(reqUrl, DrawImage, FileSection.Sprite);
-        networkModule.RequestGet(reqUrl, DrawImage, FileSection.Sprite);
+        networkModule.RequestGet(reqUrl, DrawImage, FileSection.Texture);
     }
 
     private void DrawImage(WebResponse response)
@@ -99,7 +99,7 @@ public class NetworkModuleTest : MonoBehaviour
         // Texture2D texture2D = (Texture2D)request.payload;
         // Sprite toSprite = Sprite.Create(texture2D, new Rect(0, 0, texture2D.width, texture2D.height), Vector2.one * .5f);
         // image.sprite = toSprite;
-        image.sprite = (Sprite)response.Payload;
+        image.sprite = new FileHandler().Texture2DToSprite(response.Payload as Texture2D);
     }
     
     private void PrintResult(WebResponse response)

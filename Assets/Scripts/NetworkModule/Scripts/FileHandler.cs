@@ -17,4 +17,7 @@ public class FileHandler
                 return null;
         }
     }
+
+    public Sprite Texture2DToSprite(Texture2D texture2D)
+        => Sprite.Create(texture2D, new Rect(0, 0, texture2D.width, texture2D.height), Vector2.one * .5f);
 }

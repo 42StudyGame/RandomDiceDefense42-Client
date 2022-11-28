@@ -92,10 +92,6 @@ public partial class RequestHandler: MonoBehaviour
             case FileSection.Texture:
                 payload = ((DownloadHandlerTexture)webRequest.downloadHandler).texture;
                 break;
-            case FileSection.Sprite:
-                Texture2D texture2D = ((DownloadHandlerTexture)webRequest.downloadHandler).texture;
-                payload = Sprite.Create(texture2D, new Rect(0, 0, texture2D.width, texture2D.height), Vector2.one * .5f);
-                break;
             default:
                 payload = webRequest.downloadHandler.text;
                 break;
