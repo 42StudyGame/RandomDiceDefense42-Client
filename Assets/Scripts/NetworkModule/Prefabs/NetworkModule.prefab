@@ -45,7 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7300c990fdf293e498e987897572d45b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _requestHandler: {fileID: 5632738139156600354}
+  networkCheckTic: 40
+  networkTimeout: 3000
+  requestHandler: {fileID: 5632738139156600354}
 --- !u!1001 &2552750793567811987
 PrefabInstance:
   m_ObjectHideFlags: 0
