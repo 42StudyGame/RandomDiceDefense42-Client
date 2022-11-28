@@ -1595,6 +1595,7 @@ MonoBehaviour:
   btnUploadImage: {fileID: 2079967623}
   btnDownloadImage: {fileID: 2042607824}
   image: {fileID: 1540895736}
+  serverPath: http://127.0.0.1:3000
 --- !u!1 &922189857
 GameObject:
   m_ObjectHideFlags: 0
@@ -2301,6 +2302,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1131538119}
   m_CullTransparentMesh: 1
+--- !u!114 &1143216757 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7661625985247302100, guid: 2e2ced5d8a6c34b2085c71657879cc15, type: 3}
+  m_PrefabInstance: {fileID: 924530220}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7300c990fdf293e498e987897572d45b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1166434724
 GameObject:
   m_ObjectHideFlags: 0
@@ -2566,6 +2578,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NetworkModuleTest
       objectReference: {fileID: 0}
+    - target: {fileID: 5522496125743907318, guid: 9e0532e23d9d741b5b934a1f47c3ec12, type: 3}
+      propertyPath: networkModule
+      value: 
+      objectReference: {fileID: 1143216757}
     - target: {fileID: 8063823062617214637, guid: 9e0532e23d9d741b5b934a1f47c3ec12, type: 3}
       propertyPath: m_RootOrder
       value: 13
