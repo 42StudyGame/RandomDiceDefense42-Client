@@ -5,7 +5,7 @@ using UnityEngine.Networking;
 
 public partial class RequestBuilder // IO
 {
-    public string QueryBuilder(FileSection fileSection, KeyValuePair<string, object>[] source)
+    public string QueryBuilder(KeyValuePair<string, object>[] source)
     {
         if (source == null || !source.Any()) return null;
         BuildQueryData(source);
@@ -26,7 +26,9 @@ public partial class RequestBuilder // IO
     {
         switch (section)
         {
-            case FileSection.Image:
+            case FileSection.Texture:
+                return UnityWebRequestTexture.GetTexture(uri);
+            case FileSection.Sprite:
                 return UnityWebRequestTexture.GetTexture(uri);
             default:
                 return UnityWebRequest.Get(uri);

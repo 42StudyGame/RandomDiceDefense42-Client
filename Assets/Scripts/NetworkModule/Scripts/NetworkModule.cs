@@ -16,21 +16,33 @@ public class FileForm
     }
 }
 
+public class WebResponse
+{
+    public readonly int StatusCode;
+    public object Payload;
+
+    public WebResponse(int statusCode)
+    {
+        StatusCode = statusCode;
+    }
+}
+
 public enum FileSection
 {
     None = 0,
-    Image,
+    Texture,
+    Sprite,
 }
 
 public partial class NetworkModule // IO
 {
-    public void RequestGet(string uri, UnityAction<(int, object)> callback = null, FileSection section = FileSection.None, params KeyValuePair<string, object>[] data)
+    public void RequestGet(string uri, UnityAction<WebResponse> callback = null, FileSection section = FileSection.None, params KeyValuePair<string, object>[] data)
         => requestHandler.RequestGet(uri, callback, section, data);
-    public void RequestGet(string uri, UnityAction<(int, object)> callback = null, FileSection section = FileSection.None, Dictionary<string, object> data = null)
+    public void RequestGet(string uri, UnityAction<WebResponse> callback = null, FileSection section = FileSection.None, Dictionary<string, object> data = null)
         => requestHandler.RequestGet(uri, callback, section, data);
-    public void RequestPost(string uri, UnityAction<(int, object)> callback = null, params KeyValuePair<string, object>[] data) 
+    public void RequestPost(string uri, UnityAction<WebResponse> callback = null, params KeyValuePair<string, object>[] data) 
         => requestHandler.RequestPost(uri, callback, data);
-    public void RequestPost(string uri, UnityAction<(int, object)> callback = null, Dictionary<string, object> data = null) 
+    public void RequestPost(string uri, UnityAction<WebResponse> callback = null, Dictionary<string, object> data = null) 
         => requestHandler.RequestPost(uri, callback, data);
 }
 

@@ -6,7 +6,7 @@ public class FileHandler
     {
         switch (section)
         {
-            case FileSection.Image:
+            case FileSection.Texture:
                 Texture2D source = (Texture2D)file;
                 Texture2D destination = new Texture2D(source.width, source.height);
                 Color[] pixels = source.GetPixels(0, 0, source.width, source.height);

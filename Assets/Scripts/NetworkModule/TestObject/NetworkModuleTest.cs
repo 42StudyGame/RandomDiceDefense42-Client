@@ -68,42 +68,43 @@ public class NetworkModuleTest : MonoBehaviour
             return;
         }
         
-        KeyValuePair<string, object> imgPair = new("image.png", new FileForm(FileSection.Image, "image.png", sprite.texture));
+        KeyValuePair<string, object> imgPair = new("image.png", new FileForm(FileSection.Texture, "image.png", sprite.texture));
         networkModule.RequestPost(uri, PrintResultAndDownload, imgPair);
     }
 
-    private void PrintResultAndDownload((int statusCode, object payload) request)
+    private void PrintResultAndDownload(WebResponse response)
     {
-        Debug.Log($"statusCode = {request.statusCode}");
-        Debug.Log($"payload = {request.payload}");
+        Debug.Log($"statusCode = {response.StatusCode}");
+        Debug.Log($"payload = {response.Payload}");
 
-        var req = JsonUtility.FromJson<RequestUrl>(request.payload.ToString());
+        var req = JsonUtility.FromJson<RequestUrl>(response.Payload.ToString());
         var reqType = req.requestType;
         var reqUrl = req.requestUrl;
 
-        networkModule.RequestGet(reqUrl, DrawImage, FileSection.Image);
+        // networkModule.RequestGet(reqUrl, DrawImage, FileSection.Sprite);
+        networkModule.RequestGet(reqUrl, DrawImage, FileSection.Sprite);
     }
 
-    private void DrawImage((int statusCode, object payload) request)
+    private void DrawImage(WebResponse response)
     {
-        Debug.Log($"request.statusCode in DrawImage: {request.statusCode}");
+        Debug.Log($"request.statusCode in DrawImage: {response.StatusCode}");
 
-        if (request.statusCode >= 300)
+        if (response.StatusCode >= 300)
         {
-            Debug.LogError($"request.statusCode in DrawImage: {request.statusCode}");
-            Debug.LogError($"request.payload in DrawImage: {request.payload}");
+            Debug.LogError($"request.statusCode in DrawImage: {response.StatusCode}");
+            Debug.LogError($"request.payload in DrawImage: {response.Payload}");
             return;
         }
         
         // Texture2D texture2D = (Texture2D)request.payload;
         // Sprite toSprite = Sprite.Create(texture2D, new Rect(0, 0, texture2D.width, texture2D.height), Vector2.one * .5f);
         // image.sprite = toSprite;
-        image.sprite = (Sprite)request.payload;
+        image.sprite = (Sprite)response.Payload;
     }
     
-    private void PrintResult((int statusCode, object payload) request)
+    private void PrintResult(WebResponse response)
     {
-        Debug.Log($"statusCode = {request.statusCode}");
-        Debug.Log($"payload = {request.payload}");
+        Debug.Log($"statusCode = {response.StatusCode}");
+        Debug.Log($"payload = {response.Payload}");
     }
 }

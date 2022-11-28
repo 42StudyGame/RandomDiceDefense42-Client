@@ -8,13 +8,13 @@ using UnityEngine.Networking;
 
 public partial class RequestHandler
 {
-    public void RequestGet(string uri, UnityAction<(int, object)> callback = null, FileSection section = FileSection.None, params KeyValuePair<string, object>[] data) 
+    public void RequestGet(string uri, UnityAction<WebResponse> callback = null, FileSection section = FileSection.None, params KeyValuePair<string, object>[] data) 
         => _RequestGet(uri, data, section, callback);
-    public void RequestGet(string uri, UnityAction<(int, object)> callback = null, FileSection section = FileSection.None, Dictionary<string, object> data = null) 
+    public void RequestGet(string uri, UnityAction<WebResponse> callback = null, FileSection section = FileSection.None, Dictionary<string, object> data = null) 
         => _RequestGet(uri, data?.ToArray(), section, callback);
-    public void RequestPost(string uri, UnityAction<(int, object)> callback = null, params KeyValuePair<string, object>[] data) 
+    public void RequestPost(string uri, UnityAction<WebResponse> callback = null, params KeyValuePair<string, object>[] data) 
         => _RequestPost(uri, data, callback);
-    public void RequestPost(string uri, UnityAction<(int, object)> callback = null, Dictionary<string, object> data = null) 
+    public void RequestPost(string uri, UnityAction<WebResponse> callback = null, Dictionary<string, object> data = null) 
         => _RequestPost(uri, data?.ToArray(), callback);
 
     public int networkCheckTic { get; set; }
@@ -23,18 +23,18 @@ public partial class RequestHandler
 
 public partial class RequestHandler: MonoBehaviour
 {
-    private readonly Dictionary<int, (int, object)> _requestResult = new();
+    private readonly Dictionary<int, WebResponse> _requestResult = new();
     private int _requestId;
 
-    private void _RequestGet(string uri, KeyValuePair<string, object>[] data, FileSection section, UnityAction<(int, object)> callback)
+    private void _RequestGet(string uri, KeyValuePair<string, object>[] data, FileSection section, UnityAction<WebResponse> callback)
     {
         int requestId = _requestId++;
-        string buildUri = $"{uri}{new RequestBuilder().QueryBuilder(section, data)}";
+        string buildUri = $"{uri}{new RequestBuilder().QueryBuilder(data)}";
         StartCoroutine(GetRequest(buildUri, section, requestId));
         WaitTaskAndRunCallback(requestId, callback);
     }
     
-    private void _RequestPost(string uri, KeyValuePair<string, object>[] data, UnityAction<(int, object)> callback)
+    private void _RequestPost(string uri, KeyValuePair<string, object>[] data, UnityAction<WebResponse> callback)
     {
         int requestId = _requestId++;
         StartCoroutine(PostRequest(uri, new RequestBuilder().MultipartFormBuilder(data), requestId));
@@ -58,7 +58,7 @@ public partial class RequestHandler: MonoBehaviour
         DisposeWebRequestResult(FileSection.None, webRequest, requestId);
     }
     
-    private async void WaitTaskAndRunCallback(int requestId, UnityAction<(int, object)> callback)
+    private async void WaitTaskAndRunCallback(int requestId, UnityAction<WebResponse> callback)
     {
         while (!_requestResult.ContainsKey(requestId))
         {
@@ -71,30 +71,28 @@ public partial class RequestHandler: MonoBehaviour
 
     private void DisposeWebRequestResult(FileSection section, UnityWebRequest webRequest, int requestId)
     {
-        (int statusCode, object payload) item = new ()
-        {
-            statusCode = (int)webRequest.responseCode
-        };
+        WebResponse webResponse = new ((int)webRequest.responseCode);
 
-        if (item.statusCode < 300)
+        if (webResponse.StatusCode < 300)
         {
-            SetPayload(section, webRequest, out item.payload);
+            SetPayload(section, webRequest, out webResponse.Payload);
         }
         else
         {
-            item.payload = webRequest.error;
+            webResponse.Payload = webRequest.error;
         }
         
-        _requestResult.Add(requestId, item);
+        _requestResult.Add(requestId, webResponse);
     }
 
     private static void SetPayload(FileSection section, UnityWebRequest webRequest, out object payload)
     {
         switch (section)
         {
-            case FileSection.Image:
-                // sprite를 담아줄까? texture2D를 담아줄까?
-                // payload = ((DownloadHandlerTexture)webRequest.downloadHandler).texture;
+            case FileSection.Texture:
+                payload = ((DownloadHandlerTexture)webRequest.downloadHandler).texture;
+                break;
+            case FileSection.Sprite:
                 Texture2D texture2D = ((DownloadHandlerTexture)webRequest.downloadHandler).texture;
                 payload = Sprite.Create(texture2D, new Rect(0, 0, texture2D.width, texture2D.height), Vector2.one * .5f);
                 break;
