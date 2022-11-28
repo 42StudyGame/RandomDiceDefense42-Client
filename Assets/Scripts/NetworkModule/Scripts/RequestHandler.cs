@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Events;
@@ -7,82 +8,99 @@ using UnityEngine.Networking;
 
 public partial class RequestHandler
 {
-    public void RequestGet(string uri, UnityAction<(bool, string)> callback = null) => _RequestGet(uri, callback);
-    public void RequestPost(string uri, UnityAction<(bool, string)> callback = null, params KeyValuePair<string, string>[] data) => _RequestPost(uri, data, callback);
-    public void RequestPost(string uri, UnityAction<(bool, string)> callback = null, Dictionary<string, string> data = null) => _RequestPost(uri, data, callback);
+    public void RequestGet(string uri, UnityAction<(int, object)> callback = null, FileSection section = FileSection.None, params KeyValuePair<string, object>[] data) 
+        => _RequestGet(uri, data, section, callback);
+    public void RequestGet(string uri, UnityAction<(int, object)> callback = null, FileSection section = FileSection.None, Dictionary<string, object> data = null) 
+        => _RequestGet(uri, data?.ToArray(), section, callback);
+    public void RequestPost(string uri, UnityAction<(int, object)> callback = null, params KeyValuePair<string, object>[] data) 
+        => _RequestPost(uri, data, callback);
+    public void RequestPost(string uri, UnityAction<(int, object)> callback = null, Dictionary<string, object> data = null) 
+        => _RequestPost(uri, data?.ToArray(), callback);
+
+    public int networkCheckTic { get; set; }
+    public int networkTimeout { get; set; }
 }
 
 public partial class RequestHandler: MonoBehaviour
 {
-    private readonly Dictionary<int, (bool, string)> _requestResult = new();
+    private readonly Dictionary<int, (int, object)> _requestResult = new();
     private int _requestId;
-    private const int Tic = 40; // almost 24 fps (little over)
-    private const int TimeOut = 3000;
 
-    private void _RequestGet(string uri, UnityAction<(bool, string)> callback)
+    private void _RequestGet(string uri, KeyValuePair<string, object>[] data, FileSection section, UnityAction<(int, object)> callback)
     {
         int requestId = _requestId++;
-        StartCoroutine(GetRequest(uri, requestId));
+        string buildUri = $"{uri}{new RequestBuilder().QueryBuilder(section, data)}";
+        StartCoroutine(GetRequest(buildUri, section, requestId));
         WaitTaskAndRunCallback(requestId, callback);
     }
     
-    private void _RequestPost(string uri, IEnumerable<KeyValuePair<string, string>> data, UnityAction<(bool, string)> callback)
+    private void _RequestPost(string uri, KeyValuePair<string, object>[] data, UnityAction<(int, object)> callback)
     {
         int requestId = _requestId++;
-        StartCoroutine(PostRequest(uri, data, requestId));
+        StartCoroutine(PostRequest(uri, new RequestBuilder().MultipartFormBuilder(data), requestId));
         WaitTaskAndRunCallback(requestId, callback);
     }
+    
+    private IEnumerator GetRequest(string uri, FileSection section, int requestId)
+    {
+        using UnityWebRequest webRequest = new RequestBuilder().RequestGetType(section, uri);
+        webRequest.timeout = networkTimeout;
 
-    private async void WaitTaskAndRunCallback(int requestId, UnityAction<(bool, string)> callback)
+        yield return webRequest.SendWebRequest();
+        DisposeWebRequestResult(section, webRequest, requestId);
+    }
+
+    private IEnumerator PostRequest(string uri, List<IMultipartFormSection> form, int requestId)
+    {
+        using UnityWebRequest webRequest = UnityWebRequest.Post(uri, form);
+        webRequest.timeout = networkTimeout;
+        yield return webRequest.SendWebRequest();
+        DisposeWebRequestResult(FileSection.None, webRequest, requestId);
+    }
+    
+    private async void WaitTaskAndRunCallback(int requestId, UnityAction<(int, object)> callback)
     {
         while (!_requestResult.ContainsKey(requestId))
         {
-            await Task.Delay(Tic);
+            await Task.Delay(networkCheckTic);
         }
         
         callback?.Invoke(_requestResult[requestId]);
         _requestResult.Remove(requestId);
     }
 
-    private IEnumerator GetRequest(string uri, int requestId)
+    private void DisposeWebRequestResult(FileSection section, UnityWebRequest webRequest, int requestId)
     {
-        using UnityWebRequest webRequest = UnityWebRequest.Get(uri);
-        webRequest.timeout = TimeOut;
-        yield return webRequest.SendWebRequest();
-        DisposeWebRequestResult(webRequest, requestId);
-    }
-
-    private IEnumerator PostRequest(string uri, IEnumerable<KeyValuePair<string, string>> data, int requestId)
-    {
-        WWWForm form = ConvertToWWWForm(data);
-        using UnityWebRequest webRequest = UnityWebRequest.Post(uri, form);
-        yield return webRequest.SendWebRequest();
-        DisposeWebRequestResult(webRequest, requestId);
-    }
-
-    private void DisposeWebRequestResult(UnityWebRequest webRequest, int requestId)
-    {
-        (bool success, string payload) item = new ()
+        (int statusCode, object payload) item = new ()
         {
-            success = webRequest.result is UnityWebRequest.Result.Success
+            statusCode = (int)webRequest.responseCode
         };
 
-        item.payload = item.success ? webRequest.downloadHandler.text : webRequest.error;
+        if (item.statusCode < 300)
+        {
+            SetPayload(section, webRequest, out item.payload);
+        }
+        else
+        {
+            item.payload = webRequest.error;
+        }
+        
         _requestResult.Add(requestId, item);
     }
 
-    private static WWWForm ConvertToWWWForm(IEnumerable<KeyValuePair<string, string>> source)
+    private static void SetPayload(FileSection section, UnityWebRequest webRequest, out object payload)
     {
-        WWWForm form = new WWWForm();
-
-        if (source == null) return null;
-        
-        foreach (KeyValuePair<string, string> element in source)
+        switch (section)
         {
-            form.AddField(element.Key, element.Value);
+            case FileSection.Image:
+                // sprite를 담아줄까? texture2D를 담아줄까?
+                // payload = ((DownloadHandlerTexture)webRequest.downloadHandler).texture;
+                Texture2D texture2D = ((DownloadHandlerTexture)webRequest.downloadHandler).texture;
+                payload = Sprite.Create(texture2D, new Rect(0, 0, texture2D.width, texture2D.height), Vector2.one * .5f);
+                break;
+            default:
+                payload = webRequest.downloadHandler.text;
+                break;
         }
-        
-        return form;
     }
 }
-
