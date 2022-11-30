@@ -13,12 +13,10 @@ public enum EMState
 public partial class EnemyManager // IO
 {
 	public EnemyLineManager enemyLine;
+
+	public EnemyTargetManager enemyTarget { get; private set; } = new EnemyTargetManager();
+
 	public EMState State { get; private set; }
-	
-	public Enemy targetFirst { get; private set; }
-	public Enemy targetLast { get; private set; }
-	public Enemy targetRandom { get; private set; }
-	public Enemy targetStrongest { get; private set; }
 
 	public void Init() => _Init();
 	public void CreateEnemy(int type, int hpOffset) => _CreateEnemy(type, hpOffset);
@@ -26,12 +24,6 @@ public partial class EnemyManager // IO
 	public void DestroyBoss(Boss boss) => _DestroyBoss(boss);
 
 	public void EnemyGoal(int damage) => _EnemyGoal(damage);
-
-	public void SetGeneralTarget() => _SetGeneralTarget();
-
-	public List<Enemy> GetNearEnemy(float pin, float offset) => _GetNearEnemy(pin, offset);
-	public Enemy GetPrevTarget(float pin) => _GetPrevTarget(pin);
-	public Enemy GetNexttarget(float pin) => _GetNexttarget(pin);
 
 	public void InjectScenario(ScenarioList wave, float startDelay) => _InjectScenario(wave, startDelay);
 }
@@ -65,6 +57,7 @@ public partial class EnemyManager
 
 	private void _Init() {
 		enemyLine.Init();
+		enemyTarget.Init(_enemies);
 	}
 
 	private void _CreateEnemy(int type, int hpOffset)
@@ -74,7 +67,7 @@ public partial class EnemyManager
 		enemy.transform.position = _spawnPoint.position;
 		enemy.Init(enemyData, hpOffset, this);
 		_enemies.Add(enemy);
-		SetGeneralTarget();
+		enemyTarget.SetGeneralTarget();
 	}
 
 	private void _CreateBoss(int type, int hpOffset)
@@ -83,7 +76,7 @@ public partial class EnemyManager
 		BossData bossData = (BossData)_enemyDatas[type];
 		boss.Init(bossData, hpOffset, _gameManager, _skills[bossData.skillIndex].Skill);
 		_enemies.Add(boss);
-		SetGeneralTarget();
+		enemyTarget.SetGeneralTarget();
 	}
 
 	private void _DestroyEnemy(Enemy enemy)
@@ -100,106 +93,6 @@ public partial class EnemyManager
 		_gameManager.sp += boss.sp;
 		_gameManager.uiManager.SetSpText(_gameManager.sp.ToString());
 		Destroy(boss.gameObject);
-	}
-
-	private void _SetGeneralTarget()
-	{
-		if (!_enemies.Any())
-		{
-			targetFirst = null;
-			targetLast = null;
-			targetRandom = null;
-			targetStrongest = null;
-			return;
-		}
-
-		float maxHealth = 0;
-		float minDist = float.MaxValue;
-		float maxDist = 0f;
-		for (int i = 0; i < _enemies.Count; i++)
-		{
-			if (_enemies[i].progressToGoal < minDist)
-			{
-				minDist = _enemies[i].progressToGoal;
-				targetLast = _enemies[i];
-			}
-
-			if (_enemies[i].progressToGoal > maxDist)
-			{
-				maxDist = _enemies[i].progressToGoal;
-				targetFirst = _enemies[i];
-			}
-
-			if (_enemies[i].currHealth > maxHealth)
-			{
-				maxHealth = _enemies[i].currHealth;
-				targetStrongest = _enemies[i];
-			}
-		}
-
-		targetRandom = _enemies[Random.Range(0, _enemies.Count)];
-	}
-
-
-	private List<Enemy> _GetNearEnemy(float pin, float offset)
-	{
-		if (offset > 1 || offset < 0 || pin > 1 || pin < 0)
-        {
-			Debug.LogError("input value error");
-			return null;
-        }
-
-		List<Enemy> result = new List<Enemy>();
-		float min = pin - offset;
-		float max = pin + offset;
-
-		foreach(Enemy enemy in _enemies)
-        {
-			if (enemy.progressToGoal > min && enemy.progressToGoal < max)
-            {
-				result.Add(enemy);
-            }
-        }
-		return result;
-	}
-
-	private Enemy _GetPrevTarget(float pin)
-    {
-		if (pin > 1 || pin < 0)
-        {
-			Debug.LogError("input value error");
-			return null;
-		}
-
-		Enemy result = _enemies.LastOrDefault();
-
-		foreach (Enemy enemy in _enemies)
-        {
-			if (enemy.progressToGoal < pin && enemy.progressToGoal > result.progressToGoal)
-            {
-				result = enemy;
-            }
-        }
-		return (result);
-    }
-	private Enemy _GetNexttarget(float pin)
-    {
-		if (pin > 1 || pin < 0)
-		{
-			Debug.LogError("input value error");
-			return null;
-		}
-
-		Enemy result = _enemies.FirstOrDefault();
-
-		foreach (Enemy enemy in _enemies)
-		{
-			if (enemy.progressToGoal > pin && enemy.progressToGoal < result.progressToGoal)
-			{
-				result = enemy;
-			}
-		}
-		return (result);
 	}
 
 	private void _InjectScenario(ScenarioList wave, float delay)

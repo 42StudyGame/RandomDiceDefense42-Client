@@ -73,7 +73,7 @@ public partial class Enemy // body
 
 	protected virtual void _Die() {
 		_enemyManager.DestroyEnemy(this);
-		_enemyManager.SetGeneralTarget();
+		_enemyManager.enemyTarget.SetGeneralTarget();
 	}
 
 	protected virtual void _OnDamage(float damage) {
