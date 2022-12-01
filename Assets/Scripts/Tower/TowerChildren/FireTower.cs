@@ -3,8 +3,7 @@ using System.Collections.Generic;
 public class FireTower : Tower
 {
     public FireTowerSkillData skillData;
-
-
+    
     protected override void _Launch()
     {
         base._Launch();

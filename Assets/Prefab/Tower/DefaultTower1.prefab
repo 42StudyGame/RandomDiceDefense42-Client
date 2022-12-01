@@ -350,10 +350,10 @@ GameObject:
   - component: {fileID: 397475938}
   - component: {fileID: -495085180044389356}
   - component: {fileID: 805890658}
-  - component: {fileID: 4915531627328515701}
-  - component: {fileID: 5246671977653936233}
+  - component: {fileID: -1476489979087561985}
+  - component: {fileID: 6015819550392699678}
   m_Layer: 0
-  m_Name: FireSkillTower
+  m_Name: DefaultTower1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -502,7 +502,7 @@ MonoBehaviour:
   - {fileID: 52294139186208660}
   - {fileID: 833634972931210852}
   - {fileID: 3818347411874975627}
---- !u!114 &4915531627328515701
+--- !u!114 &-1476489979087561985
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -511,16 +511,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 5630969276751559583}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec142fd6323bc4b28ba16d7b5fb23cc3, type: 3}
+  m_Script: {fileID: 11500000, guid: eeb65eed626914617bee4062e1ce3704, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   towerData: {fileID: 11400000, guid: 00dd802d14f0d444ab5b25046297069c, type: 2}
   slotId: 0
   spriteRenderer: {fileID: 4138223634660662793}
   draggable: {fileID: -495085180044389356}
+  droppable: {fileID: 6015819550392699678}
   towerEyesPosition: {fileID: 805890658}
-  skillData: {fileID: 11400000, guid: 6e27fb38564c1a04b84015f1c236a4b0, type: 2}
---- !u!114 &5246671977653936233
+  sortingGroup: {fileID: 5737358419892103837}
+  collider2D: {fileID: 397475938}
+--- !u!114 &6015819550392699678
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -529,11 +531,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5630969276751559583}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 537943f31a548de43943acde2860f952, type: 3}
+  m_Script: {fileID: 11500000, guid: 0a4d05130bdef4bfe8789be6d4f0f547, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buffPool: {fileID: 0}
-  prefab: {fileID: 0}
 --- !u!1 &6159050167509004140
 GameObject:
   m_ObjectHideFlags: 0
