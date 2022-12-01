@@ -351,6 +351,7 @@ GameObject:
   - component: {fileID: -495085180044389356}
   - component: {fileID: 805890658}
   - component: {fileID: 4915531627328515701}
+  - component: {fileID: -6185381777705399464}
   m_Layer: 0
   m_Name: FireSkillTower
   m_TagString: Untagged
@@ -517,8 +518,23 @@ MonoBehaviour:
   slotId: 0
   spriteRenderer: {fileID: 4138223634660662793}
   draggable: {fileID: -495085180044389356}
+  droppable: {fileID: -6185381777705399464}
   towerEyesPosition: {fileID: 805890658}
+  sortingGroup: {fileID: 5737358419892103837}
+  collider2D: {fileID: 397475938}
   skillData: {fileID: 11400000, guid: 6e27fb38564c1a04b84015f1c236a4b0, type: 2}
+--- !u!114 &-6185381777705399464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5630969276751559583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a4d05130bdef4bfe8789be6d4f0f547, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6159050167509004140
 GameObject:
   m_ObjectHideFlags: 0
