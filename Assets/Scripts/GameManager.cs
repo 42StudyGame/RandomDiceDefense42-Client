@@ -10,6 +10,7 @@ public partial class GameManager
 	public EnemyManager enemyManager;
 	public ScenarioManager scenarioManager;
 	public UIManager uiManager;
+	public DeckManager deckManager;
 
 	public void CreateTower() => _CreateTower();
 	public void OnDamage(int damage) => _OnDamage(damage);
@@ -17,10 +18,12 @@ public partial class GameManager
 
 public partial class GameManager : MonoBehaviour
 {
-	private void Awake() {
+	private void Awake()
+	{
 		//towerManager.Init(this);
 		enemyManager.Init();
 		scenarioManager.Init();
+		deckManager.Init();
 	}
 }
 

@@ -8,6 +8,7 @@ public partial class DeckManager // IO
 	public void DeckToDeck(DeckTower baseDeckTower, int slotId) => _DeckToDeck(baseDeckTower, slotId);
 	
 	public DeckDataConverter deckDataConverter;
+	public GameManager gameManager;
 }
 
 public partial class DeckManager // SerializeField 
@@ -18,10 +19,7 @@ public partial class DeckManager // SerializeField
 
 public partial class DeckManager : MonoBehaviour 
 {
-	private void Start()
-	{
-		Init();
-	}
+
 }
 
 public partial class DeckManager // body
