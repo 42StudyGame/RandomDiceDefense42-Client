@@ -23,6 +23,19 @@ public class ScenarioList
         boss = 0;
     }
 
+    public ScenarioList(int w)
+    {
+        wave = w;
+        enemyHPOffset = w;
+        waveStartDelay = 3f;
+        spawnDelay = 1f;
+        boss = 0;
+        for (int i = 0; i < w + 2; i++)
+        {
+            enemyList.Add(0);
+        }
+    }
+
     public ScenarioList(ScenarioList other)
     {
         wave = other.wave;
