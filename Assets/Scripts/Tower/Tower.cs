@@ -28,10 +28,10 @@ public partial class Tower : MonoBehaviour
 {
 	protected TowerManager _towerManager;
 
-	private void Update() 
+	private void Update()
 	{
-		Enemy target = _towerManager.GetTarget();
-		if (target && (Time.time >= _lastAttackTime + towerData.attackSpeed / (TowerGrade * towerData.gradeAttackSpeedIncrease)))
+		bool hasTarget = _towerManager.GetTarget().HasTarget();
+		if (hasTarget && (Time.time >= _lastAttackTime + towerData.attackSpeed / (TowerGrade * towerData.gradeAttackSpeedIncrease)))
 		{
 			_Launch();
 		}
@@ -81,11 +81,8 @@ public partial class Tower // body
 	protected virtual void _Launch() 
 	{
 		_lastAttackTime = Time.time;
-		//_towerManager.Launch(this);
 		_bullet = _towerManager.GetBullet(this);
 		_bullet.transform.position = transform.position;
-		_currentTarget = _towerManager.GetTarget();
-		_bullet.SetTarget(_currentTarget);
 		_bullet.SetDamage(towerData.damage * TowerGrade);
 	}
 
