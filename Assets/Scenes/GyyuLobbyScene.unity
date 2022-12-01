@@ -185,6 +185,7 @@ GameObject:
   m_Component:
   - component: {fileID: 339690326}
   - component: {fileID: 339690325}
+  - component: {fileID: 339690327}
   m_Layer: 0
   m_Name: TowerList
   m_TagString: Untagged
@@ -265,6 +266,25 @@ Transform:
   m_Father: {fileID: 1697944265}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &339690327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 339690324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ad5dc119f6e54cf99d20ae89f15811b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deckTowers:
+  - {fileID: 8728286855566867825}
+  - {fileID: 8728286855369513644}
+  - {fileID: 8728286856600025746}
+  - {fileID: 8728286855924028636}
+  - {fileID: 8728286855477186242}
+  - {fileID: 8728286855480839178}
 --- !u!1 &351560104
 GameObject:
   m_ObjectHideFlags: 0
@@ -1695,8 +1715,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1697944264}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -2, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: 0.0028350141, w: 0.999996}
+  m_LocalPosition: {x: 0.02157498, y: -1.9999387, z: 0}
   m_LocalScale: {x: 1.3, y: 1.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1704,7 +1724,7 @@ Transform:
   - {fileID: 339690326}
   m_Father: {fileID: 0}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.325}
 --- !u!114 &1697944266
 MonoBehaviour:
   m_ObjectHideFlags: 0

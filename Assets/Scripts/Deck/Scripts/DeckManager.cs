@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public partial class DeckManager // IO
@@ -19,7 +20,10 @@ public partial class DeckManager // SerializeField
 
 public partial class DeckManager : MonoBehaviour 
 {
-
+	private void OnEnable() 
+	{
+		Init();	
+	}
 }
 
 public partial class DeckManager // body
