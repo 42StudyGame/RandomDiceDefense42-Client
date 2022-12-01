@@ -25,6 +25,8 @@ public partial class TowerManager // SerializeField
 	[SerializeField] private BulletPool bulletPool;
 	[SerializeField] private RandomDiceCreate randomDiceCreate;
 	[SerializeField] private int maxGrade = 6;
+	[SerializeField] private TowerData[] towerDataList;
+
 }
 public partial class TowerManager : MonoBehaviour
 {
@@ -39,6 +41,7 @@ public partial class TowerManager : MonoBehaviour
 		randomDiceCreate.ReleaseTower(tower);
 		Destroy(tower.gameObject);
 	}
+
 }
 
 public partial class TowerManager // body
@@ -55,24 +58,22 @@ public partial class TowerManager // body
 		bullet.SetDamage(tower.towerData.damage * tower.GetGrade());
 	}*/
 
-	private Bullet _GetBullet(Tower tower)
-	{
+	private Bullet _GetBullet(Tower tower) {
 		Bullet bullet = bulletPool.GetObject();
 		return (bullet);
 	}
 
-	private void _SetBullet(Bullet bullet)
-	{
+	private void _SetBullet(Bullet bullet) {
 		bulletPool.ReturnObject(bullet);
 	}
 
-	private bool _AddTower(/*int _class, int level, int star*/)
-	{
+	private bool _AddTower( /*int _class, int level, int star*/) {
 		Tower tower = randomDiceCreate.CreateTower();
 		if (!tower)
 		{
 			return false;
 		}
+
 		_towers.Add(tower);
 		tower.Init(this);
 		return (true);
@@ -83,10 +84,11 @@ public partial class TowerManager // body
 		return gameManager.enemyManager.enemyTarget;
 	}
 
-	private void _Merge(Tower baseTower, Tower otherTower) {
+	private void _Merge(Tower baseTower, Tower otherTower) 
+	{
 		if (baseTower.GetGrade() >= maxGrade)
 			return;
-		baseTower.towerData = 
+		baseTower.towerData =
 			randomDiceCreate.diceDeck[Random.Range(0, randomDiceCreate.diceDeck.Length)].towerData;
 		baseTower.Init(this);
 		baseTower.UpGrade();

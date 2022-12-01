@@ -184,7 +184,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8529905647069404778
 Transform:
   m_ObjectHideFlags: 0
@@ -350,9 +350,10 @@ GameObject:
   - component: {fileID: 397475938}
   - component: {fileID: 6856837228248213096}
   - component: {fileID: -495085180044389356}
-  - component: {fileID: -1042505958853169835}
+  - component: {fileID: 805890658}
+  - component: {fileID: -4587215300866127164}
   m_Layer: 0
-  m_Name: Ice
+  m_Name: Electric
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -421,7 +422,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c5e7a64b6f8f1475683296844cb1ee32, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 375c19bb4a8af43bd8ce805099adf8e3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -467,7 +468,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.5, y: 1.5}
+  m_Size: {x: 2.36, y: 2.36}
   m_EdgeRadius: 0
 --- !u!114 &6856837228248213096
 MonoBehaviour:
@@ -481,11 +482,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecc474625827d45198f32c08c16a672e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerData: {fileID: 11400000, guid: bd3e8280d338843b59d4505b6bfe6995, type: 2}
+  towerData: {fileID: 11400000, guid: 01858cb2d5e644aaf96e8e2acd0f9157, type: 2}
   slotId: 0
   spriteRenderer: {fileID: 4138223634660662793}
   draggable: {fileID: -495085180044389356}
-  towerEyesPosition: {fileID: -1042505958853169835}
+  droppable: {fileID: -4587215300866127164}
+  towerEyesPosition: {fileID: 805890658}
+  sortingGroup: {fileID: 5737358419892103837}
+  collider2D: {fileID: 397475938}
 --- !u!114 &-495085180044389356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -498,7 +502,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e43b2d6cb93db4c628b7e3268b28d678, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-1042505958853169835
+--- !u!114 &805890658
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -518,6 +522,18 @@ MonoBehaviour:
   - {fileID: 52294139186208660}
   - {fileID: 833634972931210852}
   - {fileID: 3818347411874975627}
+--- !u!114 &-4587215300866127164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5630969276751559583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a4d05130bdef4bfe8789be6d4f0f547, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6159050167509004140
 GameObject:
   m_ObjectHideFlags: 0

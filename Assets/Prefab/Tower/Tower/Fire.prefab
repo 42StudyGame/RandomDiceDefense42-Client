@@ -184,7 +184,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8529905647069404778
 Transform:
   m_ObjectHideFlags: 0
@@ -351,8 +351,9 @@ GameObject:
   - component: {fileID: 6856837228248213096}
   - component: {fileID: -495085180044389356}
   - component: {fileID: 805890658}
+  - component: {fileID: 3075887098828514280}
   m_Layer: 0
-  m_Name: StdTower
+  m_Name: Fire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -421,7 +422,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: c5e7a64b6f8f1475683296844cb1ee32, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -429,7 +430,7 @@ SpriteRenderer:
   m_Size: {x: 2.36, y: 2.36}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!210 &5737358419892103837
@@ -481,11 +482,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecc474625827d45198f32c08c16a672e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerData: {fileID: 0}
+  towerData: {fileID: 11400000, guid: 00dd802d14f0d444ab5b25046297069c, type: 2}
   slotId: 0
   spriteRenderer: {fileID: 4138223634660662793}
   draggable: {fileID: -495085180044389356}
+  droppable: {fileID: 3075887098828514280}
   towerEyesPosition: {fileID: 805890658}
+  sortingGroup: {fileID: 5737358419892103837}
+  collider2D: {fileID: 397475938}
 --- !u!114 &-495085180044389356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -518,6 +522,18 @@ MonoBehaviour:
   - {fileID: 52294139186208660}
   - {fileID: 833634972931210852}
   - {fileID: 3818347411874975627}
+--- !u!114 &3075887098828514280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5630969276751559583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a4d05130bdef4bfe8789be6d4f0f547, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6159050167509004140
 GameObject:
   m_ObjectHideFlags: 0

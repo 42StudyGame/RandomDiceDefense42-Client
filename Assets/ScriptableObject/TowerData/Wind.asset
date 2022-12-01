@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 741ef0accb7704a06bc5fa56c2cc12f4, type: 3}
-  m_Name: Electric
+  m_Name: Wind
   m_EditorClassIdentifier: 
-  type: Electric
+  type: Wind
   damage: 10
   attackSpeed: 1
   gradeDamageIncrease: 1
   gradeAttackSpeedIncrease: 1
-  sprite: {fileID: 21300000, guid: 375c19bb4a8af43bd8ce805099adf8e3, type: 3}
+  sprite: {fileID: 21300000, guid: 1741c26b278aa4e728dc795cbfe44432, type: 3}
