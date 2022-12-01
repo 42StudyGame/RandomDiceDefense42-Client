@@ -45,7 +45,7 @@ public partial class RequestHandler: MonoBehaviour
     {
         using UnityWebRequest webRequest = new RequestBuilder().RequestGetType(section, uri);
         webRequest.timeout = networkTimeout;
-
+        
         yield return webRequest.SendWebRequest();
         DisposeWebRequestResult(section, webRequest, requestId);
     }

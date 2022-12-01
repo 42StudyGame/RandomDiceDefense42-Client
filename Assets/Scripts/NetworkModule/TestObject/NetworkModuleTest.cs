@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -96,9 +95,6 @@ public class NetworkModuleTest : MonoBehaviour
             return;
         }
         
-        // Texture2D texture2D = (Texture2D)request.payload;
-        // Sprite toSprite = Sprite.Create(texture2D, new Rect(0, 0, texture2D.width, texture2D.height), Vector2.one * .5f);
-        // image.sprite = toSprite;
         image.sprite = new FileHandler().Texture2DToSprite(response.Payload as Texture2D);
     }
     
