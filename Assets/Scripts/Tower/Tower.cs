@@ -55,24 +55,30 @@ public partial class Tower // body
 	{
 		spriteRenderer.sprite = towerData.sprite;
 		_towerManager = towerManager;
-		draggable.Init(this, towerManager);
-		draggable._onBeginDrag = ColliderOff;
-		draggable._onDrag = MoveDragObject;
-		draggable._onEndDrag = () =>
+		if (draggable)
 		{
-			ColliderOn();
-			BackToPosition();
-		};
-		droppable._onDrop = (PointerEventData eventData) =>
-		{
-			Tower otherTower = eventData.pointerDrag.GetComponent<Tower>();
-
-			if (towerData.type == otherTower.towerData.type
-				&& GetGrade() == otherTower.GetGrade())
+			draggable.Init(this, towerManager);
+			draggable._onBeginDrag = ColliderOff;
+			draggable._onDrag = MoveDragObject;
+			draggable._onEndDrag = () =>
 			{
-				_towerManager.Merge(this, otherTower);
-			}
-		};
+				ColliderOn();
+				BackToPosition();
+			};
+		}
+		if (droppable)
+		{
+			droppable._onDrop = (PointerEventData eventData) =>
+			{
+				Tower otherTower = eventData.pointerDrag.GetComponent<Tower>();
+
+				if (towerData.type == otherTower.towerData.type
+					&& GetGrade() == otherTower.GetGrade())
+				{
+					_towerManager.Merge(this, otherTower);
+				}
+			};
+		}
 		towerEyesPosition.Init();
 		_startPosition = transform.position;
 		_lastAttackTime = Time.time;
