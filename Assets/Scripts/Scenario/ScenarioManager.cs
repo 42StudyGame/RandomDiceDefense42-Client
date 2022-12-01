@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public partial class ScenarioManager // IO
@@ -44,7 +45,12 @@ public partial class ScenarioManager // body
         _fileName = "EnemyLists";
 
         _jsonConverter = new JsonConverter();
-        _scenarioLists = _jsonConverter.LoadJsonFile<ScenarioLists>(_loadPath, _fileName);
+        //_scenarioLists = _jsonConverter.LoadJsonFile<ScenarioLists>(_loadPath, _fileName);
+        _scenarioLists = new ScenarioLists();
+        _scenarioLists.waveList = new List<ScenarioList>();
+        _scenarioLists.waveList.Add(new ScenarioList(1));
+        _scenarioLists.waveList.Add(new ScenarioList(2));
+        _scenarioLists.waveList.Add(new ScenarioList(3));
         if (_scenarioLists.ValidateLists() == false)
         {
             Debug.LogError("ScenarioLists Validation Fails!");
