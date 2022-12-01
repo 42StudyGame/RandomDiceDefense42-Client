@@ -350,10 +350,10 @@ GameObject:
   - component: {fileID: 397475938}
   - component: {fileID: -495085180044389356}
   - component: {fileID: 805890658}
-  - component: {fileID: 4915531627328515701}
-  - component: {fileID: 5246671977653936233}
+  - component: {fileID: 3066180894150157917}
+  - component: {fileID: 4238300980893735730}
   m_Layer: 0
-  m_Name: FireSkillTower
+  m_Name: IceSkillTower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -422,7 +422,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c5e7a64b6f8f1475683296844cb1ee32, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0747ede9cfcc6402faa1aecda28a19fe, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -502,25 +502,7 @@ MonoBehaviour:
   - {fileID: 52294139186208660}
   - {fileID: 833634972931210852}
   - {fileID: 3818347411874975627}
---- !u!114 &4915531627328515701
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5630969276751559583}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec142fd6323bc4b28ba16d7b5fb23cc3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  towerData: {fileID: 11400000, guid: 00dd802d14f0d444ab5b25046297069c, type: 2}
-  slotId: 0
-  spriteRenderer: {fileID: 4138223634660662793}
-  draggable: {fileID: -495085180044389356}
-  towerEyesPosition: {fileID: 805890658}
-  skillData: {fileID: 11400000, guid: 6e27fb38564c1a04b84015f1c236a4b0, type: 2}
---- !u!114 &5246671977653936233
+--- !u!114 &3066180894150157917
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -534,6 +516,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buffPool: {fileID: 0}
   prefab: {fileID: 0}
+--- !u!114 &4238300980893735730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5630969276751559583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c68c281837acd0d48b373c1fe597bea5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerData: {fileID: 11400000, guid: bd3e8280d338843b59d4505b6bfe6995, type: 2}
+  slotId: 0
+  spriteRenderer: {fileID: 4138223634660662793}
+  draggable: {fileID: -495085180044389356}
+  towerEyesPosition: {fileID: 805890658}
+  buffHandler: {fileID: 3066180894150157917}
 --- !u!1 &6159050167509004140
 GameObject:
   m_ObjectHideFlags: 0

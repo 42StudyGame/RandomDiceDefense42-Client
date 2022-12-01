@@ -2,17 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IceTower : MonoBehaviour
+public class IceTower : Tower
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private BuffHandler buffHandler;
+
+    protected override void _Launch()
     {
-        
+        base._Launch();
+        _bullet.events.AddListener(_Skill);
+        _currentTarget = _towerManager.GetTarget().targetFirst;
+        _bullet.SetTarget(_currentTarget);
     }
 
-    // Update is called once per frame
-    void Update()
+    protected override void _Skill()
     {
-        
+        base._Skill();
+        buffHandler.Attach(1);
     }
+    
+    // 
 }
