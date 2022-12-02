@@ -63,7 +63,6 @@ public partial class RandomDiceCreate : MonoBehaviour // body
 			{
 				if (towerList[j].name == deckTowerList.deckTower[i])
 				{
-					Debug.Log(towerList[j].name);
 					diceDeck[i] = towerList[j];
 					break;
 				}
